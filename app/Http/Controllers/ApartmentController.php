@@ -65,7 +65,7 @@ class ApartmentController extends Controller
     public function destroy(string $id)
     {
         Apartment::destroy($id);
-        
+
         return to_route('apartments.index')->with('delete', 'success');
     }
 }
