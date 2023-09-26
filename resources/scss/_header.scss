@@ -86,7 +86,7 @@ ul.dropdown-menu.show{
     @include font();
 }
 
-.filter{
+header .filter{
     @include flex;
     @include circle(40px);
     border: 1px solid grey;

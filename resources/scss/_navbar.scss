@@ -3,8 +3,15 @@
 //__________________ NAVBAR
 
 nav {
-    height: 80px;
+    div[class*="col"] {
+        padding: 0;
+    }
+    padding: 0 12px;
     
+    .row{
+        height: 80px;
+    }
+
     ul {
         @include flex(start);
         height: 100%;
@@ -42,5 +49,13 @@ nav {
 
 img {
     width: 25px;
+}
+
+.filter{
+    @include flex;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 15px 12px;
+    border: 1px solid $light-grey;
 }
 }
