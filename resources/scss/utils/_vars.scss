@@ -1,0 +1,28 @@
+// Colors
+$brand-color: #ff385c; //radical-red
+$light-grey: #dddddd;
+
+// Font 
+$roboto: sans-serif;
+
+// Mixin
+@mixin flex($justify-content: center, $align-items: center, $direction: row){
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex-direction: $direction;
+}
+
+@mixin font($weight: 400, $size: 14px, $family: $roboto, $color:black, $spacing:normal){
+    font-weight: $weight;
+    font-size: $size;
+    font-family: $family;
+    color: $color;
+    letter-spacing: $spacing;
+}
+
+@mixin circle($size){
+    border-radius: 50%;
+    width: $size;
+    height: $size;
+}
