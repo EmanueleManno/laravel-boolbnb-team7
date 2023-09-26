@@ -55,8 +55,9 @@
                     <i class="fas fa-pencil"></i>Modifica
                 </a>
                 <!--Icona per eliminare il progetto-->
-                <form action="{{ route('apartments.destroy', $apartment) }}" method="POST" class="ms-2 delete-form"
-                data-bs-toggle="modal" data-bs-target="#modal" data-model="progetto">
+                <form action="{{ route('apartments.destroy', $apartment) }}" method="POST"
+                  class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
+                  data-bs-target="#deleteModal">
                    @csrf
                    @method('DELETE')
                    <button type="submit" class="btn btn-sm btn-danger">
@@ -78,6 +79,13 @@
   </table>
   <hr>
 </div>
+
+  {{-- Delete Modal--}}
+  @include('includes.delete-modal')
 @endsection
+
 @section('scripts')
+
+@vite('resources/js/confirm-delete.js')
+
 @endsection
