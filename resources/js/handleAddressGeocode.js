@@ -16,6 +16,7 @@ const fetchApi = query => {
 
     // Resets
     suggestionsElem.innerHTML = '';
+    addressInput.value = '';
 
     // Check query param
     if (!query) return;
@@ -31,12 +32,14 @@ const fetchApi = query => {
             console.log(results);
             if (!results.length) return;
 
-            // Update data
+            // Update suggestions
             results.forEach(result => {
-
                 // Create suggestions
                 suggestionsElem.innerHTML += `<option value="${result.address.freeformAddress}"></option>`;
             });
+
+            // Update address input (get only first result)
+            addressInput.value = results[0].address.freeformAddress;
 
         })
         .catch(err => {
@@ -46,6 +49,7 @@ const fetchApi = query => {
 
 //*** INIT ***//
 // dom
+const addressSearchInput = document.getElementById('address-search');
 const addressInput = document.getElementById('address');
 const suggestionsElem = document.getElementById('api-suggestions');
 
@@ -67,10 +71,10 @@ let timeoutId = null;
 
 
 //*** LOGIC ***//
-addressInput.addEventListener('keyup', () => {
+addressSearchInput.addEventListener('keyup', () => {
 
     // Get Input Value
-    const addressTerm = addressInput.value.trim();
+    const addressTerm = addressSearchInput.value.trim();
 
     // Fetch TT API with throttling
     searchPlace(addressTerm);
