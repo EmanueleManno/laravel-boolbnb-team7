@@ -106,7 +106,11 @@
 
     {{-- # Address --}}
     <div class="mb-3 col-8">
-        <label for="address-search" class="form-label">Indirizzo</label>
+        <label for="address-search" class="form-label">
+            Indirizzo
+            {{-- Loader --}}
+            <i id="api-loader" class="fas fa-spinner fa-pulse text-danger d-none"></i>
+        </label>
         <span class="form-text"></span>
 
         {{-- Search Input --}}
@@ -117,7 +121,7 @@
         </div>
 
         {{-- Chosen Place Input --}}
-        <input type="text" readonly name="address" id="address" class="form-control-plaintext p-2 mt-2"
+        <input type="text" readonly name="address" id="address" class="form-control-plaintext fw-bold p-2 mt-2"
             value="{{ old('address', $apartment->address) }}">
 
         {{-- API Suggestions --}}

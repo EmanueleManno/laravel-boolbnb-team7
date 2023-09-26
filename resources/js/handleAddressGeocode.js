@@ -5,6 +5,9 @@
 //*** FUNCTIONS ***//
 const searchPlace = addressTerm => {
 
+    // Activate loader on key press
+    apiLoaderElem.classList.remove('d-none');
+
     // Handle API throttling
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
@@ -21,7 +24,11 @@ const fetchApi = query => {
     lonInput.value = 0;
 
     // Check query param
-    if (!query) return;
+    if (!query) {
+        // Remove Loader
+        apiLoaderElem.classList.add('d-none');
+        return;
+    }
 
     // Geocode API Call
     axios.get(baseUri + query + '.json', {
@@ -48,6 +55,10 @@ const fetchApi = query => {
         })
         .catch(err => {
             console.log(err);
+        })
+        .then(() => {
+            // Remove Loader
+            apiLoaderElem.classList.add('d-none');
         });
 }
 
@@ -55,6 +66,7 @@ const fetchApi = query => {
 // dom
 const addressSearchInput = document.getElementById('address-search');
 const suggestionsElem = document.getElementById('api-suggestions');
+const apiLoaderElem = document.getElementById('api-loader');
 const addressInput = document.getElementById('address');
 const latInput = document.getElementById('latitude');
 const lonInput = document.getElementById('longitude');
