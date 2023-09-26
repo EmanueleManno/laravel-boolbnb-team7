@@ -20,13 +20,13 @@
 
 <body>
     <div id="app">
-        {{-- header --}}
+        {{-- Header --}}
         @include('includes.header')
 
-        {{-- main --}}
+        {{-- Main --}}
         @yield('main')
 
-        {{-- footer --}}
+        {{-- Footer --}}
         @include('includes.footer')
     </div>
 </body>
