@@ -28,6 +28,7 @@
 
         {{-- Footer --}}
         @include('includes.footer')
+
     </div>
 </body>
 

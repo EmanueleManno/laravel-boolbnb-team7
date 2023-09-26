@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -12,7 +13,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Apartment::all();
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
@@ -20,7 +22,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $apartment = new Apartment();
+
+        return view('admin.apartments.create', compact('apartment'));
     }
 
     /**

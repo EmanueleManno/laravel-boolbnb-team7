@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ApartmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,9 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('admin.home');
 })->middleware(['auth', 'verified'])->name('home');
+
+//Rotte appartamenti:
+Route::resource('apartments', ApartmentController::class)->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
