@@ -106,13 +106,19 @@
 
     {{-- # Address --}}
     <div class="mb-3 col-8">
-        <label for="address" class="form-label">Indirizzo</label>
+        <label for="address-search" class="form-label">Indirizzo</label>
         <span class="form-text"></span>
-        <input id="address" autocomplete="off" value="{{ old('address', $apartment->address) }}" type="text"
-            class="form-control" list="api-suggestions">
+
+        {{-- Search Input --}}
+        <input id="address-search" autocomplete="off" value="{{ old('address', $apartment->address) }}"
+            type="text" class="form-control" list="api-suggestions">
         <div class="invalid-feedback">
             {{ $errors->first('address') }}
         </div>
+
+        {{-- Chosen Place Input --}}
+        <input type="text" readonly name="address" id="address" class="form-control-plaintext p-2 mt-2"
+            value="{{ old('address', $apartment->address) }}">
 
         {{-- API Suggestions --}}
         <datalist id="api-suggestions"></datalist>
