@@ -2,9 +2,13 @@
 
 //__________________ HEADER
 header {
-    height: 80px;
     border-bottom: 1px solid $light-grey;
     background-color: white;
+    
+    .row{
+        @include flex($wrap: nowrap);
+        height: 80px;
+    }
     
     div[class*="col"] {
         padding: 0;

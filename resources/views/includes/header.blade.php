@@ -4,43 +4,53 @@ $firstLetter = strtoupper(substr($name, 0, 1));
 ?>
 
 <header class="sticky-top">
-    <div class="container h-100">
-        <div class="row flex-nowrap px-2 px-sm-0 justify-content-center align-items-center h-100">
+    <div class="container">
+        <div class="row px-2 px-sm-0">
             <!-- Left side -->
-            <div class="col col-md-1 col-xl-4 d-none d-md-flex justify-content-start">
-                <a class="logo" href="{{ url('/') }}">
-                    <img src="{{ asset('img/logo.png') }}" alt="logo">
-                    <h1 class="d-none d-xl-inline-block">boolbnb</h1>
-                </a>
-            </div>
-
-            <!-- Center -->
-            <div class="col col-11 col-md-6 col-xl-4">
-                <div class="filter-menu">
-                    <button class="small-label">
-                        <div>Ovunque</div>
-                    </button>
-                    <span class="separator"></span>
-
-                    <button class="small-label">
-                        <div>Qualunque settimana</div>
-                    </button>
-                    <span class="separator"></span>
-
-                    <button class="small-label">
-                        <div>Aggiungi ospiti</div>
-                        <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-                    </button>
+            <!-- Ricerca attiva solo su schermata home -->
+            @if (Route::is('guest.home') || Route::is('home'))
+                <div class="col-md-1 col-xl-4 d-none d-md-flex justify-content-start">
+                    <a class="logo" href="{{ route('guest.home') }}">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo">
+                        <h1 class="d-none d-xl-inline-block">boolbnb</h1>
+                    </a>
                 </div>
-            </div>
+
+                <!-- Center -->
+                <div class="col-11 col-md-6 col-xl-4">
+                    <div class="filter-menu">
+                        <button class="small-label">
+                            <div>Ovunque</div>
+                        </button>
+                        <span class="separator"></span>
+
+                        <button class="small-label">
+                            <div>Qualunque settimana</div>
+                        </button>
+                        <span class="separator"></span>
+
+                        <button class="small-label">
+                            <div>Aggiungi ospiti</div>
+                            <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </button>
+                    </div>
+                </div>
+            @else
+                <div class="col-11 col-md-7 col-xl-8 d-flex justify-content-start">
+                    <a class="logo" href="{{ route('guest.home') }}">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo">
+                        <h1>boolbnb</h1>
+                    </a>
+                </div>
+            @endif
 
             <!-- Right side -->
-            <div class="d-flex align-items-center d-md-none col col-1 ms-2">
+            <div class="col-1 d-flex d-md-none align-items-center ms-2">
                 <div class="filter"><i class="fa-solid fa-sliders"></i></div> <!-- Filtri avanzati (DA FARE) -->
             </div>
 
-            <div class="d-none d-md-flex col-1 col-md-5 col-xl-4 justify-content-end gap-2">
-                <a href="#" class="button-light">Affitta con Boolbnb</a>
+            <div class="col-1 d-none col-md-5 d-md-flex col-xl-4 justify-content-end gap-2">
+                <a href="{{ route('apartments.create') }}" class="button-light">Apri un Boolbnb</a>
 
                 <button class="button-light"><i class="fa-solid fa-globe"></i></button>
 

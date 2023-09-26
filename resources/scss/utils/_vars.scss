@@ -8,11 +8,12 @@ $light-grey: #dddddd;
 $roboto: 'Roboto', sans-serif;
 
 // Mixin
-@mixin flex($justify-content: center, $align-items: center, $direction: row){
+@mixin flex($justify-content: center, $align-items: center, $direction: row, $wrap: unset){
     display: flex;
     justify-content: $justify-content;
     align-items: $align-items;
     flex-direction: $direction;
+    flex-wrap: $wrap;
 }
 
 @mixin font($weight: 400, $size: 14px, $family: $roboto, $color:black, $spacing:normal){
