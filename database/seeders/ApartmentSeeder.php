@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Apartment;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class ApartmentSeeder extends Seeder
 {
@@ -13,11 +15,14 @@ class ApartmentSeeder extends Seeder
      */
     public function run(): void
     {
+        $users = User::pluck('id')->toArray();
+
         $apartments = config('apartments');
         foreach ($apartments as $apartment) {
             $new_apartment = new Apartment();
 
             $new_apartment->title = $apartment['title'];
+            $new_apartment->user_id = Arr::random($users);
             $new_apartment->description = $apartment['description'];
             $new_apartment->price = $apartment['price'];
             $new_apartment->rooms = $apartment['rooms'];
