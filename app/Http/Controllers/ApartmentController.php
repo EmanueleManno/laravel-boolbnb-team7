@@ -38,15 +38,15 @@ class ApartmentController extends Controller
             [
                 'title' => 'required|string',
                 'description' => 'nullable|string',
-                'price' => 'required|numeric|min:0',
+                'price' => 'required|decimal:0,2|min:0',
                 'rooms' => 'nullable|integer|min:0',
                 'beds' => 'nullable|integer|min:0',
                 'bathrooms' => 'nullable|integer|min:0',
                 'square_meters' => 'nullable|integer|min:0',
                 'image' => 'nullable|url',
                 'address' => 'nullable|string',
-                'latitude' => 'nullable|numeric',
-                'longitude' => 'nullable|numeric',
+                'latitude' => 'nullable|decimal:0,6',
+                'longitude' => 'nullable|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
                 'user_id' => 'nullable|exists:users,id',
             ],
@@ -57,7 +57,7 @@ class ApartmentController extends Controller
                 'description.string' => 'La descrizione non è valida',
 
                 'price.required' => 'Non può esistere un appartamento senza prezzo',
-                'price.numeric' => 'Il prezzo deve essere un numero',
+                'price.decimal' => 'Il prezzo deve essere un numero con massimo 2 cifre',
                 'price.min' => 'Inserisci un prezzo maggiore di zero',
 
                 'rooms.integer' => 'Inserisci un numero valido',
@@ -73,10 +73,6 @@ class ApartmentController extends Controller
                 'square_meters.min' => 'Inserisci un numero maggiore di zero',
 
                 'address.string' => 'L\'indirizzo non è valido',
-
-                'latitude.numeric' => 'Inserisci un numero valido',
-
-                'longitude.numeric' => 'Inserisci un numero valido',
 
                 'image.url' => "Inserisci un url valido",
 
