@@ -14,14 +14,14 @@
     <h1>Lista Appartamenti</h1>
 
     <!--Pulsante di aggiunta di un nuovo appartamento-->
-    <a href="#" class="btn btn-success">Aggiungi nuovo appartamento</a>
+    <a href="{{ route('apartments.create')}}" class="btn btn-success">Aggiungi nuovo appartamento</a>
 
 </header>
 
 <hr>
 
 <!--Tabella nella quale visualizzo la lista degli appartamenti-->
-<table class="table table-dark table-hover">
+<table class="table table-light table-hover">
 
     <!--Intestazione della tabella-->
     <thead>
@@ -46,16 +46,19 @@
         <!--Dettaglio, modifica e eliminazione-->
         <td>
             <div class="d-flex justify-content-center">
+
                 <!--Per vedere il dettaglio-->
-                <a href="#" class="btn btn-sm btn-primary">
+                <a href="{{ route('apartments.show', $apartment)}}" class="btn btn-sm btn-primary">
                     <i class="fas fa-eye"></i>Dettaglio
                 </a>
+
                 <!--Icona per modificare l'appartamento-->
-                <a href="#" class="btn btn-sm btn-warning ms-2">
+                <a href="{{ route('apartments.edit', $apartment)}}" class="btn btn-sm btn-warning ms-2">
                     <i class="fas fa-pencil"></i>Modifica
                 </a>
+
                 <!--Icona per eliminare il progetto-->
-                <form action="#" method="POST" class="ms-2 delete-form"
+                <form action="{{ route('apartments.destroy' , $apartment)}}" method="POST" class="ms-2 delete-form"
                 data-bs-toggle="modal" data-bs-target="#modal" data-model="progetto">
                    @csrf
                    @method('DELETE')
@@ -66,6 +69,7 @@
             </div>
         </td>
       </tr>
+
         <!--Se non ci sono appartamenti-->
         @empty
             <tr>
@@ -76,8 +80,8 @@
         @endforelse
     </tbody>
   </table>
-  <hr>
 </div>
 @endsection
+
 @section('scripts')
 @endsection

@@ -46,6 +46,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
+                        <!--Rotta che mi manda alla lista appartamenti-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('apartments.index')}}">{{ __('Lista Appartamenti') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
