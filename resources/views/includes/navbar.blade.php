@@ -1,4 +1,5 @@
 <nav>
+    {{--
     <ul class="container">
         @foreach ($categories as $category)
             <li>
@@ -7,4 +8,5 @@
             </li>
         @endforeach
     </ul>
+    --}}
 </nav>
