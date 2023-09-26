@@ -3,6 +3,15 @@
 -------------------------------------------*/
 
 //*** FUNCTIONS ***//
+const searchPlace = addressTerm => {
+
+    // Handle API throttling
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+        fetchApi(addressTerm);
+    }, 500);
+}
+
 const fetchApi = query => {
 
     // Resets
@@ -53,6 +62,9 @@ const sanitizeHeaders = [(data, headers) => {
     return data
 }];
 
+// variables
+let timeoutId = null;
+
 
 //*** LOGIC ***//
 addressInput.addEventListener('keyup', () => {
@@ -60,6 +72,6 @@ addressInput.addEventListener('keyup', () => {
     // Get Input Value
     const addressTerm = addressInput.value.trim();
 
-    // Fetch TT API
-    fetchApi(addressTerm);
+    // Fetch TT API with throttling
+    searchPlace(addressTerm);
 });
