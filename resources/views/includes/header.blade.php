@@ -75,16 +75,14 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                             @if (Route::has('register'))
                                 <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
                             @endif
-                            <hr>
-                            <li><a class="dropdown-item" href="#">Affitta con Boolbnb</a></li>
                         @else
-                            <li><a class="dropdown-item" href="#">Messaggi</a></li>
-                            <li><a class="dropdown-item" href="#">Notifiche</a></li>
-                            <li><a class="dropdown-item" href="#">Viaggi</a></li>
-                            <li><a class="dropdown-item" href="#">Preferiti</a></li>
+                            <li><a class="dropdown-item" href="{{ route('apartments.index') }}">I miei Boolbnb</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Messaggi</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Notifiche</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Viaggi</a></li>
                             <hr>
-                            <li><a class="dropdown-item" href="#">Affitta con Boolbnb</a></li>
-                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <li><a class="dropdown-item" href="{{ route('apartments.create') }}">Apri un Boolbnb</a></li>
+                            <li><a class="dropdown-item" href="{{ url('profile') }}">Account</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Esci</a>
