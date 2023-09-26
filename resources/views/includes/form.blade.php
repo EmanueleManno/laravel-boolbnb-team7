@@ -108,7 +108,8 @@
     <div class="mb-3 col-8">
         <label for="address" class="form-label">Indirizzo</label>
         <span class="form-text"></span>
-        <input value="{{ old('address', $apartment->address) }}" type="text" class="form-control">
+        <input id="address" value="{{ old('address', $apartment->address) }}" type="text" class="form-control"
+            list="api-suggestions">
         <div class="invalid-feedback">
             {{ $errors->first('address') }}
         </div>
@@ -130,5 +131,3 @@
     </div>
 </div>
 </form>
-
-<script></script>
