@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $categories = Category::all();
     return view('home', compact('categories'));
-});
+})->name('guest.home');
 
 Route::get('/home', function () {
     $categories = Category::all();

@@ -16,6 +16,12 @@
         crossorigin='anonymous' />
     {{-- cdn --}}
     @yield('cdn')
+
+    <style>
+        body {
+            display: none
+        }
+    </style>
 </head>
 
 <body>
@@ -33,4 +39,5 @@
 </body>
 
 @yield('scripts')
+
 </html>

@@ -4,50 +4,70 @@ $firstLetter = strtoupper(substr($name, 0, 1));
 ?>
 
 <header class="sticky-top">
-    <div class="container h-100">
-        <div class="row flex-nowrap px-2 px-sm-0 justify-content-center align-items-center h-100">
+    <div class="container">
+        <div class="row px-2 px-sm-0">
             <!-- Left side -->
-            <div class="col col-md-1 col-xl-4 d-none d-md-flex justify-content-start">
-                <a class="logo" href="{{ url('/') }}">
-                    <img src="{{ asset('img/logo.png') }}" alt="logo">
-                    <h1 class="d-none d-xl-inline-block">boolbnb</h1>
-                </a>
-            </div>
-
-            <!-- Center -->
-            <div class="col col-11 col-md-6 col-xl-4">
-                <div class="filter-menu">
-                    <button class="small-label">
-                        <div>Ovunque</div>
-                    </button>
-                    <span class="separator"></span>
-
-                    <button class="small-label">
-                        <div>Qualunque settimana</div>
-                    </button>
-                    <span class="separator"></span>
-
-                    <button class="small-label">
-                        <div>Aggiungi ospiti</div>
-                        <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-                    </button>
+            <!-- Ricerca attiva solo su schermata home -->
+            @if (Route::is('guest.home') || Route::is('home'))
+                <div class="col-md-1 col-xl-4 d-none d-md-flex justify-content-start">
+                    <a class="logo" href="{{ route('guest.home') }}">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo">
+                        <h1 class="d-none d-xl-inline-block">boolbnb</h1>
+                    </a>
                 </div>
-            </div>
+
+                <!-- Center -->
+                <div class="col-11 col-md-6 col-xl-4">
+                    <div class="filter-menu">
+                        <button class="small-label">
+                            <div>Ovunque</div>
+                        </button>
+                        <span class="separator"></span>
+
+                        <button class="small-label">
+                            <div>Qualunque settimana</div>
+                        </button>
+                        <span class="separator"></span>
+
+                        <button class="small-label">
+                            <div>Aggiungi ospiti</div>
+                            <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </button>
+                    </div>
+                </div>
+            @else
+                <div class="col-11 col-md-7 col-xl-8 d-flex justify-content-start">
+                    <a class="logo" href="{{ route('guest.home') }}">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo">
+                        <h1>boolbnb</h1>
+                    </a>
+                </div>
+            @endif
 
             <!-- Right side -->
-            <div class="d-flex align-items-center d-md-none col col-1 ms-2">
-                <div class="filter"><i class="fa-solid fa-sliders"></i></div> <!-- Filtri avanzati (DA FARE) -->
-            </div>
+            <div class="col-1 col-md-5 d-flex col-xl-4 justify-content-end gap-2">
+                <div class="d-none d-md-flex">
+                    <a href="{{ route('apartments.create') }}" class="button-light">Apri un Boolbnb</a>
 
-            <div class="d-none d-md-flex col-1 col-md-5 col-xl-4 justify-content-end gap-2">
-                <a href="#" class="button-light">Affitta con Boolbnb</a>
-
-                <button class="button-light"><i class="fa-solid fa-globe"></i></button>
+                    <button class="button-light"><i class="fa-solid fa-globe"></i></button>
+                </div>
 
                 {{-- Dropdown --}}
                 <div class="login-menu dropdown">
-                    <button class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                    <button class="dropdown-toggle d-none d-md-flex align-items-center" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-bars"></i>
+                        @guest
+                            <div class="user ms-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        @else
+                            <div class="user ms-2">
+                                <span id="admin-name">{{ $firstLetter }}</span>
+                            </div>
+                        @endguest
+                    </button>
+
+                    <button class="dropdown-toggle d-flex d-md-none align-items-center" data-bs-toggle="dropdown">
                         @guest
                             <div class="user">
                                 <i class="fa-solid fa-user"></i>
@@ -65,16 +85,14 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                             @if (Route::has('register'))
                                 <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
                             @endif
-                            <hr>
-                            <li><a class="dropdown-item" href="#">Affitta con Boolbnb</a></li>
                         @else
-                            <li><a class="dropdown-item" href="#">Messaggi</a></li>
-                            <li><a class="dropdown-item" href="#">Notifiche</a></li>
-                            <li><a class="dropdown-item" href="#">Viaggi</a></li>
-                            <li><a class="dropdown-item" href="#">Preferiti</a></li>
+                            <li><a class="dropdown-item" href="{{ route('apartments.index') }}">I miei Boolbnb</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Messaggi</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Notifiche</a></li>
+                            <li><a class="dropdown-item disabled" href="#">Viaggi</a></li>
                             <hr>
-                            <li><a class="dropdown-item" href="#">Affitta con Boolbnb</a></li>
-                            <li><a class="dropdown-item" href="#">Account</a></li>
+                            <li><a class="dropdown-item" href="{{ route('apartments.create') }}">Apri un Boolbnb</a></li>
+                            <li><a class="dropdown-item" href="{{ url('profile') }}">Account</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Esci</a>
