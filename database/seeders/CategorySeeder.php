@@ -15,12 +15,7 @@ class CategorySeeder extends Seeder
     {
 
         // Categories List
-        $categories = [
-            ['name' => 'Casa', 'icon' => 'house'],
-            ['name' => 'Appartamento', 'icon' => 'couch'],
-            ['name' => 'Hotel', 'icon' => 'hotel'],
-            ['name' => 'Pensione', 'icon' => 'bed']
-        ];
+        $categories = config('apartment_categories');
 
         foreach ($categories as $category) {
 
