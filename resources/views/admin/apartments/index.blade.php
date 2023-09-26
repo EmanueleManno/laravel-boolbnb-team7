@@ -14,14 +14,14 @@
     <h1>Lista Appartamenti</h1>
 
     <!--Pulsante di aggiunta di un nuovo appartamento-->
-    <a href="#" class="btn btn-success">Aggiungi nuovo appartamento</a>
+    <a href="{{ route('apartments.create')}}" class="btn btn-success">Aggiungi nuovo appartamento</a>
 
 </header>
 
 <hr>
 
 <!--Tabella nella quale visualizzo la lista degli appartamenti-->
-<table class="table table-dark table-hover">
+<table class="table table-light table-hover">
 
     <!--Intestazione della tabella-->
     <thead>
@@ -46,14 +46,17 @@
         <!--Dettaglio, modifica e eliminazione-->
         <td>
             <div class="d-flex justify-content-center">
+
                 <!--Per vedere il dettaglio-->
-                <a href="#" class="btn btn-sm btn-primary">
+                <a href="{{ route('apartments.show', $apartment)}}" class="btn btn-sm btn-primary">
                     <i class="fas fa-eye"></i>Dettaglio
                 </a>
+
                 <!--Icona per modificare l'appartamento-->
-                <a href="#" class="btn btn-sm btn-warning ms-2">
+                <a href="{{ route('apartments.edit', $apartment)}}" class="btn btn-sm btn-warning ms-2">
                     <i class="fas fa-pencil"></i>Modifica
                 </a>
+
                 <!--Icona per eliminare il progetto-->
                 <form action="{{ route('apartments.destroy', $apartment) }}" method="POST"
                   class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
@@ -67,6 +70,7 @@
             </div>
         </td>
       </tr>
+
         <!--Se non ci sono appartamenti-->
         @empty
             <tr>
@@ -77,7 +81,6 @@
         @endforelse
     </tbody>
   </table>
-  <hr>
 </div>
 
   {{-- Delete Modal--}}
