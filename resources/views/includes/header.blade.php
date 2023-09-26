@@ -35,8 +35,8 @@ $firstLetter = strtoupper(substr($name, 0, 1));
             </div>
 
             <!-- Right side -->
-            <div class="d-flex d-md-none col col-1 filter ms-2">
-                <i class="fa-solid fa-sliders"></i>
+            <div class="d-flex align-items-center d-md-none col col-1 ms-2">
+                <div class="filter"><i class="fa-solid fa-sliders"></i></div> <!-- Filtri avanzati (DA FARE) -->
             </div>
 
             <div class="d-none d-md-flex col-1 col-md-5 col-xl-4 justify-content-end gap-2">
