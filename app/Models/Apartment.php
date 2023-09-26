@@ -10,5 +10,13 @@ class Apartment extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillables = ['title', 'description', 'price', 'rooms', 'beds', 'bathroom', 'square_meters', 'address', 'latitude', 'longitude', 'image', 'is_visible'];
+    protected $fillables = ['title', 'category_id', 'description', 'price', 'rooms', 'beds', 'bathroom', 'square_meters', 'address', 'latitude', 'longitude', 'image', 'is_visible'];
+
+    /**
+     * Category relation
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
