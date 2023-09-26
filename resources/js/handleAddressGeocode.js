@@ -5,6 +5,12 @@
 //*** FUNCTIONS ***//
 const fetchApi = query => {
 
+    // Resets
+    suggestionsElem.innerHTML = '';
+
+    // Check query param
+    if (!query) return;
+
     // Geocode API Call
     axios.get(baseUri + query + '.json', {
         params: baseParams,
@@ -12,7 +18,16 @@ const fetchApi = query => {
     })
         .then(res => {
 
-            console.log(res.data.results);
+            const { results } = res.data;
+            console.log(results);
+            if (!results.length) return;
+
+            // Update data
+            results.forEach(result => {
+
+                // Create suggestions
+                suggestionsElem.innerHTML += `<option value="${result.address.freeformAddress}"></option>`;
+            });
 
         })
         .catch(err => {
@@ -23,6 +38,7 @@ const fetchApi = query => {
 //*** INIT ***//
 // dom
 const addressInput = document.getElementById('address');
+const suggestionsElem = document.getElementById('api-suggestions');
 
 // api
 const baseUri = 'https://api.tomtom.com/search/2/geocode/';

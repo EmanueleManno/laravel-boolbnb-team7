@@ -108,13 +108,17 @@
     <div class="mb-3 col-8">
         <label for="address" class="form-label">Indirizzo</label>
         <span class="form-text"></span>
-        <input id="address" value="{{ old('address', $apartment->address) }}" type="text" class="form-control"
-            list="api-suggestions">
+        <input id="address" autocomplete="off" value="{{ old('address', $apartment->address) }}" type="text"
+            class="form-control" list="api-suggestions">
         <div class="invalid-feedback">
             {{ $errors->first('address') }}
         </div>
+
+        {{-- API Suggestions --}}
+        <datalist id="api-suggestions"></datalist>
     </div>
 
+    {{-- # Is Visible --}}
     <div class="mb-3 col-12">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="is_visible">
