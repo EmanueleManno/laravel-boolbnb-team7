@@ -3,10 +3,11 @@
 //__________________ NAVBAR
 
 nav {
+    padding: 0 12px;
+
     div[class*="col"] {
         padding: 0;
     }
-    padding: 0 12px;
     
     .row{
         height: 80px;
