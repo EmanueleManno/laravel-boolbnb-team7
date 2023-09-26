@@ -21,7 +21,7 @@
 <hr>
 
 <!--Tabella nella quale visualizzo la lista degli appartamenti-->
-<table class="table table-dark table-hover">
+<table class="table table-light table-hover">
 
     <!--Intestazione della tabella-->
     <thead>
@@ -76,7 +76,7 @@
         @endforelse
     </tbody>
   </table>
-  <hr>
+
 </div>
 @endsection
 @section('scripts')
