@@ -105,7 +105,7 @@
     </div>
 
     {{-- # Address --}}
-    <div class="mb-3 col-8">
+    <div class="mb-3 col-12">
         <label for="address-search" class="form-label">
             Indirizzo
             {{-- Loader --}}
