@@ -106,9 +106,12 @@
 
     {{-- # Address --}}
     <div class="mb-3 col-8">
-        <label for="square_meters" class="form-label">Indirizzo</label>
+        <label for="address" class="form-label">Indirizzo</label>
         <span class="form-text"></span>
-        <input value="{{ old('') }}" type="text" class="form-control">
+        <input value="{{ old('address', $apartment->address) }}" type="text" class="form-control">
+        <div class="invalid-feedback">
+            {{ $errors->first('address') }}
+        </div>
     </div>
 
     <div class="mb-3 col-12">
@@ -127,3 +130,5 @@
     </div>
 </div>
 </form>
+
+<script></script>
