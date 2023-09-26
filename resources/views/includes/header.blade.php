@@ -39,7 +39,7 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                 <i class="fa-solid fa-sliders"></i>
             </div>
 
-            <div id="right" class="d-none d-md-flex col-1 col-md-5 col-xl-4 justify-content-end gap-2">
+            <div class="d-none d-md-flex col-1 col-md-5 col-xl-4 justify-content-end gap-2">
                 <a href="#" class="button-light">Affitta con Boolbnb</a>
 
                 <button class="button-light"><i class="fa-solid fa-globe"></i></button>

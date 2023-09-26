@@ -1,12 +1,14 @@
 @use './utils/vars.scss' as *;
 
+//__________________ Header
 header {
     height: 80px;
     border-bottom: 1px solid $light-grey;
-}
-
-div[class*="col"] {
-    padding: 0;
+    
+    div[class*="col"] {
+        padding: 0;
+        height: 48px
+    }
 }
 
 .logo {
@@ -42,9 +44,7 @@ div[class*="col"] {
     height: 48px;
     flex-grow: 1;
     font-weight: 500;
-    text-wrap: nowrap;
     overflow: hidden;
-
 
     &:last-child {
         @include font(300, $color: grey);
@@ -61,10 +61,6 @@ div[class*="col"] {
 .separator {
     border-right: 1px solid $light-grey;
     height: 24px;
-}
-
-#right {
-    height: 48px
 }
 
 .icon {
@@ -87,8 +83,7 @@ div[class*="col"] {
 }
 
 ul.dropdown-menu.show{
-    transform: translate3d(-5.6px, 57px, 0px);
-    margin-top: 20px;
+    @include font();
 }
 
 .filter{

@@ -2,8 +2,10 @@
 $brand-color: #ff385c; //radical-red
 $light-grey: #dddddd;
 
+// Google font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 // Font 
-$roboto: sans-serif;
+$roboto: 'Roboto', sans-serif;
 
 // Mixin
 @mixin flex($justify-content: center, $align-items: center, $direction: row){

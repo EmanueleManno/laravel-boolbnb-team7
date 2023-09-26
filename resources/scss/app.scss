@@ -1,13 +1,13 @@
 // Bootstrap
 @use '~bootstrap/scss/bootstrap';
-// Includes
+// Variables
 @use './utils/vars' as *;
+// Includes
 @use './header';
 
-
-// Generals
+//__________________ General rules
 body{
-    // font-family: $roboto;
+    font-family: $roboto;
     font-size: 14px;
 }
 
@@ -48,7 +48,7 @@ button{
     }
 }
 
-/* Scrollbar */
+// ________Scrollbar
 ::-webkit-scrollbar {
     width: 2px;
     height: 3px;
