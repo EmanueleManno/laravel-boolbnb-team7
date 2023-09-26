@@ -3,6 +3,12 @@
 -------------------------------------------*/
 
 //*** FUNCTIONS ***//
+
+/**
+ * Throttle API Request for address geocode
+ * 
+ * @param {String} addressTerm 
+ */
 const searchPlace = addressTerm => {
 
     // Activate loader on key press
@@ -15,6 +21,11 @@ const searchPlace = addressTerm => {
     }, 500);
 }
 
+/**
+ * Fetch Tom Tom Geocode API
+ * 
+ * @param {String} query 
+ */
 const fetchApi = query => {
 
     // Resets
@@ -23,10 +34,11 @@ const fetchApi = query => {
     latInput.value = 0;
     lonInput.value = 0;
 
-    // Check query param
+    // Abort if query is empty
     if (!query) {
         // Remove Loader
         apiLoaderElem.classList.add('d-none');
+
         return;
     }
 
@@ -37,11 +49,12 @@ const fetchApi = query => {
     })
         .then(res => {
 
+            // Get Results
             const { results } = res.data;
             console.log(results);
             if (!results.length) return;
 
-            // Create suggestions
+            // Create suggestions list
             results.forEach(result => {
                 suggestionsElem.innerHTML += `<option value="${result.address.freeformAddress}"></option>`;
             });
@@ -62,6 +75,7 @@ const fetchApi = query => {
         });
 }
 
+
 //*** INIT ***//
 // dom
 const addressSearchInput = document.getElementById('address-search');
@@ -74,7 +88,7 @@ const lonInput = document.getElementById('longitude');
 // api
 const baseUri = 'https://api.tomtom.com/search/2/geocode/';
 const baseParams = {
-    key: import.meta.env.VITE_TT_API_KEY,
+    key: import.meta.env.VITE_TT_API_KEY,// API KEY
     limit: 5,
     language: 'it-IT',
     countrySet: 'IT'
@@ -94,6 +108,6 @@ addressSearchInput.addEventListener('keyup', () => {
     // Get Input Value
     const addressTerm = addressSearchInput.value.trim();
 
-    // Fetch TT API with throttling
+    // Fetch TT API with throttling (bypass "Too many requests" error)
     searchPlace(addressTerm);
 });
