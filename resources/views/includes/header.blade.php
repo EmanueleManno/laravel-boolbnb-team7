@@ -45,19 +45,29 @@ $firstLetter = strtoupper(substr($name, 0, 1));
             @endif
 
             <!-- Right side -->
-            <div class="col-1 d-flex d-md-none align-items-center ms-2">
-                <div class="filter"><i class="fa-solid fa-sliders"></i></div> <!-- Filtri avanzati (DA FARE) -->
-            </div>
+            <div class="col-1 col-md-5 d-flex col-xl-4 justify-content-end gap-2">
+                <div class="d-none d-md-flex">
+                    <a href="{{ route('apartments.create') }}" class="button-light">Apri un Boolbnb</a>
 
-            <div class="col-1 d-none col-md-5 d-md-flex col-xl-4 justify-content-end gap-2">
-                <a href="{{ route('apartments.create') }}" class="button-light">Apri un Boolbnb</a>
-
-                <button class="button-light"><i class="fa-solid fa-globe"></i></button>
+                    <button class="button-light"><i class="fa-solid fa-globe"></i></button>
+                </div>
 
                 {{-- Dropdown --}}
                 <div class="login-menu dropdown">
-                    <button class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                    <button class="dropdown-toggle d-none d-md-flex align-items-center" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-bars"></i>
+                        @guest
+                            <div class="user ms-2">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        @else
+                            <div class="user ms-2">
+                                <span id="admin-name">{{ $firstLetter }}</span>
+                            </div>
+                        @endguest
+                    </button>
+
+                    <button class="dropdown-toggle d-flex d-md-none align-items-center" data-bs-toggle="dropdown">
                         @guest
                             <div class="user">
                                 <i class="fa-solid fa-user"></i>
