@@ -31,8 +31,8 @@ const fetchApi = query => {
     // Resets
     suggestionsElem.innerHTML = '';
     addressInput.value = '';
-    latInput.value = 0;
-    lonInput.value = 0;
+    latInput.value = null;
+    lonInput.value = null;
 
     // Abort if query is empty
     if (!query) {
