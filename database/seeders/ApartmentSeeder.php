@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Apartment;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,14 +16,16 @@ class ApartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::pluck('id')->toArray();
+        $user_ids = User::pluck('id')->toArray();
+        $category_ids = Category::pluck('id')->toArray();
 
         $apartments = config('apartments');
         foreach ($apartments as $apartment) {
             $new_apartment = new Apartment();
 
             $new_apartment->title = $apartment['title'];
-            $new_apartment->user_id = Arr::random($users);
+            $new_apartment->user_id = Arr::random($user_ids);
+            $new_apartment->category_id = Arr::random($category_ids);
             $new_apartment->description = $apartment['description'];
             $new_apartment->price = $apartment['price'];
             $new_apartment->rooms = $apartment['rooms'];
