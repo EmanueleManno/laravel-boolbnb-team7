@@ -17,6 +17,8 @@ const fetchApi = query => {
     // Resets
     suggestionsElem.innerHTML = '';
     addressInput.value = '';
+    latInput.value = 0;
+    lonInput.value = 0;
 
     // Check query param
     if (!query) return;
@@ -32,14 +34,16 @@ const fetchApi = query => {
             console.log(results);
             if (!results.length) return;
 
-            // Update suggestions
+            // Create suggestions
             results.forEach(result => {
-                // Create suggestions
                 suggestionsElem.innerHTML += `<option value="${result.address.freeformAddress}"></option>`;
             });
 
-            // Update address input (get only first result)
-            addressInput.value = results[0].address.freeformAddress;
+            // Update inputs (get only first result)
+            const chosenAddress = results[0];
+            addressInput.value = chosenAddress.address.freeformAddress;
+            latInput.value = chosenAddress.position.lat;
+            lonInput.value = chosenAddress.position.lon;
 
         })
         .catch(err => {
@@ -50,8 +54,10 @@ const fetchApi = query => {
 //*** INIT ***//
 // dom
 const addressSearchInput = document.getElementById('address-search');
-const addressInput = document.getElementById('address');
 const suggestionsElem = document.getElementById('api-suggestions');
+const addressInput = document.getElementById('address');
+const latInput = document.getElementById('latitude');
+const lonInput = document.getElementById('longitude');
 
 // api
 const baseUri = 'https://api.tomtom.com/search/2/geocode/';

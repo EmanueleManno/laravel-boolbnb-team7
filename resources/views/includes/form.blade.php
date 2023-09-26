@@ -122,6 +122,11 @@
 
         {{-- API Suggestions --}}
         <datalist id="api-suggestions"></datalist>
+
+        {{-- Hidden Latitude and Longitude Fields --}}
+        <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $apartment->latitude) }}">
+        <input type="hidden" name="longitude" id="longitude"
+            value="{{ old('longitude', $apartment->longitude) }}">
     </div>
 
     {{-- # Is Visible --}}
