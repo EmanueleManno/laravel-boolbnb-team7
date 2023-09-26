@@ -1,8 +1,10 @@
 <nav>
     <ul class="container">
-        {{-- <li v-for="category in  categories ">
-            <img :src="category.img" :alt="category.label">
-            <div>{{ category . label }}</div>
-        </li> --}}
+        @foreach ($categories as $category)
+            <li>
+                <i class="fa-solid fa-{{ $category['icon'] }}"></i>
+                <div>{{ $category['name'] }}</div>
+            </li>
+        @endforeach
     </ul>
 </nav>
