@@ -1,11 +1,9 @@
 @if ($apartment->exists)
     <h1 class="text-center mt-5">Modifica appartamento: {{ $apartment->title }}</h1>
-    <form method="POST" action=""
-        class="p-5 mt-5" novalidate>
+    <form method="POST" action="{{ route('apartments.update', $apartment) }}" class="p-5 mt-5" novalidate>
         @method('PUT')
     @else
-        <form method="POST" action="" class="p-5 mt-5"
-            novalidate>
+        <form method="POST" action="{{ route('apartments.store') }}" class="p-5 mt-5" novalidate>
 @endif
 @csrf
 
@@ -53,9 +51,8 @@
     <div class="mb-3 col-6">
         <label for="price" class="form-label">Prezzo</label>
         <span class="form-text">*</span>
-        <input value="{{ old('price', $apartment->price) }}" type="number"
-            class="form-control @error('price') is-invalid @enderror" id="price"
-            name="price" required>
+        <input value="{{ old('price', $apartment->price) }}" type="number" min="0" step="0.01"
+            class="form-control @error('price') is-invalid @enderror" id="price" name="price" required>
         <div class="invalid-feedback">
             {{ $errors->first('price') }}
         </div>
@@ -66,8 +63,7 @@
         <label for="rooms" class="form-label">Numero di stanze</label>
         <span class="form-text"></span>
         <input value="{{ old('rooms', $apartment->rooms) }}" type="number"
-            class="form-control @error('rooms') is-invalid @enderror" id="rooms"
-            name="rooms">
+            class="form-control @error('rooms') is-invalid @enderror" id="rooms" name="rooms" min="0">
         <div class="invalid-feedback">
             {{ $errors->first('rooms') }}
         </div>
@@ -78,8 +74,7 @@
         <label for="beds" class="form-label">Numero di letti</label>
         <span class="form-text"></span>
         <input value="{{ old('beds', $apartment->beds) }}" type="number"
-            class="form-control @error('beds') is-invalid @enderror" id="beds"
-            name="beds">
+            class="form-control @error('beds') is-invalid @enderror" id="beds" name="beds" min="0">
         <div class="invalid-feedback">
             {{ $errors->first('beds') }}
         </div>
@@ -90,8 +85,8 @@
         <label for="bathrooms" class="form-label">Numero di bagni</label>
         <span class="form-text"></span>
         <input value="{{ old('bathrooms', $apartment->bathrooms) }}" type="number"
-            class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms"
-            name="bathrooms">
+            class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms"
+            min="0">
         <div class="invalid-feedback">
             {{ $errors->first('bathrooms') }}
         </div>
@@ -102,8 +97,8 @@
         <label for="square_meters" class="form-label">Metri quadri</label>
         <span class="form-text"></span>
         <input value="{{ old('square_meters', $apartment->square_meters) }}" type="number"
-            class="form-control @error('square_meters') is-invalid @enderror" id="square_meters"
-            name="square_meters">
+            class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters"
+            min="0">
         <div class="invalid-feedback">
             {{ $errors->first('square_meters') }}
         </div>
@@ -113,7 +108,7 @@
     <div class="mb-3 col-8">
         <label for="square_meters" class="form-label">Indirizzo</label>
         <span class="form-text"></span>
-        <input value="{{ old('', ) }}" type="text" class="form-control">
+        <input value="{{ old('') }}" type="text" class="form-control">
     </div>
 
     <div class="mb-3 col-12">
