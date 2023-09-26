@@ -62,8 +62,10 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Apartment $apartment)
+    public function destroy(string $id)
     {
-        //
+        Apartment::destroy($id);
+        
+        return to_route('apartments.index')->with('delete', 'success');
     }
 }

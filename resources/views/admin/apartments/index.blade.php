@@ -55,7 +55,7 @@
                     <i class="fas fa-pencil"></i>Modifica
                 </a>
                 <!--Icona per eliminare il progetto-->
-                <form action="#" method="POST" class="ms-2 delete-form"
+                <form action="{{ route('apartments.destroy', $apartment) }}" method="POST" class="ms-2 delete-form"
                 data-bs-toggle="modal" data-bs-target="#modal" data-model="progetto">
                    @csrf
                    @method('DELETE')
