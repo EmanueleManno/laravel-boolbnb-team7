@@ -2,5 +2,5 @@
 
 @section('main')
     {{-- Navbar --}}
-     {{-- @include('includes.navbar') --}}
+    @include('includes.navbar')
 @endsection
