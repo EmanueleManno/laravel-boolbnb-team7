@@ -63,4 +63,15 @@ return $apartments = [
         'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-888236710191401724/original/31f1dcc0-5a17-4c5d-a4e4-7e3ba20695af.jpeg?im_w=960',
         'is_visible' => '1',
     ],
+    [
+        'title' => 'La casetta di Aldo',
+        'description' => 'Se non vi piace Cosenza è perchè non siete venuti nella casetta di Aldo!',
+        'price' => '5',
+        'rooms' => '6',
+        'beds' => '3',
+        'bathrooms' => '1',
+        'square_meters' => '60',
+        'image' => 'https://cdn.turistipercaso.it/media?src=/uploads/2023/04/case-al-contrario-brighton.jpg&sharpen&save-as=webp&aspect-ratio=16:9&crop-to-fit&w=1200&q=60',
+        'is_visible' => '1',
+    ],
 ];
