@@ -47,7 +47,7 @@
 
                     <div class="h5">
                         @forelse ($apartment->services as $service)
-                            <span class="badge text-bg-success p-2">
+                            <span class="badge text-bg-success p-2 m-1">
                                 {{ $service->name }}
                             </span>
                         @empty
