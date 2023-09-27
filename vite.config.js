@@ -12,7 +12,8 @@ export default defineConfig({
                 'resources/scss/app.scss',
                 'resources/js/app.js',
                 'resources/js/confirm-delete.js',
-                'resources/js/handle-address-geocode.js'
+                'resources/js/handle-address-geocode.js',
+                'resources/js/map-viewer.js',
             ],
             refresh: true,
         }),
