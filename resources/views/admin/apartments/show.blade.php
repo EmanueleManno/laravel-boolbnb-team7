@@ -3,7 +3,15 @@
 @section('main')
     <div class="container">
 
-        <h2 class="my-5">{{ $apartment->title }}</h2>
+        {{-- Title --}}
+        <h2 class="mt-4 mb-2">{{ $apartment->title }}</h2>
+
+        {{-- Category --}}
+        <div class="h6 mb-4">
+            <span class="badge text-bg-danger">
+                {{ $apartment->category->name }}
+            </span>
+        </div>
 
         {{-- Image --}}
         <div class="row">
@@ -18,13 +26,6 @@
 
                 {{-- Details --}}
                 <div class="mb-5">
-
-                    {{-- Category --}}
-                    <div class="h6">
-                        <span class="badge text-bg-danger">
-                            {{ $apartment->category->name }}
-                        </span>
-                    </div>
 
                     {{-- Misc --}}
                     <div>
