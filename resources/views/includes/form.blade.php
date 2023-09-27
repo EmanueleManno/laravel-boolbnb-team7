@@ -47,6 +47,14 @@
             alt="preview" class="img-fluid my-2" id="image-preview">
     </div>
 
+    {{-- Categories --}}
+    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+        <option selected>Nessuna categoria</option>
+        @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+        @endforeach
+    </select>
+
     {{-- # Price --}}
     <div class="mb-3 col-6">
         <label for="price" class="form-label">Prezzo</label>
