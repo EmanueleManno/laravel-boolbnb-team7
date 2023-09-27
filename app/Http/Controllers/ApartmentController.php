@@ -53,6 +53,7 @@ class ApartmentController extends Controller
                 'longitude' => 'nullable|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
                 'user_id' => 'nullable|exists:users,id',
+                'category_id' => 'nullable|exists:categories,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio',
@@ -82,18 +83,20 @@ class ApartmentController extends Controller
 
                 'is_visible.boolean' => 'Il valore non è valido',
 
-                'user_id.exists' => "L'utente è inesistente"
+                'user_id.exists' => "L'utente è inesistente",
+
+                'category_id.exists' => "La categoria è inesistente",
             ]
         );
 
         // Insert Apartment
         $apartment = new Apartment();
+
         $apartment->fill($data);
         $apartment->save();
 
         // Insert apartment-service records
         if (Arr::exists($data, 'services')) $apartment->services()->attach($data['services']);
-
 
         return to_route('apartments.index');
     }

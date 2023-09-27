@@ -42,7 +42,7 @@
                     <tr>
                         <th scope="row">{{ $apartment->id }}</th>
                         <td>{{ $apartment->title }}</td>
-                        <td></td>
+                        <td>{{$apartment->category?->name}}</td>
                         <td>
                             @forelse ($apartment->services as $service)
                                 {{ $service->name }},
