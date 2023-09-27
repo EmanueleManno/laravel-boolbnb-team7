@@ -16,7 +16,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        // Get only user apartments
+        $user = Auth::user();
+        $apartments = $user->apartments;
+
         return view('admin.apartments.index', compact('apartments'));
     }
 
