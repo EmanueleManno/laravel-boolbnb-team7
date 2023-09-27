@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Registrati') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" novalidate>
+                    <form id="validation-form" method="POST" action="{{ route('register') }}" novalidate>
                         @csrf
 
                         <!--Nome-->
@@ -23,6 +23,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <span id="name-error" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -38,6 +39,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <span id="surname-error" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -53,6 +55,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <span id="date-error" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -68,6 +71,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <span id="email-error" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -83,6 +87,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <span id="password-error" class="text-danger"></span>
                             </div>
                         </div>
                         
@@ -92,6 +97,12 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                @error('password-confirm')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <span id="password-confirm-error" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -109,4 +120,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+@vite(['resources/js/validation-form.js'])
 @endsection
