@@ -141,4 +141,16 @@ class ApartmentController extends Controller
 
         return to_route('apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
     }
+
+    /**
+     * Toggle Apartment visibility.
+     */
+    public function toggle(Apartment $apartment)
+    {
+        $apartment->is_visible = !$apartment->is_visible;
+        $action = $apartment->is_visible ? 'pubblicato' : 'salvato come bozza';
+        $apartment->save();
+
+        return to_route('apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
+    }
 }
