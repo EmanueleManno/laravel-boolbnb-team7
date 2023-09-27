@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApartmentController;
 use App\Models\Apartment;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 // Apartments api routes
 Route::apiResource('apartments', ApartmentController::class);
+
+// Categories api
+Route::get('/categories',  function () {
+    $categories = Category::all();
+    return response()->json($categories);
+});
