@@ -12,9 +12,15 @@
             <div class="d-flex justify-content-end align-items-center">
 
                 {{-- Publish --}}
-                <button class="btn btn-sm btn-outline-primary ms-2">
-                    <i class="fas fa-eye"></i> Publica
-                </button>
+                @if ($apartment->is_visible)
+                    <button class="btn btn-sm btn-outline-warning ms-2">
+                        <i class="fas fa-eye"></i> Cambia in Bozza
+                    </button>
+                @else
+                    <button class="btn btn-sm btn-outline-primary ms-2">
+                        <i class="fas fa-eye"></i> Publica
+                    </button>
+                @endif
 
                 {{-- Edit Button --}}
                 <a href="{{ route('apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
