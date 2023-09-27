@@ -48,12 +48,27 @@
     </div>
 
     {{-- Categories --}}
-    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-        <option selected>Nessuna categoria</option>
-        @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+    <div class="col-12 my-3">
+        <label for="categories" class="form-label">Categorie</label>
+        <select id="categories" class="form-select form-select-lg mb-3" aria-label="Large select example" name="category_id">
+            <option selected>Nessuna categoria</option>
+            @foreach($categories as $category)
+            <option  @if (old('category_id', $apartment->category_id) == $category->id) selected @endif 
+                value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    {{-- Services --}}
+    <div class="col-12 my-3">
+        @foreach ($services as $service)
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" @if(in_array($service->id, old('services', $apartment_service_ids ?? []))) checked @endif 
+            id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]">
+            <label class="form-check-label me-3" for="service-{{ $service->id }}">{{$service->name}}</label>
+        </div>
         @endforeach
-    </select>
+    </div>
 
     {{-- # Price --}}
     <div class="mb-3 col-6">
