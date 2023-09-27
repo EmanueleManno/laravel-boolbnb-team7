@@ -34,7 +34,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Titolo</th>
-                    <th scope="col">Categoria</th>
+                    <th scope="col">Stato</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Categoria</th>
                     <th scope="col" class="d-none d-lg-table-cell">Servizi</th>
                     <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
                     <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
@@ -49,15 +50,19 @@
                         <th scope="row">{{ $apartment->id }}</th>
                         <td>{{ $apartment->title }}</td>
 
-                        <td>{{$apartment->category?->name}}</td>
+                        <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
+
+                        <td class="d-none d-lg-table-cell">{{ $apartment->category?->name }}</td>
+
                         <td class="d-none d-lg-table-cell">
 
                             @forelse ($apartment->services as $service)
                                 {{ $service->name }},
-                            @empty 
+                            @empty
                                 -
                             @endforelse
                         </td>
+
                         <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
                         <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
 
@@ -89,7 +94,7 @@
                         </td>
                     </tr>
 
-                <!--Se non ci sono appartamenti-->
+                    <!--Se non ci sono appartamenti-->
                 @empty
                     <tr>
                         <td class="text-center" colspan="6">
