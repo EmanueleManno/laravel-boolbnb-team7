@@ -10,7 +10,7 @@ $firstLetter = strtoupper(substr($name, 0, 1));
             <!-- Ricerca attiva solo su schermata home -->
             @if (Route::is('guest.home'))
                 <div class="col-md-1 col-xl-4 d-none d-md-flex justify-content-start">
-                    <a class="logo" href="{{ route('guest.home') }}">
+                    <a class="logo" href="http://localhost:5174/">
                         <img src="{{ asset('img/logo.png') }}" alt="logo">
                         <h1 class="d-none d-xl-inline-block">boolbnb</h1>
                     </a>
@@ -37,7 +37,7 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                 </div>
             @else
                 <div class="col-11 col-md-7 col-xl-8 d-flex justify-content-start">
-                    <a class="logo" href="{{ route('guest.home') }}">
+                    <a class="logo" href="http://localhost:5174/">
                         <img src="{{ asset('img/logo.png') }}" alt="logo">
                         <h1>boolbnb</h1>
                     </a>
