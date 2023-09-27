@@ -30,7 +30,9 @@
         @include('includes.header')
 
         {{-- Main --}}
-        @yield('main')
+        <main>
+            @yield('main')
+        </main>
 
         {{-- Footer --}}
         @include('includes.footer')

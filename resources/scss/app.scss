@@ -4,6 +4,7 @@
 @use './utils/vars' as *;
 // Includes
 @use './header';
+@use './footer';
 @use './navbar';
 @use './form';
 // Admin
@@ -71,4 +72,9 @@ button {
 
 ::-webkit-scrollbar-track {
     background: transparent;
+}
+
+main{
+    height: calc(100vh - 121px);
+    overflow: auto;
 }
