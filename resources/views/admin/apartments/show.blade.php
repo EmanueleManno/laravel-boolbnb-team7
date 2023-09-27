@@ -54,7 +54,8 @@
         {{-- Image --}}
         <div class="row">
             <div class="col-8 mb-3">
-                <img class="img-fluid" src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
+                <img class="img-fluid" src="{{ $apartment->image ?? 'https://marcolanci.it/utils/placeholder.jpg' }}"
+                    alt="{{ $apartment->title }}">
             </div>
         </div>
 
@@ -129,7 +130,7 @@
                     </div>
 
                     {{-- Booking Button --}}
-                    <button class="btn btn-primary text-center">Prenota</button>
+                    <button disabled class="btn btn-primary text-center">Prenota</button>
                     <div class="text-center my-3">Non riceverai alcun addebito in questa fase</div>
 
                     {{-- Booking Recap --}}
