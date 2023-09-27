@@ -14,7 +14,10 @@
             <h1>Lista Appartamenti</h1>
 
             <!--Pulsante di aggiunta di un nuovo appartamento-->
-            <a href="{{ route('apartments.create') }}" class="btn btn-success">Aggiungi nuovo appartamento</a>
+            <a href="{{ route('apartments.create') }}" class="btn btn-success">
+                <span class="d-none d-md-flex">Aggiungi nuovo appartamento</span>
+                <i class="d-flex d-md-none fa-solid fa-plus"></i>
+            </a>
 
         </header>
 
@@ -29,9 +32,9 @@
                     <th scope="col">ID</th>
                     <th scope="col">Titolo</th>
                     <th scope="col">Categoria</th>
-                    <th scope="col">Servizi</th>
-                    <th scope="col">Data Creazione</th>
-                    <th scope="col">Ultima Modifica</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Servizi</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -43,15 +46,15 @@
                         <th scope="row">{{ $apartment->id }}</th>
                         <td>{{ $apartment->title }}</td>
                         <td></td>
-                        <td>
+                        <td class="d-none d-lg-table-cell">
                             @forelse ($apartment->services as $service)
                                 {{ $service->name }},
                             @empty 
                                 -
                             @endforelse
                         </td>
-                        <td>{{ $apartment->created_at }}</td>
-                        <td>{{ $apartment->updated_at }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
 
                         <!--Dettaglio, modifica e eliminazione-->
                         <td>
@@ -59,12 +62,12 @@
 
                                 <!--Per vedere il dettaglio-->
                                 <a href="{{ route('apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i>Dettaglio
+                                    <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
                                 </a>
 
                                 <!--Icona per modificare l'appartamento-->
                                 <a href="{{ route('apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
-                                    <i class="fas fa-pencil"></i>Modifica
+                                    <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
                                 </a>
 
                                 <!--Icona per eliminare il progetto-->
@@ -74,14 +77,14 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i>Elimina
+                                        <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina</span>
                                     </button>
                                 </form>
                             </div>
                         </td>
                     </tr>
 
-                    <!--Se non ci sono appartamenti-->
+                <!--Se non ci sono appartamenti-->
                 @empty
                     <tr>
                         <td class="text-center" colspan="6">
