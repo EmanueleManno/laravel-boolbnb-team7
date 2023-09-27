@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ApartmentController extends Controller
 {
@@ -121,7 +122,10 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        $categories = Category::select('id', 'name')->get();
+        $services = Service::select('id', 'name')->get();
+        $apartment_service_id = $apartment->services->pluck('id')->toArray();
+        return view('admin.apartments.edit', compact('apartment', 'categories', 'services', 'apartment_service_id'));
     }
 
     /**
@@ -129,6 +133,66 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
+
+        $data_new_apartment = $request->all();
+
+        // Validazione
+        $data = $request->validate(
+            [
+                'title' => 'required|string', Rule::unique('apartments')->ignore($apartment),
+                'description' => 'nullable|string',
+                'price' => 'required|decimal:0,2|min:0',
+                'rooms' => 'nullable|integer|min:0',
+                'beds' => 'nullable|integer|min:0',
+                'bathrooms' => 'nullable|integer|min:0',
+                'square_meters' => 'nullable|integer|min:0',
+                'image' => 'nullable|url',
+                'address' => 'nullable|string',
+                'latitude' => 'nullable|decimal:0,6',
+                'longitude' => 'nullable|decimal:0,6',
+                'is_visible' => 'nullable|boolean',
+                'category_id' => 'nullable|exists:categories,id',
+                'services' => 'nullable|exists:services,id',
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.unique' => "Esiste già un appartamento dal titolo $request->title",
+                'title.string' => 'Il titolo non è valido',
+
+                'description.string' => 'La descrizione non è valida',
+
+                'price.required' => 'Non può esistere un appartamento senza prezzo',
+                'price.decimal' => 'Il prezzo deve essere un numero con massimo 2 cifre',
+                'price.min' => 'Inserisci un prezzo maggiore di zero',
+
+                'rooms.integer' => 'Inserisci un numero valido',
+                'rooms.min' => 'Inserisci un numero maggiore di zero',
+
+                'beds.integer' => 'Inserisci un numero valido',
+                'beds.min' => 'Inserisci un numero maggiore di zero',
+
+                'bathrooms.integer' => 'Inserisci un numero valido',
+                'bathrooms.min' => 'Inserisci un numero maggiore di zero',
+
+                'square_meters.integer' => 'Inserisci un numero valido',
+                'square_meters.min' => 'Inserisci un numero maggiore di zero',
+
+                'address.string' => 'L\'indirizzo non è valido',
+
+                'image.url' => "Inserisci un url valido",
+
+                'is_visible.boolean' => 'Il valore non è valido',
+
+                'category_id.exists' => "La categoria è inesistente",
+
+                'services.exists' => 'Il servizio è inesistente',
+            ]
+        );
+
+        if (Arr::exists($data, 'services')) $apartment->services()->sync($data['services']);
+
+        $apartment->update($data_new_apartment);
+
         return to_route('apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
     }
 
