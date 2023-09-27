@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/apartments', [ApartmentController::class, 'index']);
+// Apartments api routes
+Route::apiResource('apartments', ApartmentController::class);
