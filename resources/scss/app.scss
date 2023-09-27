@@ -5,6 +5,8 @@
 // Includes
 @use './header';
 @use './navbar';
+// Admin
+@use 'admin/home.scss';
 
 //__________________ General rules
 body {
