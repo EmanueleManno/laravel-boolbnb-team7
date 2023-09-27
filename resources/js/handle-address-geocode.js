@@ -51,7 +51,6 @@ const fetchApi = query => {
 
             // Get Results
             const { results } = res.data;
-            console.log(results);
             if (!results.length) return;
 
             // Create suggestions list

@@ -9,5 +9,5 @@
 
 {{-- Scripts --}}
 @section('scripts')
-    @vite(['resources/js/handleAddressGeocode.js'])
+    @vite(['resources/js/handle-address-geocode.js'])
 @endsection
