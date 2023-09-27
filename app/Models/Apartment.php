@@ -29,7 +29,7 @@ class Apartment extends Model
     }
 
     /**
-     * Category relation
+     * User relation
      */
     public function user()
     {
