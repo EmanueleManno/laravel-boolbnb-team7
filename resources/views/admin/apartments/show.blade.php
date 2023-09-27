@@ -45,11 +45,18 @@
         <h2 class="mt-4 mb-2">{{ $apartment->title }}</h2>
 
         {{-- Category --}}
-        <div class="h6 mb-4">
-            <span class="badge text-bg-danger">
-                {{ $apartment->category->name }}
-            </span>
-        </div>
+        @if ($apartment->category)
+            <div class="h6 mb-4">
+                <span class="badge text-bg-danger">
+                    {{ $apartment->category->name }}
+                </span>
+
+            </div>
+        @else
+            <div class="mb-4">
+                Nessuna Categoria
+            </div>
+        @endif
 
         {{-- Image --}}
         <div class="row">
