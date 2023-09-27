@@ -28,6 +28,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Titolo</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Servizi</th>
                     <th scope="col">Data Creazione</th>
                     <th scope="col">Ultima Modifica</th>
                     <th scope="col"></th>
@@ -40,6 +42,14 @@
                     <tr>
                         <th scope="row">{{ $apartment->id }}</th>
                         <td>{{ $apartment->title }}</td>
+                        <td>{{ $apartment->category->name }}</td>
+                        <td>
+                            @forelse ($apartment->services as $service)
+                                {{ $service->name }},
+                            @empty 
+                                -
+                            @endforelse
+                        </td>
                         <td>{{ $apartment->created_at }}</td>
                         <td>{{ $apartment->updated_at }}</td>
 

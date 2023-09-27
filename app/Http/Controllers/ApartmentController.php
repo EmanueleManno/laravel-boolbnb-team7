@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
+use App\Models\Category;
 use App\Models\Apartment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
@@ -24,8 +26,10 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartment = new Apartment();
+        $categories = Category::select('id', 'name')->get();
+        $services = Service::select('id', 'name')->get();
 
-        return view('admin.apartments.create', compact('apartment'));
+        return view('admin.apartments.create', compact('apartment', 'categories', 'services'));
     }
 
     /**

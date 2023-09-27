@@ -1,239 +1,239 @@
 <?php
 return [
     [
-        'label' => 'Wow!',
+        'name' => 'Wow!',
         'img' => 'wow.jpg',
     ],
     [
-        'label' => 'Piscine incredibili',
+        'name' => 'Piscine incredibili',
         'img' => 'pool.jpg',
     ],
     [
-        'label' => 'Di tendenza',
+        'name' => 'Di tendenza',
         'img' => 'trend.jpg',
     ],
     [
-        'label' => 'Minicase',
+        'name' => 'Minicase',
         'img' => 'mini-houses.jpg',
     ],
     [
-        'label' => 'Grotte',
+        'name' => 'Grotte',
         'img' => 'caves.jpg',
     ],
     [
-        'label' => 'sulle piste',
+        'name' => 'sulle piste',
         'img' => 'on-slopes.jpg',
     ],
     [
-        'label' => 'Baite',
+        'name' => 'Baite',
         'img' => 'cabins.jpg',
     ],
     [
-        'label' => 'Vista mozzafiato',
+        'name' => 'Vista mozzafiato',
         'img' => 'nice-view.jpg',
     ],
     [
-        'label' => 'Ville',
+        'name' => 'Ville',
         'img' => 'villas.jpg',
     ],
     [
-        'label' => 'Cupole',
+        'name' => 'Cupole',
         'img' => 'domes.jpg',
     ],
     [
-        'label' => 'Luxe',
+        'name' => 'Luxe',
         'img' => 'luxe.jpg',
     ],
     [
-        'label' => 'Case sull\'albero',
+        'name' => 'Case sull\'albero',
         'img' => 'on-trees.jpg',
     ],
     [
-        'label' => 'Barche',
+        'name' => 'Barche',
         'img' => 'boats.jpg',
     ],
     [
-        'label' => 'Design',
+        'name' => 'Design',
         'img' => 'design.jpg',
     ],
     [
-        'label' => 'Castelli',
+        'name' => 'Castelli',
         'img' => 'castles.jpg',
     ],
     [
-        'label' => 'Sull\'acqua',
+        'name' => 'Sull\'acqua',
         'img' => 'on-water.jpg',
     ],
     [
-        'label' => 'Luoghi remoti',
+        'name' => 'Luoghi remoti',
         'img' => 'remote-places.jpg',
     ],
     [
-        'label' => 'Spiaggia',
+        'name' => 'Spiaggia',
         'img' => 'beach.jpg',
     ],
     [
-        'label' => 'Vigneti',
+        'name' => 'Vigneti',
         'img' => 'vineyards.jpg',
     ],
     [
-        'label' => 'Dimore storiche',
+        'name' => 'Dimore storiche',
         'img' => 'historic-homes.jpg',
     ],
     [
-        'label' => 'Lago',
+        'name' => 'Lago',
         'img' => 'lake.jpg',
     ],
     [
-        'label' => 'Agriturismi',
+        'name' => 'Agriturismi',
         'img' => 'farmhouses.jpg',
     ],
     [
-        'label' => 'Campagna',
+        'name' => 'Campagna',
         'img' => 'countryside.jpg',
     ],
     [
-        'label' => 'Case galleggianti',
+        'name' => 'Case galleggianti',
         'img' => 'floating-houses.jpg',
     ],
     [
-        'label' => 'B&B',
+        'name' => 'B&B',
         'img' => 'b&b.jpg',
     ],
     [
-        'label' => 'Parchi nazionali',
+        'name' => 'Parchi nazionali',
         'img' => 'national-parks.jpg',
     ],
     [
-        'label' => 'isole',
+        'name' => 'isole',
         'img' => 'islands.jpg',
     ],
     [
-        'label' => 'Città popolari',
+        'name' => 'Città popolari',
         'img' => 'popolar-cities.jpg',
     ],
     [
-        'label' => 'Stanze',
+        'name' => 'Stanze',
         'img' => 'rooms.jpg',
     ],
     [
-        'label' => 'A-frame',
+        'name' => 'A-frame',
         'img' => 'a-frame.jpg',
     ],
     [
-        'label' => 'Torri',
+        'name' => 'Torri',
         'img' => 'towers.jpg',
     ],
     [
-        'label' => 'Fronte lago',
+        'name' => 'Fronte lago',
         'img' => 'lake-front.jpg',
     ],
     [
-        'label' => 'Tropicali',
+        'name' => 'Tropicali',
         'img' => 'tropical.jpg',
     ],
     [
-        'label' => 'Camping',
+        'name' => 'Camping',
         'img' => 'camping.jpg',
     ],
     [
-        'label' => 'Spazi per giocare',
+        'name' => 'Spazi per giocare',
         'img' => 'games.jpg',
     ],
     [
-        'label' => 'Novità',
+        'name' => 'Novità',
         'img' => 'news.jpg',
     ],
     [
-        'label' => 'Fienili',
+        'name' => 'Fienili',
         'img' => 'barns.jpg',
     ],
     [
-        'label' => 'Case organiche',
+        'name' => 'Case organiche',
         'img' => 'organic-homes.jpg',
     ],
     [
-        'label' => 'Mulini',
+        'name' => 'Mulini',
         'img' => 'mills.jpg',
     ],
     [
-        'label' => 'Surf',
+        'name' => 'Surf',
         'img' => 'surf.jpg',
     ],
     [
-        'label' => 'In cima al mondo',
+        'name' => 'In cima al mondo',
         'img' => 'top-world.jpg',
     ],
     [
-        'label' => 'Polo Nord',
+        'name' => 'Polo Nord',
         'img' => 'north-pole.jpg',
     ],
     [
-        'label' => 'Trulli',
+        'name' => 'Trulli',
         'img' => 'trulli.jpg',
     ],
     [
-        'label' => 'Case cicladiche',
+        'name' => 'Case cicladiche',
         'img' => 'cycladic-houses.jpg',
     ],
     [
-        'label' => 'Pianoforti a coda',
+        'name' => 'Pianoforti a coda',
         'img' => 'piano.jpg',
     ],
     [
-        'label' => 'Spazi creativi',
+        'name' => 'Spazi creativi',
         'img' => 'creative-spaces.jpg',
     ],
     [
-        'label' => 'Cucine professionali',
+        'name' => 'Cucine professionali',
         'img' => 'kitchens.jpg',
     ],
     [
-        'label' => 'Case particolari',
+        'name' => 'Case particolari',
         'img' => 'particular-houses.jpg',
     ],
     [
-        'label' => 'Nel deserto',
+        'name' => 'Nel deserto',
         'img' => 'desert.jpg',
     ],
     [
-        'label' => 'Ryokan',
+        'name' => 'Ryokan',
         'img' => 'ryokan.jpg',
     ],
     [
-        'label' => 'Container',
+        'name' => 'Container',
         'img' => 'container.jpg',
     ],
     [
-        'label' => 'Capanne',
+        'name' => 'Capanne',
         'img' => 'desert.jpg',
     ],
     [
-        'label' => 'Spazi accessibili',
+        'name' => 'Spazi accessibili',
         'img' => 'accessible-spaces.jpg',
     ],
     [
-        'label' => 'Riad',
+        'name' => 'Riad',
         'img' => 'riad.jpg',
     ],
     [
-        'label' => 'Minsu',
+        'name' => 'Minsu',
         'img' => 'minsu.jpg',
     ],
     [
-        'label' => 'Golf',
+        'name' => 'Golf',
         'img' => 'golf.jpg',
     ],
     [
-        'label' => 'Hanok',
+        'name' => 'Hanok',
         'img' => 'hanok.jpg',
     ],
     [
-        'label' => 'Camper',
+        'name' => 'Camper',
         'img' => 'camper.jpg',
     ],
     [
-        'label' => 'Sci',
+        'name' => 'Sci',
         'img' => 'sci.jpg',
     ]
 ];
