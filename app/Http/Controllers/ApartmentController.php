@@ -129,6 +129,6 @@ class ApartmentController extends Controller
     {
         Apartment::destroy($id);
 
-        return to_route('apartments.index')->with('delete', 'success');
+        return to_route('apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
     }
 }
