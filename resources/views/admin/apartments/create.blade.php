@@ -11,4 +11,5 @@
 @section('scripts')
     @vite(['resources/js/handle-address-geocode.js'])
     @vite(['resources/js/image-preview'])
+    @vite(['resources/js/validation-create-form.js'])
 @endsection

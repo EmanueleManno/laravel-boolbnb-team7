@@ -1,10 +1,10 @@
 @if ($apartment->exists)
     <h1 class="text-center mt-5">Modifica un appartamento: {{ $apartment->title }}</h1>
-    <form method="POST" action="{{ route('apartments.update', $apartment) }}" class="p-5 mt-5" novalidate>
+    <form id="validation-form" method="POST" action="{{ route('apartments.update', $apartment) }}" class="p-5 mt-5" novalidate>
         @method('PUT')
     @else
         <h1 class="text-center mt-5">Crea un appartamento: {{ $apartment->title }}</h1>
-        <form method="POST" action="{{ route('apartments.store') }}" class="p-5 mt-2" novalidate>
+        <form id="validation-form" method="POST" action="{{ route('apartments.store') }}" class="p-5 mt-2" novalidate>
 @endif
 @csrf
 
@@ -12,7 +12,7 @@
 
     {{-- # Title --}}
     <div class="mb-3 col-6">
-        <label for="title" class="form-label">Titolo</label>
+        <label for="title" class="form-label @error('title') is-invalid @enderror">Titolo</label>
         <span class="form-text">*</span>
         <input value="{{ old('title', $apartment->title) }}" type="text"
             class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="titleHelp"
@@ -20,6 +20,12 @@
         <div class="invalid-feedback">
             {{ $errors->first('title') }}
         </div>
+        @error('title')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        <span id="title-error" class="text-danger"></span>
     </div>
 
     {{-- # Description --}}
@@ -30,6 +36,12 @@
         <div class="invalid-feedback">
             {{ $errors->first('description') }}
         </div>
+        @error('description')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        <span id="description-error" class="text-danger"></span>
     </div>
 
     <div class="row align-items-center">
@@ -41,6 +53,12 @@
             <div class="invalid-feedback">
                 {{ $errors->first('image') }}
             </div>
+            @error('image')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        <span id="image-error" class="text-danger"></span>
         </div>
         
         {{-- # Image preview --}}
