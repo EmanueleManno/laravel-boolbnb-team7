@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ApartmentController;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Apartments api routes
+Route::apiResource('apartments', ApartmentController::class);
