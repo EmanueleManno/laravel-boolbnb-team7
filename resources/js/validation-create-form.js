@@ -7,17 +7,15 @@ function validateForm() {
     titleError.innerText = "";
     descriptionError.innerText = "";
     imageError.innerText = "";
-    //categoriesError.innerText = "";
-    //servicesError.innerText = "";
 
     //Validazione Titolo
-    if (titleFieldValue.length > 10) { //255
+    if (titleFieldValue.length > 255) { //255
         errors.title = "Il nome deve essere lungo massimo 255 caratteri";
         titleError.innerText = errors.title;
     }
 
     //Validazione Descrizione
-    if (descriptionFieldValue.length > 10) {
+    if (descriptionFieldValue.length > 255) {
         errors.description = "la descrizione deve essere lunga massimo 255 caratteri";
         descriptionError.innerText = errors.description;
     }
