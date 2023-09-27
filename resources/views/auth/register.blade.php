@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <!--Intestazione-->
-                <div class="card-header">{{ __('Registrati al nostro sito') }}</div>
+                <div class="card-header">{{ __('Registrati') }}</div>
 
                 <div class="card-body">
                     <form id="validation-form" method="POST" action="{{ route('register') }}" novalidate>
