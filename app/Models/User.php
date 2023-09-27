@@ -40,4 +40,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Apartments relation
+     */
+    public function apartments()
+    {
+        return $this->hasMany(Apartment::class);
+    }
 }
