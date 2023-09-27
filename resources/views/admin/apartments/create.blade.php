@@ -5,3 +5,9 @@
         @include('includes.form')
     </div>
 @endsection
+
+
+{{-- Scripts --}}
+@section('scripts')
+    @vite(['resources/js/handle-address-geocode.js'])
+@endsection

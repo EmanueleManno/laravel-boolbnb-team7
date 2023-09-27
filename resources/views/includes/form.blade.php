@@ -105,12 +105,35 @@
     </div>
 
     {{-- # Address --}}
-    <div class="mb-3 col-8">
-        <label for="square_meters" class="form-label">Indirizzo</label>
+    <div class="mb-3 col-12">
+        <label for="address-search" class="form-label">
+            Indirizzo
+            {{-- Loader --}}
+            <i id="api-loader" class="fas fa-spinner fa-pulse text-danger d-none"></i>
+        </label>
         <span class="form-text"></span>
-        <input value="{{ old('') }}" type="text" class="form-control">
+
+        {{-- Search Input --}}
+        <input id="address-search" autocomplete="off" value="{{ old('address', $apartment->address) }}"
+            type="text" class="form-control" list="api-suggestions">
+        <div class="invalid-feedback">
+            {{ $errors->first('address') }}
+        </div>
+
+        {{-- Chosen Place Input --}}
+        <input type="text" readonly name="address" id="address" class="form-control-plaintext fw-bold p-2 mt-2"
+            value="{{ old('address', $apartment->address) }}">
+
+        {{-- API Suggestions --}}
+        <datalist id="api-suggestions"></datalist>
+
+        {{-- Hidden Latitude and Longitude Fields --}}
+        <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $apartment->latitude) }}">
+        <input type="hidden" name="longitude" id="longitude"
+            value="{{ old('longitude', $apartment->longitude) }}">
     </div>
 
+    {{-- # Is Visible --}}
     <div class="mb-3 col-12">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="is_visible">
