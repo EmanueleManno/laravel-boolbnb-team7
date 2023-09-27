@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 25);
-            $table->text('icon')->nullable();
+            $table->text('img')->nullable();
 
             $table->timestamps();
         });

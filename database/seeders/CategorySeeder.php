@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
             $new_category = new Category();
 
             $new_category->name = $category['name'];
-            $new_category->icon = $category['icon'];
+            $new_category->img = $category['img'];
 
             $new_category->save();
         }

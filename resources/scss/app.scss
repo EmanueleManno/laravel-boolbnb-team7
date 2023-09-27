@@ -1,1 +1,72 @@
-@import '~bootstrap/scss/bootstrap'
+// Bootstrap
+@use '~bootstrap/scss/bootstrap';
+// Variables
+@use './utils/vars' as *;
+// Includes
+@use './header';
+@use './navbar';
+// Admin
+@use 'admin/home.scss';
+
+//__________________ General rules
+body {
+    display: block;
+    font-family: $roboto;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+
+.button-light {
+    @include flex;
+    background-color: transparent;
+    font-weight: 500;
+    height: 100%;
+    padding: 12px;
+    border-radius: 20px;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: #f7f7f7;
+    }
+}
+
+// ________Scrollbar
+::-webkit-scrollbar {
+    width: 2px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #b5b5b5c2;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}

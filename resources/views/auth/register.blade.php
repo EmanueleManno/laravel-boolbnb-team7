@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -24,8 +25,9 @@
                                 </span>
                                 @enderror
                                 <span id="name-error" class="text-danger"></span>
+
                             </div>
-                        </div>
+
 
                         <!--Cognome-->
                         <div class="mb-4 row">
@@ -40,12 +42,9 @@
                                 </span>
                                 @enderror
                                 <span id="surname-error" class="text-danger"></span>
-                            </div>
-                        </div>
 
-                        <!--Data di nascita-->
-                        <div class="mb-4 row">
-                            <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
+                            </div>
+
 
                             <div class="col-md-6">
                                 <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
@@ -56,12 +55,9 @@
                                 </span>
                                 @enderror
                                 <span id="date-error" class="text-danger"></span>
-                            </div>
-                        </div>
 
-                        <!--Email-->
-                        <div class="mb-4 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}</label>
+                            </div>
+
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -72,15 +68,32 @@
                                 </span>
                                 @enderror
                                 <span id="email-error" class="text-danger"></span>
+
                             </div>
-                        </div>
 
-                        <!--Password-->
-                        <div class="mb-4 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <!--Password-->
+                            <div class="mb-4 row">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="new-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!--Conferma Password-->
+                            <div class="mb-4 row">
+                                <label for="password-confirm"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -112,14 +125,14 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Registrati') }}
                                 </button>
+
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('scripts')
