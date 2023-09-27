@@ -36,8 +36,7 @@
         @include('includes.footer')
 
     </div>
+    @yield('scripts')
 </body>
-
-@yield('scripts')
 
 </html>
