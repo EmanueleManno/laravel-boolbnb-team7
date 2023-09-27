@@ -8,7 +8,7 @@ $firstLetter = strtoupper(substr($name, 0, 1));
         <div class="row px-2 px-sm-0">
             <!-- Left side -->
             <!-- Ricerca attiva solo su schermata home -->
-            @if (Route::is('guest.home') || Route::is('home'))
+            @if (Route::is('guest.home'))
                 <div class="col-md-1 col-xl-4 d-none d-md-flex justify-content-start">
                     <a class="logo" href="{{ route('guest.home') }}">
                         <img src="{{ asset('img/logo.png') }}" alt="logo">
@@ -87,9 +87,9 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                             @endif
                         @else
                             <li><a class="dropdown-item" href="{{ route('apartments.index') }}">I miei Boolbnb</a></li>
+                            <li><a class="dropdown-item " href="{{ route('admin.home') }}">Il mio Profilo</a></li>
                             <li><a class="dropdown-item disabled" href="#">Messaggi</a></li>
                             <li><a class="dropdown-item disabled" href="#">Notifiche</a></li>
-                            <li><a class="dropdown-item disabled" href="#">Viaggi</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="{{ route('apartments.create') }}">Apri un Boolbnb</a></li>
                             <li><a class="dropdown-item" href="{{ url('profile') }}">Account</a></li>

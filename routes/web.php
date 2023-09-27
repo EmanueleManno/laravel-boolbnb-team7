@@ -1,5 +1,9 @@
 <?php
 
+// Home
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Guest\HomeController as GuestHomeController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApartmentController;
 use App\Models\Category;
@@ -16,17 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $categories = Category::all();
-    return view('home', compact('categories'));
-})->name('guest.home');
+// Guest Home
+Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-Route::get('/home', function () {
-    $categories = Category::all();
-    return view('admin.home', compact('categories'));
-})->middleware(['auth', 'verified'])->name('home');
+// Admin Home
+Route::get('/home', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
 
-//Rotte appartamenti:
+// Rotte appartamenti:
 Route::resource('apartments', ApartmentController::class)->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
