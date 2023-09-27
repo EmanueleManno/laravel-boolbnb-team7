@@ -34,7 +34,7 @@
 
     <div class="row align-items-center">
         {{-- # Image --}}
-        <div class="col-11 mb-3">
+        <div class="col-10 mb-3">
             <label for="image" class="form-label">Url dell'immagine</label>
             <input type="url"class="form-control @error('image') is-invalid @enderror" id="image" name="image"
             value="{{ old('image', $apartment->image) }}" placeholder="Insersisci un url valido">
@@ -44,7 +44,7 @@
         </div>
         
         {{-- # Image preview --}}
-        <div class="col-1">
+        <div class="col-2">
             <img src="{{ old('image', 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
             alt="preview" class="img-fluid my-2" id="image-preview">
         </div>
