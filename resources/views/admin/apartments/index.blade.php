@@ -21,7 +21,10 @@
 
         </header>
 
-        <hr>
+        {{-- Alerts --}}
+        <div class="container my-2">
+            @include('includes.alerts')
+        </div>
 
         <!--Tabella nella quale visualizzo la lista degli appartamenti-->
         <table class="table table-light table-hover">
@@ -45,8 +48,10 @@
                     <tr>
                         <th scope="row">{{ $apartment->id }}</th>
                         <td>{{ $apartment->title }}</td>
-                        <td></td>
+
+                        <td>{{$apartment->category?->name}}</td>
                         <td class="d-none d-lg-table-cell">
+
                             @forelse ($apartment->services as $service)
                                 {{ $service->name }},
                             @empty 
@@ -98,6 +103,7 @@
 
     {{-- Delete Modal --}}
     @include('includes.delete-modal')
+
 @endsection
 
 @section('scripts')
