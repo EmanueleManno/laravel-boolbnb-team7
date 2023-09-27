@@ -1,7 +1,39 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="container">
+    <div class="container my-4">
+
+        {{-- Actions --}}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            {{-- Back Button --}}
+            <a href="{{ route('apartments.index') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>
+                Indietro</a>
+
+            <div class="d-flex justify-content-end align-items-center">
+
+                {{-- Publish --}}
+                <button class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="fas fa-eye"></i> Publica
+                </button>
+
+                {{-- Edit Button --}}
+                <a href="{{ route('apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
+                    <i class="fas fa-pencil"></i> Modifica
+                </a>
+
+                {{-- Delete Button --}}
+                <form action="{{ route('apartments.destroy', $apartment) }}" method="POST" class="delete-form ms-2"
+                    data-title="{{ $apartment->title }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash me-2"></i>Elimina
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
 
         {{-- Title --}}
         <h2 class="mt-4 mb-2">{{ $apartment->title }}</h2>
@@ -22,14 +54,15 @@
 
         <div class="row">
             {{-- --------------------- Left Content ---------------------- --}}
-            <div class="col-7">
+            <div class="col-12 col-md-7">
 
                 {{-- Details --}}
-                <div class="mb-5">
+                <div class="mb-3">
 
                     {{-- Misc --}}
                     <div>
-                        Stanze: {{ $apartment->rooms }} - Letti: {{ $apartment->beds }} - Bagni: {{ $apartment->bathrooms }}
+                        Stanze: {{ $apartment->rooms }} - Letti: {{ $apartment->beds }} - Bagni:
+                        {{ $apartment->bathrooms }}
                         -
                         Metri quadri: {{ $apartment->square_meters }}
                     </div>
@@ -48,6 +81,7 @@
                     <div class="h5">
                         @forelse ($apartment->services as $service)
                             <span class="badge text-bg-success p-2 m-1">
+                                <i class="fas fa-{{ $service->icon }}"></i>
                                 {{ $service->name }}
                             </span>
                         @empty
@@ -59,7 +93,7 @@
             </div>
 
             {{-- ----------- Right Content --------------- --}}
-            <div class="col-5">
+            <div class="col-12 col-md-5">
 
                 <div class="card p-4">
 
