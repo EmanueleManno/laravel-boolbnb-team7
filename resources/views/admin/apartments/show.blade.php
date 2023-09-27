@@ -3,6 +3,11 @@
 @section('main')
     <div class="container my-4">
 
+        {{-- Alerts --}}
+        <div class="container my-2">
+            @include('includes.alerts')
+        </div>
+
         {{-- Actions --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             {{-- Back Button --}}
@@ -11,16 +16,15 @@
 
             <div class="d-flex justify-content-end align-items-center">
 
-                {{-- Publish --}}
-                @if ($apartment->is_visible)
-                    <button class="btn btn-sm btn-outline-warning ms-2">
-                        <i class="fas fa-eye"></i> Cambia in Bozza
+                {{-- Toggle Button --}}
+                <form method="POST" action="{{ route('admin.apartments.toggle', $apartment) }}">
+                    @csrf
+                    @method('PATCH')
+                    <button class="btn btn-sm btn-outline-{{ $apartment->is_visible ? 'secondary' : 'success' }} ms-2">
+                        <i class="fas fa-{{ $apartment->is_visible ? 'eye-slash' : 'eye' }}"></i>
+                        {{ $apartment->is_visible ? 'Cambia in Bozza' : 'Pubblica' }}
                     </button>
-                @else
-                    <button class="btn btn-sm btn-outline-primary ms-2">
-                        <i class="fas fa-eye"></i> Publica
-                    </button>
-                @endif
+                </form>
 
                 {{-- Edit Button --}}
                 <a href="{{ route('apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">

@@ -26,9 +26,11 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 // Admin Home
 Route::get('/home', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
 
-// Rotte appartamenti:
+// Apartments Routes:
+Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->middleware(['auth', 'verified'])->name('admin.apartments.toggle');
 Route::resource('apartments', ApartmentController::class)->middleware(['auth', 'verified']);
 
+// Auths
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
