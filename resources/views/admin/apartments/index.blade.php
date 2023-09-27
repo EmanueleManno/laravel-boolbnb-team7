@@ -21,7 +21,10 @@
 
         </header>
 
-        <hr>
+        {{-- Alerts --}}
+        <div class="container my-2">
+            @include('includes.alerts')
+        </div>
 
         <!--Tabella nella quale visualizzo la lista degli appartamenti-->
         <table class="table table-light table-hover">
@@ -98,6 +101,7 @@
 
     {{-- Delete Modal --}}
     @include('includes.delete-modal')
+
 @endsection
 
 @section('scripts')
