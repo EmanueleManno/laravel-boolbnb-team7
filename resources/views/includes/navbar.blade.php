@@ -1,4 +1,4 @@
-<nav>
+<nav class="bool-nav">
     <div class="container">
         <div class="row">
             <ul class="col col-11 col-md-10 col-lg-11">
