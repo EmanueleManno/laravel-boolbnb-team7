@@ -105,7 +105,7 @@ class ApartmentController extends Controller
         // Insert apartment-service records
         if (Arr::exists($data, 'services')) $apartment->services()->attach($data['services']);
 
-        return to_route('apartments.index');
+        return to_route('apartments.index')->with('alert-message', 'Appartamento creato con successo')->with('alert-type', 'success');
     }
 
     /**
@@ -129,7 +129,7 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        //
+        return to_route('apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
     }
 
     /**
