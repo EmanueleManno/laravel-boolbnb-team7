@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApartmentController;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/apartments', function () {
-    $apartemnts = Apartment::all();
-    return response()->json($apartemnts);
-});
+Route::get('/apartments', [ApartmentController::class, 'index']);
