@@ -156,4 +156,13 @@
         </div>
 
     </div>
+
+    {{-- Delete Modal --}}
+    @include('includes.delete-modal')
+@endsection
+
+
+
+@section('scripts')
+    @vite('resources/js/confirm-delete.js')
 @endsection
