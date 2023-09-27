@@ -16,7 +16,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        // Get only user apartments
+        $user = Auth::user();
+        $apartments = $user->apartments;
+
         return view('admin.apartments.index', compact('apartments'));
     }
 
@@ -52,7 +55,6 @@ class ApartmentController extends Controller
                 'latitude' => 'nullable|decimal:0,6',
                 'longitude' => 'nullable|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
-                'user_id' => 'nullable|exists:users,id',
                 'category_id' => 'nullable|exists:categories,id',
                 'services' => 'nullable|exists:services,id',
             ],
@@ -84,8 +86,6 @@ class ApartmentController extends Controller
 
                 'is_visible.boolean' => 'Il valore non è valido',
 
-                'user_id.exists' => "L'utente è inesistente",
-
                 'category_id.exists' => "La categoria è inesistente",
 
                 'services.exists' => 'Il servizio è inesistente',
@@ -94,8 +94,12 @@ class ApartmentController extends Controller
 
         // Insert Apartment
         $apartment = new Apartment();
-
         $apartment->fill($data);
+
+        // add user to apartment
+        $apartment->user_id = Auth::id();
+
+        // Save apartment
         $apartment->save();
 
         // Insert apartment-service records
