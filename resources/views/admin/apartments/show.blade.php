@@ -97,6 +97,13 @@
                     </div>
                 </div>
 
+                {{-- Map --}}
+                @if ($apartment->address)
+                    <h5 class="mb-2">Mappa</h5>
+                    <div id="map" data-latitude="{{ $apartment->latitude }}"
+                        data-longitude="{{ $apartment->longitude }}" style="height:200px"></div>
+                @endif
+
             </div>
 
             {{-- ----------- Right Content --------------- --}}
@@ -165,5 +172,5 @@
 
 
 @section('scripts')
-    @vite('resources/js/confirm-delete.js')
+    @vite(['resources/js/confirm-delete.js', 'resources/js/map-viewer.js'])
 @endsection
