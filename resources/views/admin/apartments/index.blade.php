@@ -104,6 +104,13 @@
                 @endforelse
             </tbody>
         </table>
+
+
+        {{-- Pagination --}}
+        @if ($apartments->hasPages())
+            {{ $apartments->links() }}
+        @endif
+
     </div>
 
     {{-- Delete Modal --}}
