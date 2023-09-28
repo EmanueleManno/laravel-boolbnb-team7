@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Aparments')
+@section('title', 'trash')
 
 @section('main')
 
@@ -11,25 +11,12 @@
         <header class="d-flex align-items-center justify-content-between">
 
             <!--Titolo-->
-            <h1>Lista Appartamenti</h1>
+            <h1>Cestino</h1>
 
-            <!--Pulsante di aggiunta di un nuovo appartamento-->
-            <div>
-            <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
-                <span class="d-none d-md-flex">
-                @if (count($apartments))
-                Aggiungi nuovo appartamento
-                @else
-                Clicca qui per aggiungere il tuo primo appartamento!
-                @endif
-                </span>
-                <i class="d-flex d-md-none fa-solid fa-plus"></i>
-            </a>
-
-            <!--Pulsante cestino-->
-            <a href="{{ route('admin.apartments.trash') }}" class="btn btn-secondary ms-2">Cestino</a>
+            <!--Pulsante nel quale vengo reindirizzato alla home-->
+            <div class="d-flex align-items-center justify-content-end">
+                <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">Torna alla Lista</a>
             </div>
-
         </header>
 
         {{-- Alerts --}}
@@ -107,20 +94,22 @@
                                     <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
                                 </a>
 
-                                <!--Icona per modificare l'appartamento-->
-                                <a href="{{ route('admin.apartments.edit', $apartment) }}"
-                                    class="btn btn-sm btn-warning ms-2">
-                                    <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
-                                </a>
+                                <!--Icona per ripristinare l'appartamento-->
+                                <form action="{{ route('admin.apartments.restore', $apartment)}}" method="POST" class="ms-2">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button class="btn btn-sm btn-success">
+                                    <i class="fas fa-refresh"></i><span class="d-none d-md-flex">Ripristina</span></button>
+                                </form>
 
-                                <!--Icona per eliminare il progetto-->
+                                <!--Icona per eliminare DEFINITIVAMENTE il progetto-->
                                 <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
                                     class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina</span>
+                                        <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina definitivamente</span>
                                     </button>
                                 </form>
                             </div>
@@ -131,28 +120,11 @@
                 @empty
                     <tr>
                         <td class="text-center" colspan="9">
-                            <h3>Non ci sono appartamenti</h3>
+                            <h3>Non ci sono appartamenti nel cestino</h3>
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
-
-
-        {{-- Pagination --}}
-        @if ($apartments->hasPages())
-            {{ $apartments->links() }}
-        @endif
-
     </div>
-
-    {{-- Delete Modal --}}
-    @include('includes.delete-modal')
-
-@endsection
-
-@section('scripts')
-
-    @vite('resources/js/confirm-delete.js')
-
 @endsection
