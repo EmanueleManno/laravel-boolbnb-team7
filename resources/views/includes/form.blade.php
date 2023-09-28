@@ -57,7 +57,7 @@
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
-        @enderror
+            @enderror
         <span id="image-error" class="text-danger"></span>
         </div>
         
@@ -105,6 +105,13 @@
             <div class="invalid-feedback">
                 {{ $errors->first('price') }}
             </div>
+
+            @error('price')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        <span id="price-error" class="text-danger"></span>
         </div>
     </div>
 
@@ -192,7 +199,8 @@
     {{-- # Is Visible --}}
     <div class="mb-3 col-12">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="is_visible">
+            <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible"
+                value="1" @if (old('is_visible', $apartment->is_visible)) checked @endif>
             <label class="ms-2 form-check-label" for="is_visible">Pubblica</label>
         </div>
     </div>
