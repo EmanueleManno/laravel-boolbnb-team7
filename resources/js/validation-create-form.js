@@ -75,7 +75,7 @@ let titleFieldValue = titleField.value;
 let descriptionFieldValue = descriptionField.value;
 let imageFieldValue = imageField.value;
 
-validationForm.addEventListener("submit", (e) => {
+validationForm.addEventListener("keyup", (e) => {
     e.preventDefault();
     titleFieldValue = titleField.value;
     descriptionFieldValue = descriptionField.value;
