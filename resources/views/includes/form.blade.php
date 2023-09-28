@@ -87,16 +87,31 @@
 
     <div class="row mb-5">
         {{-- Services --}}
+
         <div class="col-12">
-            @foreach ($services as $service)
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" @if (in_array($service->id, old('services', $apartment_service_id ?? []))) checked @endif
-                        id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]">
-                    <label class="form-check-label me-3"
-                        for="service-{{ $service->id }}">{{ $service->name }}</label>
+
+            <label class="form-label">Servizi</label>
+            <span class="form-text">*</span>
+
+            <div class="border rounded p-2">
+                @foreach ($services as $service)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" @if (in_array($service->id, old('services', $apartment_service_id ?? []))) checked @endif
+                            id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]">
+                        <label class="form-check-label me-3"
+                            for="service-{{ $service->id }}">{{ $service->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+
+            @error('services')
+                <div class="col-12 text-danger" role="alert">
+                    <strong>{{ $message }}</strong>
                 </div>
-            @endforeach
+            @enderror
+
         </div>
+
     </div>
 
     <div class="row mb-3">
