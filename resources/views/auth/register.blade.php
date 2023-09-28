@@ -4,7 +4,7 @@
 <!--Sezione del main-->
 @section('main')
     <!--Contenitore-->
-    <div class="container mt-4">
+    <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
