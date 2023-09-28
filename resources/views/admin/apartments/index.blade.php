@@ -15,19 +15,19 @@
 
             <!--Pulsante di aggiunta di un nuovo appartamento-->
             <div>
-            <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
-                <span class="d-none d-md-flex">
-                    @if (count($apartments))
-                        Aggiungi nuovo appartamento
-                    @else
-                        Clicca qui per aggiungere il tuo primo appartamento!
-                    @endif
-                </span>
-                <i class="d-flex d-md-none fa-solid fa-plus"></i>
-            </a>
+                <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
+                    <span class="d-none d-md-flex">
+                        @if (count($apartments))
+                            Aggiungi nuovo appartamento
+                        @else
+                            Clicca qui per aggiungere il tuo primo appartamento!
+                        @endif
+                    </span>
+                    <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
+                </a>
 
-            <!--Pulsante cestino-->
-            <a href="{{ route('admin.apartments.trash') }}" class="btn btn-secondary ms-2">Cestino</a>
+                <!--Pulsante cestino-->
+                <a href="{{ route('admin.apartments.trash') }}" class="btn btn-secondary ms-2">Cestino</a>
             </div>
 
         </header>
