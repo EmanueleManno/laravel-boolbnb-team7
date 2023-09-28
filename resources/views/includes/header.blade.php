@@ -47,7 +47,7 @@ $firstLetter = strtoupper(substr($name, 0, 1));
             <!-- Right side -->
             <div class="col-1 col-md-5 d-flex col-xl-4 justify-content-end gap-2">
                 <div class="d-none d-md-flex">
-                    <a href="{{ route('apartments.create') }}" class="button-light">Apri un Boolbnb</a>
+                    <a href="{{ route('admin.apartments.create') }}" class="button-light">Apri un Boolbnb</a>
 
                     <button class="button-light"><i class="fa-solid fa-globe"></i></button>
                 </div>
@@ -86,12 +86,14 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                                 <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
                             @endif
                         @else
-                            <li><a class="dropdown-item" href="{{ route('apartments.index') }}">I miei Boolbnb</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.apartments.index') }}">I miei Boolbnb</a>
+                            </li>
                             <li><a class="dropdown-item " href="{{ route('admin.home') }}">Il mio Profilo</a></li>
                             <li><a class="dropdown-item disabled" href="#">Messaggi</a></li>
                             <li><a class="dropdown-item disabled" href="#">Notifiche</a></li>
                             <hr>
-                            <li><a class="dropdown-item" href="{{ route('apartments.create') }}">Apri un Boolbnb</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.apartments.create') }}">Apri un Boolbnb</a>
+                            </li>
                             <li><a class="dropdown-item" href="{{ url('profile') }}">Account</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"

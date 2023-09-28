@@ -11,7 +11,7 @@
         {{-- Actions --}}
         <div class="d-flex justify-content-between align-items-center mb-4">
             {{-- Back Button --}}
-            <a href="{{ route('apartments.index') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>
+            <a href="{{ route('admin.apartments.index') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>
                 Indietro</a>
 
             <div class="d-flex justify-content-end align-items-center">
@@ -27,12 +27,12 @@
                 </form>
 
                 {{-- Edit Button --}}
-                <a href="{{ route('apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
+                <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
                     <i class="fas fa-pencil"></i> Modifica
                 </a>
 
                 {{-- Delete Button --}}
-                <form action="{{ route('apartments.destroy', $apartment) }}" method="POST" class="delete-form ms-2"
+                <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" class="delete-form ms-2"
                     data-title="{{ $apartment->title }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     @csrf
                     @method('DELETE')

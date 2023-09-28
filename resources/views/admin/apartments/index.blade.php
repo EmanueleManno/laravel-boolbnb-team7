@@ -14,7 +14,7 @@
             <h1>Lista Appartamenti</h1>
 
             <!--Pulsante di aggiunta di un nuovo appartamento-->
-            <a href="{{ route('apartments.create') }}" class="btn btn-success">
+            <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
                 <span class="d-none d-md-flex">Aggiungi nuovo appartamento</span>
                 <i class="d-flex d-md-none fa-solid fa-plus"></i>
             </a>
@@ -79,17 +79,18 @@
                             <div class="d-flex justify-content-center">
 
                                 <!--Per vedere il dettaglio-->
-                                <a href="{{ route('apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
                                 </a>
 
                                 <!--Icona per modificare l'appartamento-->
-                                <a href="{{ route('apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
+                                <a href="{{ route('admin.apartments.edit', $apartment) }}"
+                                    class="btn btn-sm btn-warning ms-2">
                                     <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
                                 </a>
 
                                 <!--Icona per eliminare il progetto-->
-                                <form action="{{ route('apartments.destroy', $apartment) }}" method="POST"
+                                <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
                                     class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal">
                                     @csrf
