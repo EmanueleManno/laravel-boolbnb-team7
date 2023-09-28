@@ -7,9 +7,9 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card border-0 rounded shadow p-2">
                     <!--Intestazione-->
-                    <div class="card-header">{{ __('Registrati') }}</div>
+                    <div class="card-header bg-white border-0 h3">{{ __('Registrati') }}</div>
 
                     <div class="card-body">
                         <form id="validation-form" method="POST" action="{{ route('register') }}" novalidate>
