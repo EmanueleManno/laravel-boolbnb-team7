@@ -174,26 +174,26 @@
     <div class="row mb-3">
         {{-- # Address --}}
         <div class="col-12">
-            <label for="address-search" class="form-label">
-                Indirizzo
-                {{-- Loader --}}
-                <i id="api-loader" class="fas fa-spinner fa-pulse text-danger d-none"></i>
-            </label>
-            <span class="form-text"></span>
+            <label for="address-search" class="form-label">Indirizzo</label>
 
-            {{-- Search Input --}}
-            <input id="address-search" autocomplete="off" value="{{ old('address', $apartment->address) }}"
-                type="text" class="form-control" list="api-suggestions">
-            <div class="invalid-feedback">
-                {{ $errors->first('address') }}
+            <div class="position-relative">
+
+                {{-- Search Input --}}
+                <input id="address-search" autocomplete="off" value="{{ old('address', $apartment->address) }}"
+                    type="text" class="form-control" list="api-suggestions">
+
+                {{-- Errors --}}
+                <div class="invalid-feedback">
+                    {{ $errors->first('address') }}
+                </div>
+
+                {{-- API Suggestion List --}}
+                <ul id="api-suggestions" class="suggestions-list"></ul>
             </div>
 
             {{-- Chosen Place Input --}}
             <input type="text" readonly name="address" id="address"
                 class="form-control-plaintext fw-bold p-2 mt-2" value="{{ old('address', $apartment->address) }}">
-
-            {{-- API Suggestions --}}
-            <datalist id="api-suggestions"></datalist>
 
             {{-- Hidden Latitude and Longitude Fields --}}
             <input type="hidden" name="latitude" id="latitude"
