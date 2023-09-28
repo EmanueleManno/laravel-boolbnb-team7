@@ -1,16 +1,21 @@
 // Bootstrap
 @use '~bootstrap/scss/bootstrap';
+
 // Variables
 @use './utils/vars' as *;
+
 // Includes
 @use './header';
 @use './footer';
 @use './navbar';
 @use './form';
-// Component
+
+// Components
 @use'./suggestions-list';
+
 // Admin
 @use 'admin/home.scss';
+
 
 
 //__________________ General rules
@@ -60,6 +65,14 @@ button {
     &:hover {
         background-color: #f7f7f7;
     }
+}
+
+// ________Image Preview (index table)
+.image-preview {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 0.25rem;
 }
 
 // ________Scrollbar

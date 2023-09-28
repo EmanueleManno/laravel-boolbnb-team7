@@ -5,23 +5,23 @@
 @section('main')
 
     <!--Contenitore-->
-    <div class="container my-2">
+    <div class="container my-5">
 
         <!--Header-->
-        <header class="d-flex align-items-center justify-content-between">
+        <header class="d-flex align-items-center justify-content-between pb-4">
 
             <!--Titolo-->
-            <h1>Lista Appartamenti</h1>
+            <h2>Lista Appartamenti</h2>
 
             <!--Pulsante di aggiunta di un nuovo appartamento-->
             <div>
             <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
                 <span class="d-none d-md-flex">
-                @if (count($apartments))
-                Aggiungi nuovo appartamento
-                @else
-                Clicca qui per aggiungere il tuo primo appartamento!
-                @endif
+                    @if (count($apartments))
+                        Aggiungi nuovo appartamento
+                    @else
+                        Clicca qui per aggiungere il tuo primo appartamento!
+                    @endif
                 </span>
                 <i class="d-flex d-md-none fa-solid fa-plus"></i>
             </a>
@@ -38,7 +38,7 @@
         </div>
 
         <!--Tabella nella quale visualizzo la lista degli appartamenti-->
-        <table class="table table-light table-hover">
+        <table class="table table-white table-hover align-middle mt-5">
 
             <!--Intestazione della tabella-->
             <thead>
@@ -48,7 +48,6 @@
                     <th scope="col">Titolo</th>
                     <th scope="col">Stato</th>
                     <th scope="col" class="d-none d-lg-table-cell">Categoria</th>
-                    <th scope="col" class="d-none d-lg-table-cell">Servizi</th>
                     <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
                     <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
                     <th scope="col"></th>
@@ -63,10 +62,11 @@
                         <th scope="row">{{ $apartment->id }}</th>
 
                         <!-- Preview Immagine-->
-                        <td class="d-none d-lg-table-cell"><img src="{{ $apartment->image ?? ('https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
-                            alt="preview" class="my-2" height="75px" width="75px" id="image-preview">
+                        <td class="d-none d-lg-table-cell">
+                            <img src="{{ $apartment->image ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
+                                alt="{{ $apartment->title }}" class="image-preview">
                         </td>
-        
+
                         <!--Titolo dell'appartamento-->
                         <td>{{ $apartment->title }}</td>
 
@@ -82,17 +82,6 @@
                             @endif
                         </td>
 
-                        <!--Servizi dell'appartamento-->
-                        <td class="d-none d-lg-table-cell">
-
-                            @forelse ($apartment->services as $service)
-                                {{ $service->name }} @if (!$loop->last)
-                                    ,
-                                @endif
-                            @empty
-                                -
-                            @endforelse
-                        </td>
 
                         <!--Data di creazione e ultima modifica-->
                         <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
@@ -127,10 +116,10 @@
                         </td>
                     </tr>
 
-                <!--Se non ci sono appartamenti-->
+                    <!--Se non ci sono appartamenti-->
                 @empty
                     <tr>
-                        <td class="text-center" colspan="9">
+                        <td class="text-center" colspan="8">
                             <h3>Non ci sono appartamenti</h3>
                         </td>
                     </tr>
