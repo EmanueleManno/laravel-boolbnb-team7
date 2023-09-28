@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Guest Home
+// Guest Home (Redirect su Vue)
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
 

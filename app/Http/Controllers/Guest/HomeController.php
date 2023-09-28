@@ -10,7 +10,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        return view('guest.home', compact('categories'));
+        return redirect('http://localhost:5174/');
     }
 }
