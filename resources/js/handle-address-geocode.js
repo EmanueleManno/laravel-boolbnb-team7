@@ -11,8 +11,9 @@
  */
 const searchPlace = addressTerm => {
 
-    // Activate loader on key press
-    apiLoaderElem.classList.remove('d-none');
+    // Show loader inside suggestions list
+    suggestionsElem.innerHTML = '<li class="pe-none"><i class="fas fa-spinner fa-pulse text-danger p-3"></i></li>';
+    suggestionsElem.classList.add('show');
 
     // Handle API throttling
     clearTimeout(timeoutId);
@@ -29,16 +30,16 @@ const searchPlace = addressTerm => {
 const fetchApi = query => {
 
     // Resets
-    suggestionsElem.innerHTML = '';
     addressInput.value = '';
     latInput.value = null;
     lonInput.value = null;
 
+
     // Abort if query is empty
     if (!query) {
-        // Remove Loader
-        apiLoaderElem.classList.add('d-none');
-
+        // Reset loader
+        suggestionsElem.classList.remove('show');
+        suggestionsElem.innerHTML = '';
         return;
     }
 
@@ -54,23 +55,31 @@ const fetchApi = query => {
             if (!results.length) return;
 
             // Create suggestions list
+            suggestionsElem.innerHTML = '';
             results.forEach(result => {
-                suggestionsElem.innerHTML += `<option value="${result.address.freeformAddress}"></option>`;
+                // Get palce data
+                const palce = {
+                    address: result.address.freeformAddress,
+                    lat: result.position.lat,
+                    lon: result.position.lon
+                };
+
+                // Add place to suggestions
+                suggestionsElem.innerHTML += `<li class="suggestions-item py-2" data-lat="${palce.lat}" data-lon="${palce.lon}">${palce.address}</li>`;
             });
 
-            // Update inputs (get only first result)
+            // Update inputs (preselect first result)
             const chosenAddress = results[0];
             addressInput.value = chosenAddress.address.freeformAddress;
             latInput.value = chosenAddress.position.lat;
             lonInput.value = chosenAddress.position.lon;
 
+
         })
         .catch(err => {
             console.log(err);
-        })
-        .then(() => {
-            // Remove Loader
-            apiLoaderElem.classList.add('d-none');
+            // Show error message
+            suggestionsElem.innerHTML = '<li class="text-danger pe-none p-3">Impossibile contattare il server</li>';
         });
 }
 
@@ -79,7 +88,6 @@ const fetchApi = query => {
 // dom
 const addressSearchInput = document.getElementById('address-search');
 const suggestionsElem = document.getElementById('api-suggestions');
-const apiLoaderElem = document.getElementById('api-loader');
 const addressInput = document.getElementById('address');
 const latInput = document.getElementById('latitude');
 const lonInput = document.getElementById('longitude');
@@ -102,6 +110,7 @@ let timeoutId = null;
 
 
 //*** LOGIC ***//
+// Handle search input keyup
 addressSearchInput.addEventListener('keyup', () => {
 
     // Get Input Value
@@ -109,4 +118,26 @@ addressSearchInput.addEventListener('keyup', () => {
 
     // Fetch TT API with throttling (bypass "Too many requests" error)
     searchPlace(addressTerm);
+});
+
+// Handle suggestions visibility
+addressSearchInput.addEventListener('focusout', () => {
+    suggestionsElem.classList.remove('show');
+});
+
+// Handle suggestions list click
+suggestionsElem.addEventListener('click', (e) => {
+    // Get list item clicked
+    const suggestion = e.target;
+
+    // Check if is a suggestions list item
+    if (!suggestion.classList.contains('suggestions-item')) return
+
+    // Set values
+    addressInput.value = suggestion.innerText;
+    latInput.value = suggestion.dataset.lat;
+    lonInput.value = suggestion.dataset.lon;
+
+    // Set search input value
+    addressSearchInput.value = suggestion.innerText;
 });
