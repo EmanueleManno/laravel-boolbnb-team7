@@ -1,12 +1,9 @@
 @if ($apartment->exists)
-    <h1 class="text-center mt-5">Modifica un appartamento: {{ $apartment->title }}</h1>
-    <form id="validation-form" method="POST" action="{{ route('admin.apartments.update', $apartment) }}" class="p-5 mt-5"
+    <form id="validation-form" method="POST" action="{{ route('admin.apartments.update', $apartment) }}" class="mt-5"
         novalidate>
         @method('PUT')
     @else
-        <h1 class="text-center mt-5">Crea un appartamento: {{ $apartment->title }}</h1>
-        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="p-5 mt-2"
-            novalidate>
+        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="mt-5" novalidate>
 @endif
 @csrf
 
@@ -228,10 +225,8 @@
     </div>
 
 
-    <div class="d-flex align-items-center justify-content-between ">
-        <a class="btn btn-secondary" href="{{ route('admin.apartments.index') }}">Torna indietro</a>
-
-        {{-- # Submit --}}
+    {{-- # Submit --}}
+    <div class="d-flex justify-content-end ">
         <button type="submit" class="btn btn-success">Conferma</button>
     </div>
 </div>
