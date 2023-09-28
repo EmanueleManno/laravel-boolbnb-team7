@@ -109,7 +109,7 @@ class ApartmentController extends Controller
         // Insert apartment-service records
         if (Arr::exists($data, 'services')) $apartment->services()->attach($data['services']);
 
-        return to_route('apartments.index')->with('alert-message', 'Appartamento creato con successo')->with('alert-type', 'success');
+        return to_route('admin.apartments.index')->with('alert-message', 'Appartamento creato con successo')->with('alert-type', 'success');
     }
 
     /**
@@ -197,7 +197,7 @@ class ApartmentController extends Controller
 
         $apartment->update($data);
 
-        return to_route('apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
+        return to_route('admin.apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
     }
 
     /**
@@ -207,7 +207,7 @@ class ApartmentController extends Controller
     {
         Apartment::destroy($id);
 
-        return to_route('apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
+        return to_route('admin.apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
     }
 
     /**
@@ -219,6 +219,6 @@ class ApartmentController extends Controller
         $action = $apartment->is_visible ? 'pubblicato' : 'salvato come bozza';
         $apartment->save();
 
-        return to_route('apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
+        return to_route('admin.apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
     }
 }

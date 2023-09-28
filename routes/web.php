@@ -23,12 +23,18 @@ use Illuminate\Support\Facades\Route;
 // Guest Home
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-// Admin Home
-Route::get('/home', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
 
-// Apartments Routes:
-Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->middleware(['auth', 'verified'])->name('admin.apartments.toggle');
-Route::resource('apartments', ApartmentController::class)->middleware(['auth', 'verified']);
+// Admin Routes
+Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
+
+    // Home
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+
+    // Apartments Routes:
+    Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle');
+    Route::resource('apartments', ApartmentController::class);
+});
+
 
 // Auths
 Route::middleware('auth')->group(function () {

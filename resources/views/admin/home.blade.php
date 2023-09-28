@@ -38,7 +38,7 @@
                     <div class="col-12 col-md-6">
                         <h3>I tuoi Boolbnb</h3>
                         {{-- VEDE TUTTI GLI APPARTAMENTI DA SISTEMARE --}}
-                        <a class="button-primary" href="{{ route('apartments.index') }}">
+                        <a class="button-primary" href="{{ route('admin.apartments.index') }}">
                             Vai ai tuoi boolbnb
                         </a>
                     </div>
