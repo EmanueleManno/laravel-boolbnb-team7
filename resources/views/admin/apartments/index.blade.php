@@ -15,7 +15,15 @@
 
             <!--Pulsante di aggiunta di un nuovo appartamento-->
             <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
-                <span class="d-none d-md-flex">Aggiungi nuovo appartamento</span>
+                <span class="d-none d-md-flex">
+                @forelse ($apartments as $apartment)
+                @if ($apartments)
+                Aggiungi nuovo appartamento
+                @endif
+                @empty
+                Clicca qui per aggiungere il tuo primo appartamento!
+                @endforelse
+                </span>
                 <i class="d-flex d-md-none fa-solid fa-plus"></i>
             </a>
 
@@ -114,10 +122,10 @@
                         </td>
                     </tr>
 
-                    <!--Se non ci sono appartamenti-->
+                <!--Se non ci sono appartamenti-->
                 @empty
                     <tr>
-                        <td class="text-center" colspan="7">
+                        <td class="text-center" colspan="9">
                             <h3>Non ci sono appartamenti</h3>
                         </td>
                     </tr>
