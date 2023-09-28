@@ -11,8 +11,11 @@
 
     {{-- # Title --}}
     <div class="col-6 mb-4">
-        <label for="title" class="form-label @error('title') is-invalid @enderror">Titolo</label>
-        <span class="form-text text-danger fs-5">*</span>
+        <label for="title" class="form-label @error('title') is-invalid @enderror">
+            Titolo
+            <span class="form-text text-danger fs-5">*</span>
+        </label>
+
         <input value="{{ old('title', $apartment->title) }}" type="text"
             class="form-control @error('title') is-invalid @enderror" id="title" name="title" required>
         @error('title')
@@ -78,8 +81,10 @@
     {{-- Services --}}
     <div class="col-12 mb-4">
 
-        <label class="form-label">Servizi</label>
-        <span class="form-text text-danger fs-5">*</span>
+        <label class="form-label">
+            Servizi
+            <span class="form-text text-danger fs-5">*</span>
+        </label>
 
         <div class="border rounded p-2">
             @foreach ($services as $service)
@@ -101,8 +106,10 @@
 
     {{-- # Price --}}
     <div class="col-6 mb-4">
-        <label for="price" class="form-label">Prezzo</label>
-        <span class="form-text text-danger fs-5">*</span>
+        <label for="price" class="form-label">
+            Prezzo
+            <span class="form-text text-danger fs-5">*</span>
+        </label>
         <input value="{{ old('price', $apartment->price) }}" type="number" min="0" step="0.01"
             class="form-control @error('price') is-invalid @enderror" id="price" name="price" required>
         @error('price')
