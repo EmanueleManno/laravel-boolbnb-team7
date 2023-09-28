@@ -37,6 +37,7 @@
                     <th scope="col">Stato</th>
                     <th scope="col" class="d-none d-lg-table-cell">Categoria</th>
                     <th scope="col" class="d-none d-lg-table-cell">Servizi</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Anteprima</th>
                     <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
                     <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
                     <th scope="col"></th>
@@ -47,11 +48,15 @@
             <tbody>
                 @forelse ($apartments as $apartment)
                     <tr>
+                        <!--Id dell'appartamento-->
                         <th scope="row">{{ $apartment->id }}</th>
+                        <!--Titolo dell'appartamento-->
                         <td>{{ $apartment->title }}</td>
 
+                        <!--Stato dell'appartamento-->
                         <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
 
+                        <!--Categoria dell'appartamento-->
                         <td class="d-none d-lg-table-cell">
                             @if ($apartment->category)
                                 {{ $apartment->category->name }}
@@ -60,6 +65,7 @@
                             @endif
                         </td>
 
+                        <!--Servizi dell'appartamento-->
                         <td class="d-none d-lg-table-cell">
 
                             @forelse ($apartment->services as $service)
@@ -71,6 +77,11 @@
                             @endforelse
                         </td>
 
+                        <!-- Preview Immagine-->
+                        <td class="d-none d-lg-table-cell"><img src="{{ old('image', $apartment->image) ?? ('https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
+                            alt="preview" class="img-fluid my-2" id="image-preview"></td>
+
+                        <!--Data di creazione e ultima modifica-->
                         <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
                         <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
 
