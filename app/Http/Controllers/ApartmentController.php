@@ -93,6 +93,9 @@ class ApartmentController extends Controller
             ]
         );
 
+        // Handle toggle
+        $data['is_visible'] = Arr::exists($data, 'is_visible');
+
         // Insert Apartment
         $apartment = new Apartment();
         $apartment->fill($data);
@@ -133,8 +136,6 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-
-        $data_new_apartment = $request->all();
 
         // Validazione
         $data = $request->validate(
@@ -191,7 +192,10 @@ class ApartmentController extends Controller
 
         if (Arr::exists($data, 'services')) $apartment->services()->sync($data['services']);
 
-        $apartment->update($data_new_apartment);
+        // Handle toggle
+        $data['is_visible'] = Arr::exists($data, 'is_visible');
+
+        $apartment->update($data);
 
         return to_route('apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
     }

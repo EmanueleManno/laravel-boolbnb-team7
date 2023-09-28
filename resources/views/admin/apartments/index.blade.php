@@ -52,12 +52,20 @@
 
                         <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
 
-                        <td class="d-none d-lg-table-cell">{{ $apartment->category?->name }}</td>
+                        <td class="d-none d-lg-table-cell">
+                            @if ($apartment->category)
+                                {{ $apartment->category->name }}
+                            @else
+                                -
+                            @endif
+                        </td>
 
                         <td class="d-none d-lg-table-cell">
 
                             @forelse ($apartment->services as $service)
-                                {{ $service->name }},
+                                {{ $service->name }} @if (!$loop->last)
+                                    ,
+                                @endif
                             @empty
                                 -
                             @endforelse
@@ -97,7 +105,7 @@
                     <!--Se non ci sono appartamenti-->
                 @empty
                     <tr>
-                        <td class="text-center" colspan="6">
+                        <td class="text-center" colspan="7">
                             <h3>Non ci sono appartamenti</h3>
                         </td>
                     </tr>
