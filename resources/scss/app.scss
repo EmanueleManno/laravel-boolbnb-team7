@@ -7,6 +7,8 @@
 @use './footer';
 @use './navbar';
 @use './form';
+// Component
+@use'./suggestions-list';
 // Admin
 @use 'admin/home.scss';
 
@@ -74,7 +76,7 @@ button {
     background: transparent;
 }
 
-main{
+main {
     height: calc(100vh - 121px);
     overflow: auto;
 }
