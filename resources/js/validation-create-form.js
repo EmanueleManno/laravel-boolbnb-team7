@@ -13,11 +13,12 @@ function checkDecimalMaxDigits(value, maxDigits) {
 
 
 function validateForm() {
-    errors = {};
+
     titleError.innerText = "";
     descriptionError.innerText = "";
     imageError.innerText = "";
     priceError.innerText = "";
+
 
     //Validazione Titolo
     if (titleFieldValue.length > 255) {
@@ -57,6 +58,12 @@ function validateForm() {
     }
 }
 
+
+function submit(){
+    console.log(errors)
+    if (!Object.keys(errors).length) validationForm.submit();
+}
+
 //Campi del form
 const validationForm = document.getElementById("validation-form");
 const titleField = document.getElementById("title");
@@ -74,16 +81,21 @@ let errors = {};
 let titleFieldValue = titleField.value;
 let descriptionFieldValue = descriptionField.value;
 let imageFieldValue = imageField.value;
+errors = {title:1};
 
 validationForm.addEventListener("keyup", (e) => {
-    e.preventDefault();
+    errors = {};
     titleFieldValue = titleField.value;
     descriptionFieldValue = descriptionField.value;
     imageFieldValue = imageField.value;
 
     //Eseguo la funzione di validazione:
     validateForm();
-
-    //Il form viene lanciato:
-    if (!Object.keys(errors).length) validationForm.submit();
 });
+
+validationForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+    //Il form viene lanciato:
+    submit(errors)
+})
