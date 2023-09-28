@@ -46,14 +46,12 @@ function validateForm() {
 
     //Validazione Prezzo
     if (priceField.value < 1) {
-        console.log(priceField.value)
         errors.price = "Il prezzo è obbligatorio";
         priceError.innerText = errors.price;
 
     }
 
     if(!checkDecimalMaxDigits(priceField.value, 2)){
-        console.log(priceField.value)
         errors.price = "Il prezzo può avere massimo due numeri decimali";
         priceError.innerText = errors.price;
     }
