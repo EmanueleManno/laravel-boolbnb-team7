@@ -125,6 +125,11 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+
+        if (Auth::id() !== $apartment->user_id) {
+            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato a modificare questo post!');
+        }
+
         $categories = Category::select('id', 'name')->get();
         $services = Service::select('id', 'name')->get();
         $apartment_service_id = $apartment->services->pluck('id')->toArray();
