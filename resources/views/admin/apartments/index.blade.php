@@ -5,13 +5,13 @@
 @section('main')
 
     <!--Contenitore-->
-    <div class="container my-2">
+    <div class="container my-5">
 
         <!--Header-->
-        <header class="d-flex align-items-center justify-content-between">
+        <header class="d-flex align-items-center justify-content-between pb-4">
 
             <!--Titolo-->
-            <h1>Lista Appartamenti</h1>
+            <h2>Lista Appartamenti</h2>
 
             <!--Pulsante di aggiunta di un nuovo appartamento-->
             <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
@@ -33,7 +33,7 @@
         </div>
 
         <!--Tabella nella quale visualizzo la lista degli appartamenti-->
-        <table class="table table-light table-hover">
+        <table class="table table-white table-hover align-middle mt-5">
 
             <!--Intestazione della tabella-->
             <thead>
@@ -57,9 +57,9 @@
                         <th scope="row">{{ $apartment->id }}</th>
 
                         <!-- Preview Immagine-->
-                        <td class="d-none d-lg-table-cell"><img
-                                src="{{ $apartment->image ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
-                                alt="preview" class="my-2" height="75px" width="75px" id="image-preview">
+                        <td class="d-none d-lg-table-cell">
+                            <img src="{{ $apartment->image ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
+                                alt="{{ $apartment->title }}" class="image-preview">
                         </td>
 
                         <!--Titolo dell'appartamento-->

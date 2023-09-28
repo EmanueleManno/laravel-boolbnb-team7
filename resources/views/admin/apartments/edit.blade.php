@@ -4,14 +4,14 @@
     <div class="container my-5">
 
         {{-- Form Header --}}
-        <div class="d-flex justify-content-between align-items-center">
+        <header class="d-flex justify-content-between align-items-center pb-4">
 
             <h2 class="text-center">Modifica Appartamento</h2>
             <a class="btn btn-secondary" href="{{ route('admin.apartments.index') }}">
                 <i class="fas fa-arrow-left"></i>
                 Indietro
             </a>
-        </div>
+        </header>
 
         @include('includes.form')
     </div>
