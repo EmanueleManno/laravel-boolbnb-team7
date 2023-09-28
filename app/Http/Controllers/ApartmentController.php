@@ -215,12 +215,22 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
     }
 
-    //Funzione per il cestino
+    //Funzione per il cestino:
     public function trash()
     {
         $apartments = Apartment::onlyTrashed()->get();
         return view('admin.apartments.trash', compact('apartments'));
     }
+
+    //Funzione per il restore:
+    public function restore(string $id)
+    {
+        $apartment = Apartment::onlyTrashed()->findOrFail($id);
+        $apartment->restore();
+
+        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
+    }
+
 
     /**
      * Toggle Apartment visibility.
