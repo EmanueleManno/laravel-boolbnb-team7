@@ -16,7 +16,6 @@
                 </div>
             @endif
 
-
             <div class="card my-3">
                 <div class="row">
                     {{-- Personal info --}}
@@ -24,7 +23,7 @@
                         @if (Auth::user()->name)
                             <h3>Informazioni di {{ Auth::user()->name }}</h3>
                         @else
-                            <h3>Informazioni personali</h3>
+                            <h2>Informazioni personali</h2>
                         @endif
                         <ul>
                             <li><span>Nome</span> {{ Auth::user()->name ?? 'Non fornito' }}</li>
@@ -35,13 +34,34 @@
                     </div>
 
                     {{-- Personal Boolbnb --}}
-                    <div class="col-12 col-md-6">
-                        <h3>I tuoi Boolbnb</h3>
-                        {{-- VEDE TUTTI GLI APPARTAMENTI DA SISTEMARE --}}
-                        <a class="button-primary" href="{{ route('admin.apartments.index') }}">
-                            Vai ai tuoi boolbnb
-                        </a>
-                    </div>
+                    @if (count(Auth::user()->apartments))
+                        <div class="col-12 col-md-6">
+                            <h3>I tuoi Boolbnb</h3>
+                            <a class="button-primary" href="{{ route('admin.apartments.index') }}">
+                                Vai ai tuoi boolbnb
+                            </a>
+                        </div>
+                    @else
+                        {{-- Add Boolbnb --}}
+                        <div class="col-12 col-md-6">
+                            <h2>Apri un Boolbnb</h2>
+                            <div class="fs-6">Mettere casa su Boolbnb è facile!</div>
+                            <a class="button-primary" href="{{ route('admin.apartments.create') }}">
+                                <i class="fa-solid fa-house-medical pe-1"></i> Boolbnb Start
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Esci</h3>
+                <div class="logout">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Esci</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>

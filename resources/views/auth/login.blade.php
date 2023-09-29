@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="container mt-4">
+    <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                <div class="card border-0 rounded shadow p-2">
+                    <div class="card-header bg-white border-0 h3">{{ __('Login') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -13,7 +13,7 @@
 
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -52,7 +52,7 @@
                                             {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
+                                            {{ __('Ricordami') }}
                                         </label>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
 
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('Recupera Password') }}
                                         </a>
                                     @endif
                                 </div>

@@ -57,7 +57,7 @@ class ApartmentController extends Controller
                 'longitude' => 'nullable|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
                 'category_id' => 'nullable|exists:categories,id',
-                'services' => 'nullable|exists:services,id',
+                'services' => 'required|exists:services,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio',
@@ -89,6 +89,7 @@ class ApartmentController extends Controller
 
                 'category_id.exists' => "La categoria è inesistente",
 
+                'services.required' => 'Inserisci almeno un servizio',
                 'services.exists' => 'Il servizio è inesistente',
             ]
         );
@@ -117,6 +118,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        if ((Auth::id() !== $apartment->user_id) && ($apartment->is_visible === 0)) {
+            return to_route('admin.apartments.index')->with('alert-type', 'warning')->with('alert-message', "L'appartamento che stai tentando di visualizzare non è ancora stato pubblicato");
+        }
+
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -125,6 +130,11 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+
+        if (Auth::id() !== $apartment->user_id) {
+            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato a modificare questo post!');
+        }
+
         $categories = Category::select('id', 'name')->get();
         $services = Service::select('id', 'name')->get();
         $apartment_service_id = $apartment->services->pluck('id')->toArray();
@@ -153,7 +163,7 @@ class ApartmentController extends Controller
                 'longitude' => 'nullable|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
                 'category_id' => 'nullable|exists:categories,id',
-                'services' => 'nullable|exists:services,id',
+                'services' => 'required|exists:services,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio',
@@ -186,6 +196,7 @@ class ApartmentController extends Controller
 
                 'category_id.exists' => "La categoria è inesistente",
 
+                'services.required' => 'Inserisci almeno un servizio',
                 'services.exists' => 'Il servizio è inesistente',
             ]
         );
@@ -209,6 +220,45 @@ class ApartmentController extends Controller
 
         return to_route('admin.apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
     }
+
+    //Funzione per il cestino:
+    public function trash()
+    {
+        // Get only user apartments
+        $apartments = Apartment::onlyTrashed()->where('user_id', Auth::id())->paginate(5);
+
+        return view('admin.apartments.trash', compact('apartments'));
+    }
+
+    //Funzione per il restore:
+    public function restore(string $id)
+    {
+        $apartment = Apartment::onlyTrashed()->findOrFail($id);
+        $apartment->restore();
+
+        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
+    }
+
+    //Funzione per il drop:
+    public function drop(string $id)
+    {
+        $apartment = Apartment::onlyTrashed()->findOrFail($id);
+
+        $apartment->forceDelete();
+
+        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
+    }
+
+    //Funzione per il dropAll:
+    public function dropAll()
+    {
+        $total = Apartment::onlyTrashed()->where('user_id', Auth::id())->count();
+
+        Apartment::onlyTrashed()->where('user_id', Auth::id())->forceDelete();
+
+        return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total appartamenti")->with('alert-type', 'danger');
+    }
+
 
     /**
      * Toggle Apartment visibility.

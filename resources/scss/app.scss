@@ -1,14 +1,21 @@
 // Bootstrap
 @use '~bootstrap/scss/bootstrap';
+
 // Variables
 @use './utils/vars' as *;
+
 // Includes
 @use './header';
 @use './footer';
 @use './navbar';
 @use './form';
+
+// Components
+@use'./suggestions-list';
+
 // Admin
 @use 'admin/home.scss';
+
 
 
 //__________________ General rules
@@ -60,6 +67,14 @@ button {
     }
 }
 
+// ________Image Preview (index table)
+.image-preview {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
 // ________Scrollbar
 ::-webkit-scrollbar {
     width: 2px;
@@ -74,7 +89,7 @@ button {
     background: transparent;
 }
 
-main{
+main {
     height: calc(100vh - 121px);
     overflow: auto;
 }

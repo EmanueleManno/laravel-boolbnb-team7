@@ -13,7 +13,8 @@
             {{-- Back Button --}}
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>
                 Indietro</a>
-
+            
+            @if (Auth::id() === $apartment->user_id)
             <div class="d-flex justify-content-end align-items-center">
 
                 {{-- Toggle Button --}}
@@ -26,6 +27,7 @@
                     </button>
                 </form>
 
+                
                 {{-- Edit Button --}}
                 <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
                     <i class="fas fa-pencil"></i> Modifica
@@ -40,8 +42,8 @@
                         <i class="fas fa-trash me-2"></i>Elimina
                     </button>
                 </form>
-
             </div>
+            @endif
 
         </div>
 
