@@ -50,26 +50,52 @@
                 <td>
                     <div class="d-flex justify-content-center">
 
-                        {{-- Show --}}
-                        <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
-                        </a>
+                        @if (!$apartment->deleted_at)
+                            {{-- Show --}}
+                            <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
+                            </a>
 
-                        {{-- Edit --}}
-                        <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
-                            <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
-                        </a>
+                            {{-- Edit --}}
+                            <a href="{{ route('admin.apartments.edit', $apartment) }}"
+                                class="btn btn-sm btn-warning ms-2">
+                                <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
+                            </a>
 
-                        {{-- Soft Delete --}}
-                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
-                            class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina</span>
-                            </button>
-                        </form>
+                            {{-- Soft Delete --}}
+                            <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
+                                class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina</span>
+                                </button>
+                            </form>
+
+                            {{-- Trash Actions --}}
+                        @else
+                            {{-- Restore --}}
+                            <form action="{{ route('admin.apartments.restore', $apartment) }}" method="POST"
+                                class="ms-2">
+                                @csrf
+                                @method('PATCH')
+                                <button class="btn btn-sm btn-success">
+                                    <i class="fa-solid fa-recycle"></i><span>Ripristina</span></button>
+                            </form>
+
+                            {{-- Drop --}}
+                            <form action="{{ route('admin.apartments.drop', $apartment) }}" method="POST"
+                                class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa-solid fa-trash-can"></i><span> Elimina definitivamente</span>
+                                </button>
+                            </form>
+                        @endif
+
 
                     </div>
                 </td>
