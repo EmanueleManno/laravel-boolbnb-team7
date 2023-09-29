@@ -116,24 +116,7 @@
                                     <span id="password-error" class="text-danger"></span>
                                 </div>
                             </div>
-
-
-                            <!--Conferma Password-->
-                            <div class="mb-4 row">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
-
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>                                    
-                                @enderror
-                                <span id="password-error" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        
+                  
                         <!--Conferma Password-->
                         <div class="mb-4 row">
                             <label for="passwordConfirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
