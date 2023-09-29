@@ -33,7 +33,7 @@
         </header>
 
         {{-- Alerts --}}
-        <div class="container my-2">
+        <div class="my-2">
             @include('includes.alerts')
         </div>
 
