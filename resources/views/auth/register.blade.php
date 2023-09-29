@@ -4,7 +4,7 @@
 <!--Sezione del main-->
 @section('main')
     <!--Contenitore-->
-    <div class="container my-5">
+    <div class="container my-5" id="get-validation" data-validate="register">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card border-0 rounded shadow p-2">
@@ -32,6 +32,7 @@
                                     @enderror
                                     <span id="name-error" class="text-danger"></span>
                                 </div>
+
                             </div>
 
                             <!--Cognome-->
@@ -122,8 +123,24 @@
                                 <label for="password-confirm"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
 
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>                                    
+                                @enderror
+                                <span id="password-error" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        
+                        <!--Conferma Password-->
+                        <div class="mb-4 row">
+                            <label for="passwordConfirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+
+                           
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
+                                    <input id="passwordConfirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
 
                                     @error('password-confirm')
@@ -131,8 +148,9 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <span id="password-confirm-error" class="text-danger"></span>
+                                    <span id="passwordConfirm-error" class="text-danger"></span>
                                 </div>
+
                             </div>
 
                             <!--Bottone Registrati-->
@@ -154,5 +172,6 @@
 
 <!--Sezione scripts-->
 @section('scripts')
-    @vite(['resources/js/validation-form.js'])
+@vite(['resources/js/frontend-validation.js'])
 @endsection
+
