@@ -55,6 +55,7 @@
 
             <!--Corpo della tabella-->
             <tbody>
+
                 @forelse ($apartments as $apartment)
                     <tr>
                         <!--Id dell'appartamento-->
@@ -130,6 +131,7 @@
                         </td>
                     </tr>
                 @endforelse
+                
             </tbody>
         </table>
     </div>
