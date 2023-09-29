@@ -13,9 +13,20 @@
             <!--Titolo-->
             <h1>Cestino</h1>
 
-            <!--Pulsante nel quale vengo reindirizzato alla home-->
+            <!--Pulsante nel quale vengo reindirizzato alla home e svuota cestino-->
             <div class="d-flex align-items-center justify-content-end">
-                <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">Torna alla Lista</a>
+
+                <!--Torna alla lista-->
+                <a href="{{ route('admin.apartments.index') }}" class="btn btn-sm btn-secondary">Torna alla Lista</a>
+
+                <!--Svuota cestino-->
+                <form class="delete-form ms-2 delete-all" method="POST" action="{{route('admin.apartments.dropAll')}}"
+                data-bs-toggle="modal" data-bs-target="#deleteModal">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-sm btn-danger">Svuota cestino</button>
+                </form>
+
             </div>
         </header>
 
@@ -44,6 +55,7 @@
 
             <!--Corpo della tabella-->
             <tbody>
+
                 @forelse ($apartments as $apartment)
                     <tr>
                         <!--Id dell'appartamento-->
@@ -89,17 +101,12 @@
                         <td>
                             <div class="d-flex justify-content-center">
 
-                                <!--Per vedere il dettaglio-->
-                                <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
-                                </a>
-
                                 <!--Icona per ripristinare l'appartamento-->
                                 <form action="{{ route('admin.apartments.restore', $apartment)}}" method="POST" class="ms-2">
                                     @csrf
                                     @method('PATCH')
                                     <button class="btn btn-sm btn-success">
-                                    <i class="fas fa-refresh"></i><span class="d-none d-md-flex">Ripristina</span></button>
+                                    <i class="fa-solid fa-recycle"></i><span>Ripristina</span></button>
                                 </form>
 
                                 <!--Icona per eliminare DEFINITIVAMENTE il progetto-->
@@ -109,7 +116,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina definitivamente</span>
+                                        <i class="fa-solid fa-trash-can"></i><span> Elimina definitivamente</span>
                                     </button>
                                 </form>
                             </div>
@@ -124,6 +131,7 @@
                         </td>
                     </tr>
                 @endforelse
+                
             </tbody>
         </table>
     </div>
