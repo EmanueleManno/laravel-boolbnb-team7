@@ -1,6 +1,6 @@
 <table class="table table-white table-hover align-middle mt-5">
 
-    <!--Intestazione della tabella-->
+    {{-- Table Headers --}}
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -14,26 +14,26 @@
         </tr>
     </thead>
 
-    <!--Corpo della tabella-->
+    {{-- Table Body --}}
     <tbody>
         @forelse ($apartments as $apartment)
             <tr>
-                <!--Id dell'appartamento-->
+                {{-- ID --}}
                 <th scope="row">{{ $apartment->id }}</th>
 
-                <!-- Preview Immagine-->
+                {{-- Preview --}}
                 <td class="d-none d-lg-table-cell">
                     <img src="{{ $apartment->image ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
                         alt="{{ $apartment->title }}" class="image-preview">
                 </td>
 
-                <!--Titolo dell'appartamento-->
+                {{-- Title --}}
                 <td>{{ $apartment->title }}</td>
 
-                <!--Stato dell'appartamento-->
+                {{-- Status (is_visible) --}}
                 <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
 
-                <!--Categoria dell'appartamento-->
+                {{-- Category --}}
                 <td class="d-none d-lg-table-cell">
                     @if ($apartment->category)
                         {{ $apartment->category->name }}
@@ -42,26 +42,25 @@
                     @endif
                 </td>
 
-
-                <!--Data di creazione e ultima modifica-->
+                {{-- Dates --}}
                 <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
                 <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
 
-                <!--Dettaglio, modifica e eliminazione-->
+                {{-- Actions --}}
                 <td>
                     <div class="d-flex justify-content-center">
 
-                        <!--Per vedere il dettaglio-->
+                        {{-- Show --}}
                         <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
                             <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
                         </a>
 
-                        <!--Icona per modificare l'appartamento-->
+                        {{-- Edit --}}
                         <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
                             <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
                         </a>
 
-                        <!--Icona per eliminare il progetto-->
+                        {{-- Soft Delete --}}
                         <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
                             class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
                             data-bs-target="#deleteModal">
@@ -71,11 +70,12 @@
                                 <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina</span>
                             </button>
                         </form>
+
                     </div>
                 </td>
             </tr>
 
-            <!--Se non ci sono appartamenti-->
+            {{-- Empty message --}}
         @empty
             <tr>
                 <td class="text-center" colspan="8">
