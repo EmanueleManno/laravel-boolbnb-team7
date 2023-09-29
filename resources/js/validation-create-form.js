@@ -60,7 +60,6 @@ function validateForm() {
 
 
 function submit(){
-    console.log(errors)
     if (!Object.keys(errors).length) validationForm.submit();
 }
 

@@ -5,7 +5,7 @@
 @section('main')
 
 <!--Contenitore-->
-<div class="container mt-4">
+<div class="container mt-4" id="get-validation" data-validate="register">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -134,5 +134,5 @@
 
 <!--Sezione scripts-->
 @section('scripts')
-@vite(['resources/js/validation-form.js'])
+@vite(['resources/js/frontend-validation.js'])
 @endsection

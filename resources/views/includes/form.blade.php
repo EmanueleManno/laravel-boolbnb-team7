@@ -10,7 +10,7 @@
 @endif
 @csrf
 
-<div class="row">
+<div class="row" id="get-validation" data-validate="form">
 
     {{-- # Title --}}
     <div class="mb-3 col-6">
