@@ -103,7 +103,7 @@
                                 </form>
 
                                 <!--Icona per eliminare DEFINITIVAMENTE il progetto-->
-                                <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
+                                <form action="{{ route('admin.apartments.drop', $apartment) }}" method="POST"
                                     class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal">
                                     @csrf
@@ -127,4 +127,14 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Delete Modal --}}
+    @include('includes.delete-modal')
+
+@endsection
+
+@section('scripts')
+
+    @vite('resources/js/confirm-delete.js')
+
 @endsection
