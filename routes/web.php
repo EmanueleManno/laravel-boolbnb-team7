@@ -35,6 +35,9 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
     Route::get('apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
     //Rotta per il restore:
     Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore');
+    //Rotta per l'elimina definitivamente:
+    Route::delete('apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop');
+    //Rotta per il toggle:
     Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle');
     Route::resource('apartments', ApartmentController::class);
 });
