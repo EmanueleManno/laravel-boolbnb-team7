@@ -120,12 +120,12 @@
             </div>
 
             {{-- ----------- Right Content --------------- --}}
-            <div class="col-12 col-md-5">
+            <!--<div class="col-12 col-md-5">
 
                 <div class="card p-4">
 
                     {{-- Price x Night --}}
-                    <h5 class="mb-3">{{ $apartment->price }}€ <span class="fw-normal fs-6">notte</span></h5>
+                    <h5 class="mb-3"> {{-- $apartment->price --}} € <span class="fw-normal fs-6">notte</span></h5>
 
                     {{-- Booking Options --}}
                     <div class="row rounded border mb-3">
@@ -173,7 +173,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div>-->
         </div>
 
     </div>
