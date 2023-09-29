@@ -4,16 +4,15 @@
 
 @section('main')
 
-    <!--Contenitore-->
     <div class="container my-5">
 
         <!--Header-->
         <header class="d-flex align-items-center justify-content-between pb-4">
 
-            <!--Titolo-->
+            {{-- Page Title --}}
             <h2>Lista Appartamenti</h2>
 
-            <!--Pulsante di aggiunta di un nuovo appartamento-->
+            {{-- Page Actions --}}
             <div>
                 <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
                     <span class="d-none d-md-flex">
