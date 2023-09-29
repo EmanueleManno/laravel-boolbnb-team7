@@ -4,30 +4,29 @@
 
 @section('main')
 
-    <!--Contenitore-->
-    <div class="container my-2">
+    <div class="container my-5">
 
         <!--Header-->
-        <header class="d-flex align-items-center justify-content-between">
+        <header class="d-flex align-items-center justify-content-between pb-4">
 
-            <!--Titolo-->
-            <h1>Cestino</h1>
+            {{-- Page Title --}}
+            <h2>Cestino</h2>
 
-            <!--Pulsante nel quale vengo reindirizzato alla home e svuota cestino-->
-            <div class="d-flex align-items-center justify-content-end">
+            {{-- Page Actions --}}
+            <div>
 
-                <!--Torna alla lista-->
-                <a href="{{ route('admin.apartments.index') }}" class="btn btn-sm btn-secondary">Torna alla Lista</a>
+                {{-- Back --}}
+                <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">Torna alla Lista</a>
 
-                <!--Svuota cestino-->
-                <form class="delete-form ms-2 delete-all" method="POST" action="{{ route('admin.apartments.dropAll') }}"
-                    data-bs-toggle="modal" data-bs-target="#deleteModal">
+                {{-- Drop All --}}
+                <form class="delete-form ms-2 delete-all d-inline-block" method="POST"
+                    action="{{ route('admin.apartments.dropAll') }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-sm btn-danger">Svuota cestino</button>
+                    <button class="btn btn-danger">Svuota cestino</button>
                 </form>
-
             </div>
+
         </header>
 
         {{-- Alerts --}}
