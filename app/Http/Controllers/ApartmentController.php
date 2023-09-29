@@ -132,7 +132,7 @@ class ApartmentController extends Controller
     {
 
         if (Auth::id() !== $apartment->user_id) {
-            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato a modificare questo post!');
+            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato a modificare questo appartamento!');
         }
 
         $categories = Category::select('id', 'name')->get();
@@ -255,6 +255,10 @@ class ApartmentController extends Controller
         $total = Apartment::onlyTrashed()->where('user_id', Auth::id())->count();
 
         Apartment::onlyTrashed()->where('user_id', Auth::id())->forceDelete();
+
+        if ($total === 0) {
+            return to_route('admin.apartments.trash')->with('alert-message', "Non ci sono appartamenti da eliminare")->with('alert-type', 'danger');
+        }
 
         return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total appartamenti")->with('alert-type', 'danger');
     }
