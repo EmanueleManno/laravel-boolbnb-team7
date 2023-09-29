@@ -243,6 +243,16 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
     }
 
+    //Funzione per il dropAll:
+    public function dropAll()
+    {
+        $total = Apartment::onlyTrashed()->count();
+
+        Apartment::onlyTrashed()->forceDelete();
+
+        return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total appartamenti")->with('alert-type', 'danger');
+    }
+
 
     /**
      * Toggle Apartment visibility.
