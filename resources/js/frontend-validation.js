@@ -1,29 +1,3 @@
-// Validation Rules
-
-const validationRules = {
-
-    // Form Rules
-
-    title: {
-        required: true,
-        maxLength: 255,
-    },
-    description: {
-        maxLength: 255,
-    },
-    image: {
-        url:true,
-    },
-    price: {
-        required: true,
-        decimalDigits: 2,
-    },
-
-};
-
-const errors = {};
-
-
 // Check Image Url
 function isValidUrl(url) {
 
@@ -45,12 +19,12 @@ function checkDecimalMaxDigits(value, maxDigits) {
 // Validate Field Function
 
 function validateField(fieldName, value) {
-
+    
     const rules = validationRules[fieldName]
     errors[fieldName] = [];
 
 
-
+    // Form Rules
     if(rules.required && !value.trim()){
         errors[fieldName].push(`Il campo è obbligatorio.`);
     };
@@ -61,12 +35,18 @@ function validateField(fieldName, value) {
     };
 
 
-    // Controllo Url
+    // TODO Controllo Url
 
 
     if (rules.decimalDigits && !checkDecimalMaxDigits(value, rules.decimalDigits)) {
         errors[fieldName].push(`Il campo deve avere al massimo ${rules.decimalDigits} cifre decimali.`);
+    };
+
+
+    if (rules.equal && passwordConfirm.value != password.value) {
+        errors[fieldName].push(`Le due password devono essere uguali`);
     }
+
 };
 
 
@@ -85,12 +65,39 @@ function updateErrorMessages() {
     }
 }
 
+// Check HTML page
+
+function checkPage() {
+
+    const getValidation = document.getElementById('get-validation')
+
+    if(getValidation.dataset.validate == "form"){
+        page = 'form'
+    } else {
+        page = 'register'
+    }
+    return page
+}
+
+// Get the Right elements
+
+function getRightElements() {
+
+    if(page === 'form') {
+        targetFields = formFields;
+        validationRules = formRules;
+    } else {
+        targetFields = registerFields;
+        validationRules = registerRules; 
+    }
+    
+}
 
 // Check if all fields are validated
 
 function validateAllFields() {
-    for (const fieldName in formFields) {
-        const value = formFields[fieldName].value;
+    for (const fieldName in targetFields) {
+        const value = targetFields[fieldName].value;
         validateField(fieldName, value);
     }
 
@@ -98,23 +105,78 @@ function validateAllFields() {
 }
 
 
-
-// Get the element of the form
+// Get the elements
 const formFields = {
     title: document.getElementById("title"),
     description: document.getElementById("description"),
     image: document.getElementById("image"),
     price: document.getElementById("price"),
+};
+
+const registerFields = {
+    name: document.getElementById("name"),
+    surname: document.getElementById("surname"),
+    email: document.getElementById("email"),
+    password: document.getElementById("password"),
+    passwordConfirm: document.getElementById("passwordConfirm"),
+};
+
+
+// Validation Rules
+
+const formRules = {
+
+    title: {
+        required: true,
+        maxLength: 255,
+    },
+    description: {
+        maxLength: 255,
+    },
+    image: {
+        url:true,
+    },
+    price: {
+        required: true,
+        decimalDigits: 2,
+    },
 
 };
 
+const registerRules = {
+
+    name: {
+        maxLength: 255,
+    },
+    surname: {
+        maxLength: 255,
+    },
+    email: {
+        required: true,
+    },
+    password: {
+        required: true,
+    },
+    passwordConfirm: {
+        required: true,
+        equal: true,
+    }
+
+};
+
+const errors = {};
+let page = '';
+let validationRules;
+let targetFields
+checkPage();
+getRightElements();
 
 
 // Add event listener and call functions
 
-for (const fieldName in formFields) {
+for (const fieldName in targetFields) {
 
-    formFields[fieldName].addEventListener("input", (e) => {
+    targetFields[fieldName].addEventListener("input", (e) => {
 
         validateField(fieldName, e.target.value);
         updateErrorMessages();
@@ -126,10 +188,9 @@ const validationForm = document.getElementById("validation-form");
 
 validationForm.addEventListener("submit", (event) => {
 
+    
     validateAllFields();
-
     const hasErrors = Object.values(errors).some(fieldErrors => fieldErrors.length > 0);
-
     if (hasErrors) {
         event.preventDefault();
     }

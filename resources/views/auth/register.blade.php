@@ -100,10 +100,10 @@
                         
                         <!--Conferma Password-->
                         <div class="mb-4 row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                            <label for="passwordConfirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" 
+                                <input id="passwordConfirm" type="password" 
                                 class="form-control" name="password_confirmation" required autocomplete="new-password">
 
                                 @error('password-confirm')
@@ -111,7 +111,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <span id="password-confirm-error" class="text-danger"></span>
+                                <span id="passwordConfirm-error" class="text-danger"></span>
                             </div>
                         </div>
 
