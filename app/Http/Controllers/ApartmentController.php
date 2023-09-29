@@ -220,7 +220,9 @@ class ApartmentController extends Controller
     //Funzione per il cestino:
     public function trash()
     {
-        $apartments = Apartment::onlyTrashed()->get();
+        // Get only user apartments
+        $apartments = Apartment::onlyTrashed()->where('user_id', Auth::id())->paginate(5);
+
         return view('admin.apartments.trash', compact('apartments'));
     }
 
@@ -246,9 +248,9 @@ class ApartmentController extends Controller
     //Funzione per il dropAll:
     public function dropAll()
     {
-        $total = Apartment::onlyTrashed()->count();
+        $total = Apartment::onlyTrashed()->where('user_id', Auth::id())->count();
 
-        Apartment::onlyTrashed()->forceDelete();
+        Apartment::onlyTrashed()->where('user_id', Auth::id())->forceDelete();
 
         return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total appartamenti")->with('alert-type', 'danger');
     }
