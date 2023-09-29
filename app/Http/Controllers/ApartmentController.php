@@ -233,6 +233,16 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
     }
 
+    //Funzione per il drop:
+    public function drop(string $id)
+    {
+        $apartment = Apartment::onlyTrashed()->findOrFail($id);
+
+        $apartment->forceDelete();
+
+        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
+    }
+
 
     /**
      * Toggle Apartment visibility.
