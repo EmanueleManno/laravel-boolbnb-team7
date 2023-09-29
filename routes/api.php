@@ -3,8 +3,11 @@
 use App\Http\Controllers\Api\ApartmentController;
 use App\Models\Apartment;
 use App\Models\Category;
+use App\Models\Session as ModelsSession;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +27,12 @@ Route::apiResource('apartments', ApartmentController::class);
 Route::get('/categories',  function () {
     $categories = Category::all();
     return response()->json($categories);
+});
+
+
+Route::get('/user', function () {
+    $user = ModelsSession::select('user_id')->get();
+    $userTarget = User::where('id', '=', $user[0]['user_id'])->get();
+    // $user = Session::all();
+    return response()->json($userTarget);
 });
