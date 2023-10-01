@@ -26,7 +26,10 @@
                 </a>
 
                 <!--Pulsante cestino-->
-                <a href="{{ route('admin.apartments.trash') }}" class="btn btn-secondary ms-2">Cestino</a>
+                <a href="{{ route('admin.apartments.trash') }}" class="btn btn-secondary ms-2">
+                    <span class="d-none d-md-flex">Cestino</span>
+                    <i class="d-inline-block d-md-none fa-solid fa-trash-can"></i>
+                </a>
             </div>
 
         </header>
