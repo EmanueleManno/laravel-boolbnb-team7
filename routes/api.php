@@ -6,8 +6,11 @@ use App\Models\Category;
 use App\Models\Session as ModelsSession;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+
+use function PHPSTORM_META\map;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +23,18 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-// Apartments api routes
+// Apartments routes
 Route::apiResource('apartments', ApartmentController::class);
 
-// Categories api
+
+// Categories route
 Route::get('/categories',  function () {
     $categories = Category::all();
     return response()->json($categories);
 });
 
 
+// User route
 Route::get('/user', function () {
     $user = ModelsSession::select('user_id')->get();
     $userTarget = User::where('id', '=', $user[0]['user_id'])->get();
