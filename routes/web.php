@@ -6,6 +6,7 @@ use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\MessageController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 // Guest Home (Redirect su Vue)
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
+//! Rotte per i messaggi
+//! Route::get('message', [MessageController::class, 'index']);
+//! Route::post('message', [MessageController::class, 'store'])->name('message.store');
 
 // Admin Routes
 Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
