@@ -63,6 +63,20 @@ function updateErrorMessages() {
             errorContainer.innerText = "";
         }
     }
+
+    if(page ===  'form') {
+
+        // Aggiungi la gestione degli errori dei servizi
+        const servicesErrorContainer = document.getElementById('services-error');
+        const servicesErrors = errors[servicesCheckboxes];
+        if (servicesErrors && servicesErrors.length > 0) {
+            servicesErrorContainer.innerText = servicesErrors.join(" ");
+        } else {
+            servicesErrorContainer.innerText = "";
+        }
+    }
+
+    
 }
 
 // Check HTML page
@@ -100,8 +114,36 @@ function validateAllFields() {
         const value = targetFields[fieldName].value;
         validateField(fieldName, value);
     }
+    
 
+    validateExceptions();
     updateErrorMessages();
+};
+
+
+//Check for exceptions
+
+function validateExceptions() {
+
+    // Check services
+    if (page === "form") {
+
+        servicesCheckboxes = document.querySelectorAll('[name="services[]"]');
+        errors[servicesCheckboxes] = [];
+
+        let hasSelectedService = false;
+        for (const checkbox of servicesCheckboxes) {
+            if (checkbox.checked) {
+                hasSelectedService = true;
+                break;
+            }
+        }
+
+        if (!hasSelectedService) {
+            errors[servicesCheckboxes].push(`Devi selezionare almeno un servizio.`);
+        }
+    }
+
 }
 
 
@@ -140,6 +182,9 @@ const formRules = {
         required: true,
         decimalDigits: 2,
     },
+    services: {
+
+    }
 
 };
 
@@ -167,7 +212,8 @@ const registerRules = {
 const errors = {};
 let page = '';
 let validationRules;
-let targetFields
+let targetFields;
+let servicesCheckboxes;
 checkPage();
 getRightElements();
 
@@ -188,7 +234,6 @@ const validationForm = document.getElementById("validation-form");
 
 validationForm.addEventListener("submit", (event) => {
 
-    
     validateAllFields();
     const hasErrors = Object.values(errors).some(fieldErrors => fieldErrors.length > 0);
     if (hasErrors) {

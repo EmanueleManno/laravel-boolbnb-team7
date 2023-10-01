@@ -100,6 +100,7 @@
         @error('services')
             <span class="text-danger" role="alert">{{ $message }}</span>
         @enderror
+        <span id="services-error" class="text-danger"></span>
 
     </div>
 
