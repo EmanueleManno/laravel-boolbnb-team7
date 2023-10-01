@@ -64,14 +64,16 @@ function updateErrorMessages() {
         }
     }
 
+    if(page ===  'form') {
 
-    // Aggiungi la gestione degli errori dei servizi
-    const servicesErrorContainer = document.getElementById('services-error');
-    const servicesErrors = errors[servicesCheckboxes];
-    if (servicesErrors && servicesErrors.length > 0) {
-        servicesErrorContainer.innerText = servicesErrors.join(" ");
-    } else {
-        servicesErrorContainer.innerText = "";
+        // Aggiungi la gestione degli errori dei servizi
+        const servicesErrorContainer = document.getElementById('services-error');
+        const servicesErrors = errors[servicesCheckboxes];
+        if (servicesErrors && servicesErrors.length > 0) {
+            servicesErrorContainer.innerText = servicesErrors.join(" ");
+        } else {
+            servicesErrorContainer.innerText = "";
+        }
     }
 
     
