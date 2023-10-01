@@ -7,7 +7,7 @@
             <th scope="col" class="d-none d-lg-table-cell">Anteprima</th>
             <th scope="col">Titolo</th>
             <th scope="col">Stato</th>
-            <th scope="col" class="d-none d-lg-table-cell">Categoria</th>
+            <th scope="col" class="d-none d-md-table-cell">Categoria</th>
             <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
             <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
             <th scope="col"></th>
@@ -34,7 +34,7 @@
                 <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
 
                 {{-- Category --}}
-                <td class="d-none d-lg-table-cell">
+                <td class="d-none d-md-table-cell">
                     @if ($apartment->category)
                         {{ $apartment->category->name }}
                     @else
