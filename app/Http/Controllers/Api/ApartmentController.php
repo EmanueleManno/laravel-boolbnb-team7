@@ -71,19 +71,21 @@ class ApartmentController extends Controller
      */
     public function filterApartments($filters)
     {
-        // API Data
+        //*** API DATA ***//
         $api_uri = 'https://api.tomtom.com/search/2/geometryFilter.json';
         $api_key = config('api_config.tt_key');
 
 
+        //*** GET APARTMENTS WITH FILTERS ***//
         // Get all visible apartments and apply other filters (TODO)
         $apartments = Apartment::where('is_visible', 1)->get();
 
 
-        // Set Tom Tom API parameters
-        $radius = $filters['radius'] ?? 20000;
+        //*** SET TOM TOM API PARAMETERS ***//
+        $radius = $filters['radius'] ?? 20000; // default 20km
         $request_poi_list = [];
 
+        // Set cirlce geometry
         $request_geometry_list = [
             [
                 "type" => "CIRCLE",
@@ -92,6 +94,7 @@ class ApartmentController extends Controller
             ]
         ];
 
+        // Set POI List from apartments
         foreach ($apartments as $apartment) {
             $request_poi_list[] = [
                 "poi" => [
@@ -108,16 +111,27 @@ class ApartmentController extends Controller
         }
 
 
-        // Fetch API
-        $response = Http::get($api_uri, [
+        //*** FETCH API ***//
+        $response_poi_list = Http::get($api_uri, [
             'key' => $api_key,
             'geometryList' => json_encode($request_geometry_list),
             'poiList' => json_encode($request_poi_list)
         ]);
 
 
+        //*** GET FILTERED APARTMENTS ***//
+        $filtered_apartments = [];
 
-        return $response->json(); //! DEBUG
+        foreach ($response_poi_list->json('results') as $poi_data) {
+            // Get ID from poi name
+            $id = $poi_data['poi']['name'];
+
+            // Find apartment
+            $filtered_apartments[] = $apartments->find($id);
+        }
+
+
+        return $filtered_apartments; //! DEBUG
         //return $apartments;
     }
 }
