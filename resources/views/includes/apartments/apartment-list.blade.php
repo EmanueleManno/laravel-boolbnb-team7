@@ -69,7 +69,8 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i><span class="d-none d-md-flex">Elimina</span>
+                                    <i class="fas fa-trash"></i>
+                                    <span class="d-none d-md-flex">Elimina</span>
                                 </button>
                             </form>
 
@@ -81,7 +82,9 @@
                                 @csrf
                                 @method('PATCH')
                                 <button class="btn btn-sm btn-success">
-                                    <i class="fa-solid fa-recycle"></i><span>Ripristina</span></button>
+                                    <i class="d-inline-block d-md-none fa-solid fa-recycle"></i>
+                                    <span class="d-none d-md-flex"> Ripristina elemento</span>
+                                </button>
                             </form>
 
                             {{-- Drop --}}
@@ -91,7 +94,8 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fa-solid fa-trash-can"></i><span> Elimina definitivamente</span>
+                                    <i class="d-inline-block d-md-none fa-solid fa-trash-can"></i>
+                                    <span class="d-none d-md-flex"> Elimina definitivamente</span>                                   
                                 </button>
                             </form>
                         @endif
