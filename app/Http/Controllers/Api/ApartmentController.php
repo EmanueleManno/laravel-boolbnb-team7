@@ -77,8 +77,14 @@ class ApartmentController extends Controller
 
 
         //*** GET APARTMENTS WITH FILTERS ***//
-        // Get all visible apartments and apply other filters (TODO)
-        $apartments = Apartment::where('is_visible', 1)->get();
+        // Get all visible apartments and apply other filters
+        $query = Apartment::where('is_visible', 1);
+
+        // TODO: Filtro "min rooms"
+        // TODO: Filtro "min beds"
+        // TODO: Filtro "services"
+
+        $apartments = $query->get();
 
 
         //*** SET TOM TOM API PARAMETERS ***//
@@ -116,13 +122,15 @@ class ApartmentController extends Controller
             'key' => $api_key,
             'geometryList' => json_encode($request_geometry_list),
             'poiList' => json_encode($request_poi_list)
-        ]);
+        ])->json('results');
 
+
+        // TODO: ordinare la lista per distanza ASC
 
         //*** GET FILTERED APARTMENTS ***//
         $filtered_apartments = [];
 
-        foreach ($response_poi_list->json('results') as $poi_data) {
+        foreach ($response_poi_list as $poi_data) {
             // Get ID from poi name
             $id = $poi_data['poi']['name'];
 
@@ -131,7 +139,6 @@ class ApartmentController extends Controller
         }
 
 
-        return $filtered_apartments; //! DEBUG
-        //return $apartments;
+        return $filtered_apartments;
     }
 }
