@@ -75,17 +75,49 @@ class ApartmentController extends Controller
         $api_uri = 'https://api.tomtom.com/search/2/geometryFilter.json';
         $api_key = config('api_config.tt_key');
 
+
         // Get all visible apartments and apply other filters (TODO)
         $apartments = Apartment::where('is_visible', 1)->get();
 
+
+        // Set Tom Tom API parameters
+        $radius = $filters['radius'] ?? 20000;
+        $request_poi_list = [];
+
+        $request_geometry_list = [
+            [
+                "type" => "CIRCLE",
+                "position" => "{$filters['lat']}, {$filters['lon']}",
+                "radius" => $radius
+            ]
+        ];
+
+        foreach ($apartments as $apartment) {
+            $request_poi_list[] = [
+                "poi" => [
+                    "name" => $apartment['id']
+                ],
+                "address" => [
+                    "freeformAddress" => $apartment['address']
+                ],
+                "position" => [
+                    "lat" => $apartment['latitude'],
+                    "lon" => $apartment['longitude']
+                ]
+            ];
+        }
+
+
         // Fetch API
         $response = Http::get($api_uri, [
-            'key' => $api_key
+            'key' => $api_key,
+            'geometryList' => json_encode($request_geometry_list),
+            'poiList' => json_encode($request_poi_list)
         ]);
 
 
 
-        return $apartments; //! DEBUG
+        return $response->json(); //! DEBUG
         //return $apartments;
     }
 }
