@@ -19,18 +19,20 @@ class ApartmentController extends Controller
         $filters = $request->all();
 
 
+        // Get apartments
         if (isset($filters['lat']) && isset($filters['lon'])) {
 
-            // Get filtered apartments
+            // Filtered apartments
             $apartments = $this->filterApartments($filters);
         } else {
 
-            // Get all apartments
+            // All apartments
             $apartments = Apartment::where('is_visible', true)
                 ->orderBy('updated_at', 'DESC')
                 ->get();
         }
 
+        // Send response
         return response()->json($apartments);
     }
 
@@ -74,21 +76,23 @@ class ApartmentController extends Controller
         //*** API DATA ***//
         $api_uri = 'https://api.tomtom.com/search/2/geometryFilter.json';
         $api_key = config('api_config.tt_key');
+        $default_radius = 20000; // [m]
 
 
         //*** GET APARTMENTS WITH FILTERS ***//
-        // Get all visible apartments and apply other filters
+        // Get all visible apartments
         $query = Apartment::where('is_visible', 1);
 
         // TODO: Filtro "min rooms"
         // TODO: Filtro "min beds"
         // TODO: Filtro "services"
 
+        // Apply query and get apartments
         $apartments = $query->get();
 
 
         //*** SET TOM TOM API PARAMETERS ***//
-        $radius = $filters['radius'] ?? 20000; // default 20km
+        $radius = $filters['radius'] ?? $default_radius;
         $request_poi_list = [];
 
         // Set cirlce geometry
