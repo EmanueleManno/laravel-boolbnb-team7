@@ -1,9 +1,10 @@
 @if ($apartment->exists)
     <form id="validation-form" method="POST" action="{{ route('admin.apartments.update', $apartment) }}" class="mt-5"
-        novalidate>
+        enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
-        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="mt-5" novalidate>
+        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="mt-5"
+            enctype="multipart/form-data" novalidate>
 @endif
 @csrf
 
@@ -44,8 +45,8 @@
             {{-- # Url --}}
             <div class="col-8 col-sm-9">
                 <label for="image" class="form-label">Url dell'immagine</label>
-                <input type="url"class="form-control @error('image') is-invalid @enderror" id="image"
-                    name="image" value="{{ old('image', $apartment->image) }}" placeholder="Insersisci un url valido">
+                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
+                    name="image" placeholder="Insersisci un url valido">
                 @error('image')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
