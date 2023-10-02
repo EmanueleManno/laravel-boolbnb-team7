@@ -1,7 +1,7 @@
 // Check Image Url
 function isValidUrl(url) {
 
-    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
 
@@ -19,19 +19,24 @@ function checkDecimalMaxDigits(value, maxDigits) {
 // Validate Field Function
 
 function validateField(fieldName, value) {
-    
+
     const rules = validationRules[fieldName]
     errors[fieldName] = [];
 
 
     // Form Rules
-    if(rules.required && !value.trim()){
+    if (rules.required && !value.trim()) {
         errors[fieldName].push(`Il campo è obbligatorio.`);
     };
 
-    
-    if(rules.maxLength && value.length > rules.maxLength){
+
+    if (rules.maxLength && value.length > rules.maxLength) {
         errors[fieldName].push(`Il campo deve contenere al massimo ${rules.maxLength} caratteri.`);
+    };
+
+
+    if (rules.minLength && parseInt(value) < rules.minLength) {
+        errors[fieldName].push(`Inserisci un numero maggiore di ${rules.minLength}.`);
     };
 
 
@@ -64,7 +69,7 @@ function updateErrorMessages() {
         }
     }
 
-    if(page ===  'form') {
+    if (page === 'form') {
 
         // Aggiungi la gestione degli errori dei servizi
         const servicesErrorContainer = document.getElementById('services-error');
@@ -76,7 +81,7 @@ function updateErrorMessages() {
         }
     }
 
-    
+
 }
 
 // Check HTML page
@@ -85,7 +90,7 @@ function checkPage() {
 
     const getValidation = document.getElementById('get-validation')
 
-    if(getValidation.dataset.validate == "form"){
+    if (getValidation.dataset.validate == "form") {
         page = 'form'
     } else {
         page = 'register'
@@ -97,14 +102,14 @@ function checkPage() {
 
 function getRightElements() {
 
-    if(page === 'form') {
+    if (page === 'form') {
         targetFields = formFields;
         validationRules = formRules;
     } else {
         targetFields = registerFields;
-        validationRules = registerRules; 
+        validationRules = registerRules;
     }
-    
+
 }
 
 // Check if all fields are validated
@@ -114,7 +119,7 @@ function validateAllFields() {
         const value = targetFields[fieldName].value;
         validateField(fieldName, value);
     }
-    
+
 
     validateExceptions();
     updateErrorMessages();
@@ -153,6 +158,7 @@ const formFields = {
     description: document.getElementById("description"),
     image: document.getElementById("image"),
     price: document.getElementById("price"),
+    rooms: document.getElementById("rooms"),
 };
 
 const registerFields = {
@@ -176,11 +182,15 @@ const formRules = {
         maxLength: 255,
     },
     image: {
-        url:true,
+        url: true,
     },
     price: {
         required: true,
         decimalDigits: 2,
+    },
+    rooms: {
+        required: true,
+        minLength: 1,
     },
     services: {
 
