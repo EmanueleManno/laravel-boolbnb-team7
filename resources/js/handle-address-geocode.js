@@ -29,15 +29,13 @@ const searchPlace = addressTerm => {
  */
 const fetchApi = query => {
 
-    // Resets
-    addressInput.value = '';
-    latInput.value = null;
-    lonInput.value = null;
-
-
     // Abort if query is empty
     if (!query) {
-        // Reset loader
+        // Resets
+        addressInput.value = '';
+        latInput.value = null;
+        lonInput.value = null;
+
         suggestionsElem.classList.remove('show');
         suggestionsElem.innerHTML = '';
         return;
@@ -67,13 +65,6 @@ const fetchApi = query => {
                 // Add place to suggestions
                 suggestionsElem.innerHTML += `<li class="suggestions-item py-2" data-lat="${palce.lat}" data-lon="${palce.lon}">${palce.address}</li>`;
             });
-
-            // Update inputs (preselect first result)
-            const chosenAddress = results[0];
-            addressInput.value = chosenAddress.address.freeformAddress;
-            latInput.value = chosenAddress.position.lat;
-            lonInput.value = chosenAddress.position.lon;
-
 
         })
         .catch(err => {
