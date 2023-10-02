@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ApartmentController extends Controller
@@ -99,6 +100,13 @@ class ApartmentController extends Controller
 
         // Insert Apartment
         $apartment = new Apartment();
+
+        // Storage image
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::putFile('apartments_img', $data['image']);
+            $data['image'] = $img_url;
+        }
+
         $apartment->fill($data);
 
         // add user to apartment
