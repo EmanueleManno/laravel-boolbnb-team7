@@ -22,16 +22,18 @@
                 </a>
                 
 
-                {{-- Drop All --}}
-                <form class="delete-form ms-2 delete-all d-inline-block" method="POST"
-                    action="{{ route('admin.apartments.dropAll') }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    @csrf
-                    @method('DELETE')
+                <!-- Svuota cestino commentato -->
+                {{-- Drop All --}} 
+                <!--<form class="delete-form ms-2 delete-all d-inline-block" method="POST"
+                    action="{{--{{ route('admin.apartments.dropAll') }}--}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    {{--@csrf
+                    @method('DELETE')--}}
                     <button class="btn btn-danger">
                         <span class="d-none d-md-flex">Svuota cestino</span>
                         <i class="d-inline-block d-md-none fa-solid fa-broom"></i>
                     </button>
-                </form>
+                </form>-->
+
             </div>
 
         </header>
