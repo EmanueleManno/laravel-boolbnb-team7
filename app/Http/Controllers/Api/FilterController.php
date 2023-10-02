@@ -32,14 +32,19 @@ class FilterController extends Controller
         // Filtro "min rooms"
         if (isset($filters['rooms'])) {
             $query->where('rooms', '>=', $filters['rooms']);
-        };
+        }
 
         // Filtro "min beds"
         if (isset($filters['beds'])) {
             $query->where('beds', '>=', $filters['beds']);
-        };
+        }
 
-        // TODO: Filtro "services"
+        // Filtro "services"
+        if (isset($filters['services'])) {
+            foreach ($filters['services'] as $service_id) {
+                $query->whereRelation('services', 'id', $service_id);
+            }
+        }
 
         // Filter by distance and order ASC
         $query->having('distance', '<', $radius);
