@@ -161,6 +161,7 @@ const formFields = {
     rooms: document.getElementById("rooms"),
     beds: document.getElementById("beds"),
     bathrooms: document.getElementById("bathrooms"),
+    address: document.getElementById("address"),
 };
 
 const registerFields = {
@@ -201,6 +202,10 @@ const formRules = {
     bathrooms: {
         required: true,
         minLength: 1,
+    },
+    address: {
+        required: true,
+        maxLength: 255,
     },
     services: {
 

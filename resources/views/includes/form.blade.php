@@ -192,6 +192,7 @@
             @error('address')
                 <span class="invalid-feedback" role="alert">{{ $message }}</span>
             @enderror
+            <span id="address-error" class="text-danger"></span>
 
             {{-- API Suggestion List --}}
             <ul id="api-suggestions" class="suggestions-list"></ul>
