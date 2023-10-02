@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApartmentController;
+use App\Http\Controllers\Api\FilterController;
 use App\Models\Apartment;
 use App\Models\Category;
 use App\Models\Session as ModelsSession;
@@ -22,6 +23,10 @@ use function PHPSTORM_META\map;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+// Filter routes
+Route::get('apartments/filter', [FilterController::class, 'index']);
+
 
 // Apartments routes
 Route::apiResource('apartments', ApartmentController::class);
