@@ -209,6 +209,15 @@ class ApartmentController extends Controller
             ]
         );
 
+        // Storage image
+        if (array_key_exists('image', $data)) {
+            if ($apartment->image) {
+                Storage::delete($apartment->image);
+            }
+            $img_url = Storage::putFile('apartments_img', $data['image']);
+            $data['image'] = $img_url;
+        }
+
         if (Arr::exists($data, 'services')) $apartment->services()->sync($data['services']);
 
         // Handle toggle
