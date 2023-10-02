@@ -133,6 +133,7 @@
                 @error('rooms')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
+                <span id="rooms-error" class="text-danger"></span>
             </div>
 
 
@@ -145,6 +146,7 @@
                 @error('beds')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
+                <span id="beds-error" class="text-danger"></span>
             </div>
 
 
@@ -157,6 +159,7 @@
                 @error('bathrooms')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
+                <span id="bathrooms-error" class="text-danger"></span>
             </div>
 
         </div>

@@ -159,6 +159,8 @@ const formFields = {
     image: document.getElementById("image"),
     price: document.getElementById("price"),
     rooms: document.getElementById("rooms"),
+    beds: document.getElementById("beds"),
+    bathrooms: document.getElementById("bathrooms"),
 };
 
 const registerFields = {
@@ -189,6 +191,14 @@ const formRules = {
         decimalDigits: 2,
     },
     rooms: {
+        required: true,
+        minLength: 1,
+    },
+    beds: {
+        required: true,
+        minLength: 1,
+    },
+    bathrooms: {
         required: true,
         minLength: 1,
     },
