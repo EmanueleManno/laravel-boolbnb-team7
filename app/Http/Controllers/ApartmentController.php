@@ -51,7 +51,7 @@ class ApartmentController extends Controller
                 'beds' => 'nullable|integer|min:0',
                 'bathrooms' => 'nullable|integer|min:0',
                 'square_meters' => 'nullable|integer|min:0',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image:jpg, jpeg, png, svg, webp, pdf',
                 'address' => 'nullable|string',
                 'latitude' => 'nullable|decimal:0,6',
                 'longitude' => 'nullable|decimal:0,6',
@@ -83,7 +83,7 @@ class ApartmentController extends Controller
 
                 'address.string' => 'L\'indirizzo non è valido',
 
-                'image.url' => "Inserisci un url valido",
+                'image.image' => "l\'immagine inserita non è valida",
 
                 'is_visible.boolean' => 'Il valore non è valido',
 
@@ -157,7 +157,7 @@ class ApartmentController extends Controller
                 'beds' => 'nullable|integer|min:0',
                 'bathrooms' => 'nullable|integer|min:0',
                 'square_meters' => 'nullable|integer|min:0',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image:jpg, jpeg, png, svg, webp, pdf',
                 'address' => 'nullable|string',
                 'latitude' => 'nullable|decimal:0,6',
                 'longitude' => 'nullable|decimal:0,6',
@@ -190,7 +190,7 @@ class ApartmentController extends Controller
 
                 'address.string' => 'L\'indirizzo non è valido',
 
-                'image.url' => "Inserisci un url valido",
+                'image.image' => "l\'immagine inserita non è valida",
 
                 'is_visible.boolean' => 'Il valore non è valido',
 
