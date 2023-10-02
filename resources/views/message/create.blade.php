@@ -4,6 +4,7 @@
 
 <!--Contenitore-->
 <div class="container my-5">
+    
     {{-- Form Header --}}
     <header class="d-flex justify-content-between align-items-center pb-4">
 
@@ -64,7 +65,7 @@
 
             @error('email')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
+                    {{ $message }}
                 </span>
             @enderror
             <span id="email-error" class="text-danger"></span>

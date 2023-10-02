@@ -6,6 +6,11 @@
 
     <div class="container my-5">
 
+        {{-- Alerts --}}
+        <div class="my-2">
+            @include('includes.alerts')
+        </div>
+
         <!--Header-->
         <header class="d-flex align-items-center justify-content-between pb-4">
 
@@ -15,8 +20,8 @@
             {{-- Page Actions --}}
             <div>
                 <a href="{{ route('message.create') }}" class="btn btn-success">
-                    <span class="d-none d-md-flex">
-                       Aggiungi nuovo messaggio
+                    <span>
+                       Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
                     </span>
                     <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
                 </a>
@@ -70,12 +75,6 @@
                 @endforelse
             </tbody>
         </table>
-        
-
-        {{-- Alerts --}}
-        <div class="my-2">
-            @include('includes.alerts')
-        </div>
 
     </div>
 
