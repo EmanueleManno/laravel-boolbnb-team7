@@ -44,12 +44,4 @@ class Apartment extends Model
     {
         return $this->hasMany(Message::class);
     }
-
-    // Getter img
-    public function image()
-    {
-        return Attribute::make(
-            get: fn ($value) => asset('storage/' . $value)
-        );
-    }
 }
