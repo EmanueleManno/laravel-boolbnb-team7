@@ -14,9 +14,12 @@ class FilterController extends Controller
      */
     public function index(Request $request)
     {
+        // Get Filters
         $filters = $request->all();
 
-        if (!isset($filters['lat']) || !isset($filters['lon'])) response(404);
+        // Check Required parameters
+        if (!isset($filters['lat']) || !isset($filters['lon'])) return response(400);
+
 
         //*** API DATA ***//
         $api_uri = 'https://api.tomtom.com/search/2/geometryFilter.json';
