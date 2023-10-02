@@ -118,8 +118,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        if ((Auth::id() !== $apartment->user_id) && ($apartment->is_visible === 0)) {
-            return to_route('admin.apartments.index')->with('alert-type', 'warning')->with('alert-message', "L'appartamento che stai tentando di visualizzare non è ancora stato pubblicato");
+        if (
+            Auth::id() !== $apartment->user_id //&& ($apartment->is_visible === 0)
+        ) {
+            return to_route('admin.apartments.index')->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
         }
 
         return view('admin.apartments.show', compact('apartment'));
@@ -132,7 +134,7 @@ class ApartmentController extends Controller
     {
 
         if (Auth::id() !== $apartment->user_id) {
-            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato a modificare questo appartamento!');
+            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
         }
 
         $categories = Category::select('id', 'name')->get();
