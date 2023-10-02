@@ -103,11 +103,13 @@ class ApartmentController extends Controller
 
         // Storage image
         if (array_key_exists('image', $data)) {
+            $extension = $data['image']->extension();
             $img_url = Storage::putFile('apartments_img', $data['image']);
             $data['image'] = $img_url;
         }
 
         $apartment->fill($data);
+
 
         // add user to apartment
         $apartment->user_id = Auth::id();

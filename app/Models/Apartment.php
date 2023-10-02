@@ -44,4 +44,10 @@ class Apartment extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+    // Get image path
+    public function get_image()
+    {
+        return asset('storage/' . $this->image);
+    }
 }
