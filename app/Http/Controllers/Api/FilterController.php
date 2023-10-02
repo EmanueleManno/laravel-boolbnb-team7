@@ -29,7 +29,11 @@ class FilterController extends Controller
         // Get all visible apartments
         $query->where('is_visible', 1);
 
-        // TODO: Filtro "min rooms"
+        // Filtro "min rooms"
+        if (isset($filters['rooms'])) {
+            $query->where('rooms', '>=', $filters['rooms']);
+        };
+
         // TODO: Filtro "min beds"
         // TODO: Filtro "services"
 
