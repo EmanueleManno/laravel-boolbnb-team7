@@ -42,15 +42,32 @@
     <div class="col-12 mb-4">
         <div class="row align-items-center">
 
-            {{-- # Url --}}
+            {{-- # Add file --}}
             <div class="col-8 col-sm-9">
-                <label for="image" class="form-label">Url dell'immagine</label>
-                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
-                    name="image" placeholder="Insersisci un url valido">
+                <label for="image" class="form-label">Immagine</label>
+
+                {{-- Button for change image --}}
+                <div class="input-group  @if (!$apartment->image) d-none @endif" id="change-image">
+                    <button class="btn btn-outline-secondary" type="button">Cambia immagine</button>
+                    <input type="text" class="form-control" placeholder="{{ $apartment->image }}" disabled>
+                </div>
+
+                {{-- Input for add image --}}
+                <input type="file"
+                    class="form-control @error('image') is-invalid @enderror @if ($apartment->image) d-none @endif"
+                    id="image" name="image">
+
                 @error('image')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
                 <span id="image-error" class="text-danger"></span>
+
+                {{-- Button for remove image --}}
+                <button class="btn btn-danger mt-3 @if (!$apartment->image) d-none @endif" id="remove-image"
+                    type="button">Togli
+                    immagine</button>
+                <input type="checkbox" class="d-none" id="delete_image" name="delete_image" value="1">
+
             </div>
 
             {{-- # Preview --}}

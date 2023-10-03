@@ -156,7 +156,6 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-
         // Validazione
         $data = $request->validate(
             [
@@ -212,12 +211,15 @@ class ApartmentController extends Controller
         );
 
         // Storage image
-        if (array_key_exists('image', $data)) {
+        if (Arr::exists($data, 'image')) {
             if ($apartment->image) {
                 Storage::delete($apartment->image);
             }
             $img_url = Storage::putFile('apartments_img', $data['image']);
             $data['image'] = $img_url;
+        } elseif (Arr::exists($request, 'delete_image') && $apartment->image) {
+            Storage::delete($apartment->image);
+            $data['image'] = null;
         }
 
         if (Arr::exists($data, 'services')) $apartment->services()->sync($data['services']);

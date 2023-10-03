@@ -11,7 +11,7 @@ class Apartment extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title', 'category_id', 'description', 'price', 'rooms', 'beds', 'bathrooms', 'square_meters', 'address', 'latitude', 'longitude', 'image', 'is_visible'];
+    protected $fillable = ['title', 'category_id', 'description', 'price', 'rooms', 'beds', 'bathrooms', 'square_meters', 'address', 'latitude', 'longitude', 'image', 'is_visible', 'delete_image'];
 
     /**
      * Category relation
