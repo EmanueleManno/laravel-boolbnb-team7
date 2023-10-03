@@ -30,7 +30,7 @@ Route::get('apartments/filter', [FilterController::class, 'index']);
 
 // Message routes
 Route::get('/messages', [MessageController::class, 'index']);
-Route::get('/messages/filter', [MessageController::class, 'filtermessages']);
+Route::post('messages', [MessageController::class, 'store']);
 
 // Apartments routes
 Route::apiResource('apartments', ApartmentController::class);

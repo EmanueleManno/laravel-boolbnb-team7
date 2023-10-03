@@ -19,13 +19,17 @@ class MessageSeeder extends Seeder
         // Get related resource ids
         $apartments_ids = Apartment::pluck('id')->toArray();
 
-        $message = new Message();
+        $messages = config('messages');
+        foreach ($messages as $message) {
 
-        $message->name = 'Titolo di prova';
-        $message->content = 'Contenuto di prova';
-        $message->email = 'Emaildiprova@gmail.com';
-        $message->apartment_id = Arr::random($apartments_ids);
+            $new_message = new Message();
 
-        $message->save();
+            $new_message->name = $message['name'];
+            $new_message->content = $message['content'];
+            $new_message->email = $message['email'];;
+            $new_message->apartment_id = Arr::random($apartments_ids);
+
+            $new_message->save();
+        }
     }
 }
