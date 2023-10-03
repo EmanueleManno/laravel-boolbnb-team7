@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\FilterController;
+use App\Http\Controllers\Api\MessageController;
 use App\Models\Apartment;
 use App\Models\Category;
 use App\Models\Session as ModelsSession;
@@ -27,6 +28,9 @@ use function PHPSTORM_META\map;
 // Filter routes
 Route::get('apartments/filter', [FilterController::class, 'index']);
 
+// Message routes
+Route::get('/messages', [MessageController::class, 'index']);
+Route::get('/messages/filter', [MessageController::class, 'filtermessages']);
 
 // Apartments routes
 Route::apiResource('apartments', ApartmentController::class);
