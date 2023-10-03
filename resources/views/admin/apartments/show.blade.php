@@ -120,12 +120,12 @@
             </div>
 
             {{-- ----------- Right Content --------------- --}}
-            <!--<div class="col-12 col-md-5">
+            <div class="col-12 col-md-5">
 
-                <div class="card p-4">
+                <div class="justify-content-center align-items-center p-4">
 
                     {{-- Price x Night --}}
-                    <h5 class="mb-3"> {{-- $apartment->price --}} € <span class="fw-normal fs-6">notte</span></h5>
+                   <!-- <h5 class="mb-3"> {{-- $apartment->price --}} € <span class="fw-normal fs-6">notte</span></h5>
 
                     {{-- Booking Options --}}
                     <div class="row rounded border mb-3">
@@ -172,8 +172,35 @@
                         </div>
                     </div>
 
+                </div>-->
+
+                
+                    <h3 class="mb-2 text-center">Messaggi ricevuti</h3>
+                
+                    <div>
+                    <ul>
+                        @forelse ($apartment->messages as $message)
+                        <li class="text-center">
+                            <strong>{{$message->name}}</strong>
+                            ricevuto da <i> {{$message->email}} </i> 
+                            <div class="text-gradient" style="font-size: 12px">
+                                in data
+                                {{ $message->created_at->format('d/m/y') }}
+                                alle
+                                {{ $message->created_at->format('H:i') }}
+                            </div>
+                        </li>
+                    
+                        {{-- Empty message --}}
+                        @empty
+                               <li class="text-center" colspan="8">
+                               Non ci sono messaggi
+                               </li>
+                        @endforelse
+                    </ul>
+                    </div>
                 </div>
-            </div>-->
+            </div>
         </div>
 
     </div>
