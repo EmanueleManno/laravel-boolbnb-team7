@@ -24,9 +24,13 @@ use Illuminate\Support\Facades\Route;
 // Guest Home (Redirect su Vue)
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-//! Rotte per i messaggi
-//! Route::get('message', [MessageController::class, 'index']);
-//! Route::post('message', [MessageController::class, 'store'])->name('message.store');
+// Rotte per i messaggi
+//Lista di tutti i messaggi:
+Route::get('message', [MessageController::class, 'index'])->name('message.index');
+//Creazione di un messaggio:
+Route::get('message/create', [MessageController::class, 'create'])->name('message.create');
+//Store di un messaggio:
+Route::post('message', [MessageController::class, 'store'])->name('message.store');
 
 // Admin Routes
 Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
@@ -39,10 +43,10 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
     Route::get('apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
     //Rotta per il restore:
     Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore');
-    //Rotta per il svuota cestino:
-    Route::delete('apartments/drop', [ApartmentController::class, 'dropAll'])->name('apartments.dropAll');
+    //Rotta per lo svuota cestino:
+    //Route::delete('apartments/drop', [ApartmentController::class, 'dropAll'])->name('apartments.dropAll');
     //Rotta per l'elimina definitivamente:
-    Route::delete('apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop');
+    //Route::delete('apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop');
     //Rotta per il toggle:
     Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle');
     Route::resource('apartments', ApartmentController::class);

@@ -144,37 +144,49 @@
 
             {{-- # Rooms --}}
             <div class="col-12 col-sm-4 mb-4">
-                <label for="rooms" class="form-label">Numero di stanze</label>
+                <label for="rooms" class="form-label">
+                    Numero di stanze
+                    <span class="form-text text-danger fs-5">*</span>
+                </label>
                 <input value="{{ old('rooms', $apartment->rooms) }}" type="number"
                     class="form-control @error('rooms') is-invalid @enderror" id="rooms" name="rooms"
                     min="0">
                 @error('rooms')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
+                <span id="rooms-error" class="text-danger"></span>
             </div>
 
 
             {{-- # Beds --}}
             <div class="mb-4 col-12 col-sm-4 mb-4">
-                <label for="beds" class="form-label">Numero di letti</label>
+                <label for="beds" class="form-label">
+                    Numero di letti
+                    <span class="form-text text-danger fs-5">*</span>
+                </label>
                 <input value="{{ old('beds', $apartment->beds) }}" type="number"
                     class="form-control @error('beds') is-invalid @enderror" id="beds" name="beds"
                     min="0">
                 @error('beds')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
+                <span id="beds-error" class="text-danger"></span>
             </div>
 
 
             {{-- # Bathrooms --}}
             <div class="col-12 col-sm-4 mb-4">
-                <label for="bathrooms" class="form-label">Numero di bagni</label>
+                <label for="bathrooms" class="form-label">
+                    Numero di bagni
+                    <span class="form-text text-danger fs-5">*</span>
+                </label>
                 <input value="{{ old('bathrooms', $apartment->bathrooms) }}" type="number"
                     class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" name="bathrooms"
                     min="0">
                 @error('bathrooms')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
+                <span id="bathrooms-error" class="text-danger"></span>
             </div>
 
         </div>
@@ -195,7 +207,10 @@
 
     {{-- # Address --}}
     <div class="col-12 mb-4">
-        <label for="address-search" class="form-label">Indirizzo</label>
+        <label for="address-search" class="form-label">
+            Indirizzo
+            <span class="form-text text-danger fs-5">*</span>
+        </label>
 
         <div class="position-relative">
 
@@ -211,6 +226,7 @@
             {{-- API Suggestion List --}}
             <ul id="api-suggestions" class="suggestions-list"></ul>
         </div>
+        <span id="address-error" class="text-danger"></span>
 
         {{-- Chosen Place Input --}}
         <input type="text" readonly name="address" id="address" class="form-control-plaintext p-2 fw-bold"
@@ -234,7 +250,10 @@
 
 
     {{-- # Submit --}}
-    <div class="col-12 text-end">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <div class="text-danger">
+            I campi contrassegnati (*) sono obbligatori.
+        </div>
         <button type="submit" class="btn btn-success">Conferma</button>
     </div>
 

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('img/logo.png') }}">
-    <title>{{ config('app.name', 'Boolbnb') }}</title>
 
-    @vite(['resources/js/app.js'])
+    {{-- Title --}}
+    <title>{{ config('app.name', 'Boolbnb') }} - @yield('title')</title>
 
     {{-- Fontawesome --}}
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'
@@ -16,6 +16,8 @@
         crossorigin='anonymous' />
     {{-- cdn --}}
     @yield('cdn')
+
+    @vite(['resources/js/app.js'])
 
     <style>
         body {

@@ -87,17 +87,19 @@
                                 </button>
                             </form>
 
+                            <!--Commentato l'elimina definitivamente-->
                             {{-- Drop --}}
-                            <form action="{{ route('admin.apartments.drop', $apartment) }}" method="POST"
-                                class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
+                                <!--<form action="{{--{{ route('admin.apartments.drop', $apartment) }}"--}} method="POST"
+                                class="delete-form ms-2" data-title="{{--{{ $apartment->title }}"--}} data-bs-toggle="modal"
                                 data-bs-target="#deleteModal">
-                                @csrf
-                                @method('DELETE')
+                                {{--@csrf
+                                @method('DELETE')--}}
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="d-inline-block d-md-none fa-solid fa-trash-can"></i>
                                     <span class="d-none d-md-flex"> Elimina definitivamente</span>
                                 </button>
-                            </form>
+                            </form>-->
+
                         @endif
 
 

@@ -19,5 +19,5 @@
 
 {{-- Scripts --}}
 @section('scripts')
-    @vite(['resources/js/handle-address-geocode.js', 'resources/js/image-form'])
+    @vite(['resources/js/handle-address-geocode.js', 'resources/js/image-form', 'resources/js/frontend-validation.js'])
 @endsection

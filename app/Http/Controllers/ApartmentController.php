@@ -48,14 +48,14 @@ class ApartmentController extends Controller
                 'title' => 'required|string',
                 'description' => 'nullable|string',
                 'price' => 'required|decimal:0,2|min:0',
-                'rooms' => 'nullable|integer|min:0',
-                'beds' => 'nullable|integer|min:0',
-                'bathrooms' => 'nullable|integer|min:0',
+                'rooms' => 'required|integer|min:1',
+                'beds' => 'required|integer|min:1',
+                'bathrooms' => 'required|integer|min:1',
                 'square_meters' => 'nullable|integer|min:0',
                 'image' => 'nullable|image:jpg, jpeg, png, svg, webp, pdf',
-                'address' => 'nullable|string',
-                'latitude' => 'nullable|decimal:0,6',
-                'longitude' => 'nullable|decimal:0,6',
+                'address' => 'required|string',
+                'latitude' => 'required|decimal:0,6',
+                'longitude' => 'required|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
                 'category_id' => 'nullable|exists:categories,id',
                 'services' => 'required|exists:services,id',
@@ -70,18 +70,22 @@ class ApartmentController extends Controller
                 'price.decimal' => 'Il prezzo deve essere un numero con massimo 2 cifre',
                 'price.min' => 'Inserisci un prezzo maggiore di zero',
 
+                'rooms.required' => 'Il numero di stanze è obbligatorio',
                 'rooms.integer' => 'Inserisci un numero valido',
-                'rooms.min' => 'Inserisci un numero maggiore di zero',
+                'rooms.min' => 'Inserisci un numero maggiore di uno',
 
+                'beds.required' => 'Il numero di letti è obbligatorio',
                 'beds.integer' => 'Inserisci un numero valido',
-                'beds.min' => 'Inserisci un numero maggiore di zero',
+                'beds.min' => 'Inserisci un numero maggiore di uno',
 
+                'bathrooms.required' => 'Il numero di bagni è obbligatorio',
                 'bathrooms.integer' => 'Inserisci un numero valido',
-                'bathrooms.min' => 'Inserisci un numero maggiore di zero',
+                'bathrooms.min' => 'Inserisci un numero maggiore di uno',
 
                 'square_meters.integer' => 'Inserisci un numero valido',
                 'square_meters.min' => 'Inserisci un numero maggiore di zero',
 
+                'address.required' => 'L\'indirizzo è obbligatorio',
                 'address.string' => 'L\'indirizzo non è valido',
 
                 'image.image' => "l\'immagine inserita non è valida",
@@ -128,8 +132,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        if ((Auth::id() !== $apartment->user_id) && ($apartment->is_visible === 0)) {
-            return to_route('admin.apartments.index')->with('alert-type', 'warning')->with('alert-message', "L'appartamento che stai tentando di visualizzare non è ancora stato pubblicato");
+        if (
+            Auth::id() !== $apartment->user_id //&& ($apartment->is_visible === 0)
+        ) {
+            return to_route('admin.apartments.index')->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
         }
 
         return view('admin.apartments.show', compact('apartment'));
@@ -142,7 +148,7 @@ class ApartmentController extends Controller
     {
 
         if (Auth::id() !== $apartment->user_id) {
-            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato a modificare questo appartamento!');
+            return to_route('admin.apartments.show', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
         }
 
         $categories = Category::select('id', 'name')->get();
@@ -162,21 +168,20 @@ class ApartmentController extends Controller
                 'title' => 'required|string', Rule::unique('apartments')->ignore($apartment),
                 'description' => 'nullable|string',
                 'price' => 'required|decimal:0,2|min:0',
-                'rooms' => 'nullable|integer|min:0',
-                'beds' => 'nullable|integer|min:0',
-                'bathrooms' => 'nullable|integer|min:0',
+                'rooms' => 'required|integer|min:1',
+                'beds' => 'required|integer|min:1',
+                'bathrooms' => 'required|integer|min:1',
                 'square_meters' => 'nullable|integer|min:0',
                 'image' => 'nullable|image:jpg, jpeg, png, svg, webp, pdf',
-                'address' => 'nullable|string',
-                'latitude' => 'nullable|decimal:0,6',
-                'longitude' => 'nullable|decimal:0,6',
+                'address' => 'required|string',
+                'latitude' => 'required|decimal:0,6',
+                'longitude' => 'required|decimal:0,6',
                 'is_visible' => 'nullable|boolean',
                 'category_id' => 'nullable|exists:categories,id',
                 'services' => 'required|exists:services,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio',
-                'title.unique' => "Esiste già un appartamento dal titolo $request->title",
                 'title.string' => 'Il titolo non è valido',
 
                 'description.string' => 'La descrizione non è valida',
@@ -185,18 +190,22 @@ class ApartmentController extends Controller
                 'price.decimal' => 'Il prezzo deve essere un numero con massimo 2 cifre',
                 'price.min' => 'Inserisci un prezzo maggiore di zero',
 
+                'rooms.required' => 'Il numero di stanze è obbligatorio',
                 'rooms.integer' => 'Inserisci un numero valido',
-                'rooms.min' => 'Inserisci un numero maggiore di zero',
+                'rooms.min' => 'Inserisci un numero maggiore di uno',
 
+                'beds.required' => 'Il numero di letti è obbligatorio',
                 'beds.integer' => 'Inserisci un numero valido',
-                'beds.min' => 'Inserisci un numero maggiore di zero',
+                'beds.min' => 'Inserisci un numero maggiore di uno',
 
+                'bathrooms.required' => 'Il numero di bagni è obbligatorio',
                 'bathrooms.integer' => 'Inserisci un numero valido',
-                'bathrooms.min' => 'Inserisci un numero maggiore di zero',
+                'bathrooms.min' => 'Inserisci un numero maggiore di uno',
 
                 'square_meters.integer' => 'Inserisci un numero valido',
                 'square_meters.min' => 'Inserisci un numero maggiore di zero',
 
+                'address.required' => 'L\'indirizzo è obbligatorio',
                 'address.string' => 'L\'indirizzo non è valido',
 
                 'image.image' => "l\'immagine inserita non è valida",
