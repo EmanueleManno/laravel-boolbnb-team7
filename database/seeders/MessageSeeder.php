@@ -16,6 +16,7 @@ class MessageSeeder extends Seeder
     {
         $message = new Message();
 
+        $message->apartment_id = '1';
         $message->name = 'Titolo di prova';
         $message->content = 'Contenuto di prova';
         $message->email = 'Emaildiprova@gmail.com';
