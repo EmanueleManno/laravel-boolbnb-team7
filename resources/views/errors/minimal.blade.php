@@ -2,7 +2,7 @@
 
 
 @section('main')
-    <section class="container mt-5">
+    <section id="error" class="container mt-5">
 
         <div class="row">
 
