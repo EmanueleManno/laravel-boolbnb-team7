@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ApartmentController extends Controller
@@ -51,7 +52,7 @@ class ApartmentController extends Controller
                 'beds' => 'required|integer|min:1',
                 'bathrooms' => 'required|integer|min:1',
                 'square_meters' => 'nullable|integer|min:0',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image:jpg, jpeg, png, svg, webp, pdf',
                 'address' => 'required|string',
                 'latitude' => 'required|decimal:0,6',
                 'longitude' => 'required|decimal:0,6',
@@ -87,7 +88,7 @@ class ApartmentController extends Controller
                 'address.required' => 'L\'indirizzo è obbligatorio',
                 'address.string' => 'L\'indirizzo non è valido',
 
-                'image.url' => "Inserisci un url valido",
+                'image.image' => "l\'immagine inserita non è valida",
 
                 'is_visible.boolean' => 'Il valore non è valido',
 
@@ -103,7 +104,16 @@ class ApartmentController extends Controller
 
         // Insert Apartment
         $apartment = new Apartment();
+
+        // Storage image
+        if (array_key_exists('image', $data)) {
+            $extension = $data['image']->extension();
+            $img_url = Storage::putFile('apartments_img', $data['image']);
+            $data['image'] = $img_url;
+        }
+
         $apartment->fill($data);
+
 
         // add user to apartment
         $apartment->user_id = Auth::id();
@@ -152,7 +162,6 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-
         // Validazione
         $data = $request->validate(
             [
@@ -163,7 +172,7 @@ class ApartmentController extends Controller
                 'beds' => 'required|integer|min:1',
                 'bathrooms' => 'required|integer|min:1',
                 'square_meters' => 'nullable|integer|min:0',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image:jpg, jpeg, png, svg, webp, pdf',
                 'address' => 'required|string',
                 'latitude' => 'required|decimal:0,6',
                 'longitude' => 'required|decimal:0,6',
@@ -199,7 +208,7 @@ class ApartmentController extends Controller
                 'address.required' => 'L\'indirizzo è obbligatorio',
                 'address.string' => 'L\'indirizzo non è valido',
 
-                'image.url' => "Inserisci un url valido",
+                'image.image' => "l\'immagine inserita non è valida",
 
                 'is_visible.boolean' => 'Il valore non è valido',
 
@@ -209,6 +218,18 @@ class ApartmentController extends Controller
                 'services.exists' => 'Il servizio è inesistente',
             ]
         );
+
+        // Storage image
+        if (Arr::exists($data, 'image')) {
+            if ($apartment->image) {
+                Storage::delete($apartment->image);
+            }
+            $img_url = Storage::putFile('apartments_img', $data['image']);
+            $data['image'] = $img_url;
+        } elseif (Arr::exists($request, 'delete_image') && $apartment->image) {
+            Storage::delete($apartment->image);
+            $data['image'] = null;
+        }
 
         if (Arr::exists($data, 'services')) $apartment->services()->sync($data['services']);
 

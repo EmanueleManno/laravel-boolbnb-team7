@@ -8,7 +8,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '50',
-        'image' => 'https://a0.muscache.com/im/pictures/b7c9264d-73c9-45c3-882e-6e9577d63d68.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_1.webp',
         'is_visible' => '1',
     ],
     [
@@ -19,7 +19,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '50',
-        'image' => 'https://a0.muscache.com/im/pictures/60d4058e-98a8-4f30-ba8a-93b101a31c47.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_2.webp',
         'is_visible' => '1',
     ],
     [
@@ -31,7 +31,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '50',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-4604261/original/6645fb7f-74c0-40cf-a6bc-ee90596a4087.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_3.webp',
         'is_visible' => '1',
     ],
     [
@@ -45,7 +45,7 @@ return $apartments = [
         'beds' => '5',
         'bathrooms' => '2',
         'square_meters' => '50',
-        'image' => 'https://a0.muscache.com/im/pictures/2ce2f829-7965-479a-af98-c5a84824ce06.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_4.webp',
         'is_visible' => '1',
     ],
     [
@@ -60,7 +60,7 @@ return $apartments = [
         'beds' => '2',
         'bathrooms' => '1',
         'square_meters' => '50',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-888236710191401724/original/31f1dcc0-5a17-4c5d-a4e4-7e3ba20695af.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_5.webp',
         'is_visible' => '1',
     ],
     [
@@ -71,7 +71,7 @@ return $apartments = [
         'beds' => '3',
         'bathrooms' => '1',
         'square_meters' => '60',
-        'image' => 'https://cdn.turistipercaso.it/media?src=/uploads/2023/04/case-al-contrario-brighton.jpg&sharpen&save-as=webp&aspect-ratio=16:9&crop-to-fit&w=1200&q=60',
+        'image' => 'apartments_img/apartment_6.webp',
         'is_visible' => '1',
     ],
     [
@@ -82,7 +82,7 @@ return $apartments = [
         'beds' => '2',
         'bathrooms' => '3',
         'square_meters' => '80',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-908580991826086201/original/7225e5f8-863b-4545-b1ef-6593c05e3789.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_7.webp',
         'is_visible' => '1',
     ],
     [
@@ -93,7 +93,7 @@ return $apartments = [
         'beds' => '7',
         'bathrooms' => '7',
         'square_meters' => '220',
-        'image' => 'https://a0.muscache.com/im/pictures/e47c0a48-4f10-470d-aa86-66f79ae86f20.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_8.webp',
         'is_visible' => '1',
     ],
     [
@@ -104,7 +104,7 @@ return $apartments = [
         'beds' => '3',
         'bathrooms' => '1',
         'square_meters' => '60',
-        'image' => 'https://a0.muscache.com/im/pictures/89494640/e150036b_original.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_9.webp',
         'is_visible' => '1',
     ],
     [
@@ -115,7 +115,7 @@ return $apartments = [
         'beds' => '11',
         'bathrooms' => '8',
         'square_meters' => '250',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-848341774182969784/original/057e6c1c-71d7-4733-9e9e-ad8d22175966.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_10.webp',
         'is_visible' => '1',
     ],
     [
@@ -126,7 +126,7 @@ return $apartments = [
         'beds' => '10',
         'bathrooms' => '7',
         'square_meters' => '140',
-        'image' => 'https://a0.muscache.com/im/pictures/3d6a9e6e-9aec-4fd6-9388-ba46e39b8e23.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_11.webp',
         'is_visible' => '1',
     ],
     [
@@ -141,7 +141,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '3',
         'square_meters' => '80',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-53109666/original/aac56e3b-e245-4524-8d49-3e59f7a2b2ec.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_12.webp',
         'is_visible' => '1',
     ],
     [
@@ -152,7 +152,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '2',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-27451296/original/6bc4e7ab-62b4-424a-9c8a-2e56d2e0364b.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_13.web',
         'is_visible' => '1',
     ],
     [
@@ -164,7 +164,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '70',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-659600087552092324/original/45fe0ffd-7569-4bad-8ccc-620d0a625c65.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_14.webp',
         'is_visible' => '1',
     ],
     [
@@ -176,7 +176,7 @@ return $apartments = [
         'beds' => '2',
         'bathrooms' => '2',
         'square_meters' => '110',
-        'image' => 'https://a0.muscache.com/im/pictures/74102172/9815f41f_original.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_15.webp',
         'is_visible' => '1',
     ],
     [
@@ -189,7 +189,7 @@ return $apartments = [
         'beds' => '6',
         'bathrooms' => '4',
         'square_meters' => '250',
-        'image' => 'https://a0.muscache.com/im/pictures/11b79350-93cb-476b-9e73-38e9f8d3d428.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_16.webp',
         'is_visible' => '1',
     ],
     [
@@ -203,7 +203,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '80',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-18089107/original/cb94063e-f229-4119-89b0-2ffaf912b424.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_17.webp',
         'is_visible' => '1',
     ],
     [
@@ -215,7 +215,7 @@ return $apartments = [
         'beds' => '2',
         'bathrooms' => '1',
         'square_meters' => '80',
-        'image' => 'https://a0.muscache.com/im/pictures/miso/Hosting-44625932/original/6137a2aa-bb69-4aa1-9bf6-510667cf2ccd.jpeg?im_w=960',
+        'image' => 'apartments_img/apartment_18.webp',
         'is_visible' => '1',
     ],
     [
@@ -226,7 +226,7 @@ return $apartments = [
         'beds' => '2',
         'bathrooms' => '2',
         'square_meters' => '80',
-        'image' => 'https://a0.muscache.com/im/pictures/13f7fce8-8036-4eff-9bc7-3778b404ccc3.jpg?im_w=960',
+        'image' => 'apartments_img/apartment_19.webp',
         'is_visible' => '1',
     ]
 ];
