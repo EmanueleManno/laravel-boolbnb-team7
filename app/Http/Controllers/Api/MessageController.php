@@ -16,14 +16,32 @@ class MessageController extends Controller
         return response()->json(compact('messages', 'total'));
     }
 
-    //Funzione che mi restituisce i messaggi filtrati per id dell'appartamento:
-    public function filtermessages()
-    {
-        //Prendi i messaggi con id dell'appartamento uguale a 10:
-        $messages = Message::all()->where('apartment_id', 10);
+    public function store(Request $request)
 
-        //Mandami la risposta:
-        $total = count($messages);
-        return response()->json(compact('messages', 'total',));
+    {
+
+        $data = $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'content' => 'required'
+            ],
+            [
+                'name.required' => 'Il titolo è obbligatorio',
+                'email.required' => 'La mail è obbligatoria',
+                'email.email' => 'La mail non è scritta nel formato giusto',
+                'content.required' => 'Il contenuto è obbligatorio'
+            ]
+        );
+
+        // Insert message
+        $message = new Message();
+
+        $message->fill($data);
+
+        // Save apartment
+        $message->save();
+
+        return to_route('message.index')->with('alert-message', 'Messaggio creato con successo')->with('alert-type', 'success');
     }
 }
