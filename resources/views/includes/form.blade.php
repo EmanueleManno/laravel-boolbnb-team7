@@ -1,9 +1,10 @@
 @if ($apartment->exists)
     <form id="validation-form" method="POST" action="{{ route('admin.apartments.update', $apartment) }}" class="mt-5"
-        novalidate>
+        enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
-        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="mt-5" novalidate>
+        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="mt-5"
+            enctype="multipart/form-data" novalidate>
 @endif
 @csrf
 
@@ -41,20 +42,37 @@
     <div class="col-12 mb-4">
         <div class="row align-items-center">
 
-            {{-- # Url --}}
+            {{-- # Add file --}}
             <div class="col-8 col-sm-9">
-                <label for="image" class="form-label">Url dell'immagine</label>
-                <input type="url"class="form-control @error('image') is-invalid @enderror" id="image"
-                    name="image" value="{{ old('image', $apartment->image) }}" placeholder="Insersisci un url valido">
+                <label for="image" class="form-label">Immagine</label>
+
+                {{-- Button for change image --}}
+                <div class="input-group  @if (!$apartment->image) d-none @endif" id="change-image">
+                    <button class="btn btn-outline-secondary" type="button">Cambia immagine</button>
+                    <input type="text" class="form-control" placeholder="{{ $apartment->image }}" disabled>
+                </div>
+
+                {{-- Input for add image --}}
+                <input type="file"
+                    class="form-control @error('image') is-invalid @enderror @if ($apartment->image) d-none @endif"
+                    id="image" name="image">
+
                 @error('image')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
                 <span id="image-error" class="text-danger"></span>
+
+                {{-- Button for remove image --}}
+                <button class="btn btn-danger mt-3 @if (!$apartment->image) d-none @endif" id="remove-image"
+                    type="button">Togli
+                    immagine</button>
+                <input type="checkbox" class="d-none" id="delete_image" name="delete_image" value="1">
+
             </div>
 
             {{-- # Preview --}}
             <div class="col-4 col-sm-3">
-                <img src="{{ old('image', $apartment->image ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=') }}"
+                <img src="{{ $apartment->image ? $apartment->get_image() : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
                     alt="preview" class="img-fluid" id="image-preview">
             </div>
         </div>

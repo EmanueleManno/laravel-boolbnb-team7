@@ -23,7 +23,7 @@
 
                 {{-- Preview --}}
                 <td class="d-none d-lg-table-cell">
-                    <img src="{{ $apartment->image ?? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
+                    <img src="{{ $apartment->image ? $apartment->get_image() : 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=' }}"
                         alt="{{ $apartment->title }}" class="image-preview">
                 </td>
 
@@ -96,7 +96,7 @@
                                 @method('DELETE')--}}
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="d-inline-block d-md-none fa-solid fa-trash-can"></i>
-                                    <span class="d-none d-md-flex"> Elimina definitivamente</span>                                   
+                                    <span class="d-none d-md-flex"> Elimina definitivamente</span>
                                 </button>
                             </form>-->
 

@@ -13,36 +13,37 @@
             {{-- Back Button --}}
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>
                 Indietro</a>
-            
+
             @if (Auth::id() === $apartment->user_id)
-            <div class="d-flex justify-content-end align-items-center">
+                <div class="d-flex justify-content-end align-items-center">
 
-                {{-- Toggle Button --}}
-                <form method="POST" action="{{ route('admin.apartments.toggle', $apartment) }}">
-                    @csrf
-                    @method('PATCH')
-                    <button class="btn btn-sm btn-outline-{{ $apartment->is_visible ? 'secondary' : 'success' }} ms-2">
-                        <i class="fas fa-{{ $apartment->is_visible ? 'eye-slash' : 'eye' }}"></i>
-                        {{ $apartment->is_visible ? 'Cambia in Bozza' : 'Pubblica' }}
-                    </button>
-                </form>
+                    {{-- Toggle Button --}}
+                    <form method="POST" action="{{ route('admin.apartments.toggle', $apartment) }}">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-sm btn-outline-{{ $apartment->is_visible ? 'secondary' : 'success' }} ms-2">
+                            <i class="fas fa-{{ $apartment->is_visible ? 'eye-slash' : 'eye' }}"></i>
+                            {{ $apartment->is_visible ? 'Cambia in Bozza' : 'Pubblica' }}
+                        </button>
+                    </form>
 
-                
-                {{-- Edit Button --}}
-                <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
-                    <i class="fas fa-pencil"></i> Modifica
-                </a>
 
-                {{-- Delete Button --}}
-                <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" class="delete-form ms-2"
-                    data-title="{{ $apartment->title }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        <i class="fas fa-trash me-2"></i>Elimina
-                    </button>
-                </form>
-            </div>
+                    {{-- Edit Button --}}
+                    <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
+                        <i class="fas fa-pencil"></i> Modifica
+                    </a>
+
+                    {{-- Delete Button --}}
+                    <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
+                        class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash me-2"></i>Elimina
+                        </button>
+                    </form>
+                </div>
             @endif
 
         </div>
@@ -67,7 +68,9 @@
         {{-- Image --}}
         <div class="row">
             <div class="col-8 mb-3">
-                <img class="img-fluid" src="{{ $apartment->image ?? 'https://marcolanci.it/utils/placeholder.jpg' }}"
+
+                <img class="img-fluid"
+                    src="{{ $apartment->image ? asset('storage/' . $apartment->image) : 'https://marcolanci.it/utils/placeholder.jpg' }}"
                     alt="{{ $apartment->title }}">
             </div>
         </div>
@@ -121,6 +124,7 @@
 
             {{-- ----------- Right Content --------------- --}}
             <div class="col-12 col-md-5">
+
 
                 <div class="justify-content-center align-items-center p-4">
 
@@ -201,6 +205,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
