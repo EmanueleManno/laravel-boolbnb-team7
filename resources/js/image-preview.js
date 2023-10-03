@@ -55,10 +55,8 @@ const remove_image = () => {
     imagePreview.src = placeholder;
     // Remove button
     removeImage.classList.add('d-none');
-
-    // return placeholder;
+    // Delete image
     deleteImage.checked = true;
-    console.log(deleteImage.value);
 }
 
 // ______________Event listener
