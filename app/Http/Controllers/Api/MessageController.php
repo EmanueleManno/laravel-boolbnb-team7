@@ -19,8 +19,8 @@ class MessageController extends Controller
     //Funzione che mi restituisce i messaggi filtrati per id dell'appartamento:
     public function filtermessages()
     {
-        //Prendi i messaggi con id dell'appartamento uguale a 1:
-        $messages = Message::all()->where('apartment_id', 1);
+        //Prendi i messaggi con id dell'appartamento uguale a 10:
+        $messages = Message::all()->where('apartment_id', 10);
 
         //Mandami la risposta:
         $total = count($messages);
