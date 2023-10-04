@@ -38,8 +38,8 @@
                     <th scope="col">Titolo</th>
                     <th scope="col">Contenuto</th>
                     <th scope="col">Email</th>
-                    <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
-                    <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
+                    <th scope="col">Appartamento</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Data</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -59,10 +59,12 @@
 
                         {{-- Mail --}}
                         <td>{{ $message->email }}</td>
+
+                        {{-- Apartment_id --}}
+                        <td>{{ $message->apartment_id }}</td>
         
                         {{-- Dates --}}
                         <td class="d-none d-lg-table-cell">{{ $message->created_at }}</td>
-                        <td class="d-none d-lg-table-cell">{{ $message->updated_at }}</td>
                     </tr>
         
                     {{-- Empty message --}}
