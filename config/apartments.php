@@ -152,7 +152,7 @@ return $apartments = [
         'beds' => '1',
         'bathrooms' => '1',
         'square_meters' => '2',
-        'image' => 'apartments_img/apartment_13.web',
+        'image' => 'apartments_img/apartment_13.webp',
         'is_visible' => '1',
     ],
     [
