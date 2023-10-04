@@ -155,7 +155,7 @@ function validateExceptions() {
 // Get the elements
 const formFields = {
     title: document.getElementById("title"),
-    description: document.getElementById("description"),
+    // description: document.getElementById("description"),
     image: document.getElementById("image"),
     price: document.getElementById("price"),
     rooms: document.getElementById("rooms"),
@@ -181,9 +181,9 @@ const formRules = {
         required: true,
         maxLength: 255,
     },
-    description: {
-        maxLength: 255,
-    },
+    // description: {
+    //     maxLength: 255,
+    // },
     image: {
         url: true,
     },
