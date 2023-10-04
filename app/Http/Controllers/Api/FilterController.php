@@ -19,7 +19,7 @@ class FilterController extends Controller
         $radius = $filters['radius'] ?? 20000;
 
         // Check Required parameters
-        if (!isset($filters['lat']) || !isset($filters['lon'])) return response(400);
+        if (!isset($filters['lat']) || !isset($filters['lon'])) return response('Latitude and Longitude are required.', 400);
 
 
         //*** GET APARTMENTS WITH FILTERS ***//
