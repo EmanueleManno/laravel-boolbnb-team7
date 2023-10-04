@@ -21,7 +21,7 @@ class ServiceSeeder extends Seeder
             $new_service = new Service();
 
             $new_service->name = $service['name'];
-            $new_service->icon = $service['icon'];
+            $new_service->image = $service['image'];
 
             $new_service->save();
         }

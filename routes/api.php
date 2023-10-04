@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\Api\MessageController;
 use App\Models\Apartment;
 use App\Models\Category;
+use App\Models\Service;
 use App\Models\Session as ModelsSession;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,6 +43,11 @@ Route::get('/categories',  function () {
     return response()->json($categories);
 });
 
+// Services route
+Route::get('/services',  function () {
+    $services = Service::all();
+    return response()->json($services);
+});
 
 // User route
 Route::get('/user', function () {

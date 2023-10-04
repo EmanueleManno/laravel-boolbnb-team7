@@ -101,11 +101,12 @@
 
                     <h5 class="mb-2">Servizi offerti</h5>
 
-                    <div class="h5">
+                    <div class="h5 d-flex flex-wrap">
                         @forelse ($apartment->services as $service)
-                            <span class="badge text-bg-success p-2 m-1">
-                                <i class="fas fa-{{ $service->icon }}"></i>
-                                {{ $service->name }}
+                            <span class="badge text-bg-success p-2 m-1 d-flex align-items-center">
+                                <div class="service-image"><img src="{{ asset('img/service/' . $service['image']) }}"
+                                        alt="{{ $service->name }}" width="20px"></div>
+                                <span>{{ $service->name }}</span>
                             </span>
                         @empty
                             -
@@ -129,79 +130,79 @@
                 <div class="justify-content-center align-items-center p-4">
 
                     {{-- Price x Night --}}
-                   <!-- <h5 class="mb-3"> {{-- $apartment->price --}} € <span class="fw-normal fs-6">notte</span></h5>
+                    <!-- <h5 class="mb-3"> {{-- $apartment->price --}} € <span class="fw-normal fs-6">notte</span></h5>
 
-                    {{-- Booking Options --}}
-                    <div class="row rounded border mb-3">
+                                                                        {{-- Booking Options --}}
+                                                                        <div class="row rounded border mb-3">
 
-                        <div class="col-6 py-2">
-                            <label for="check-in" class="form-label fw-bold mb-0">CHECK-IN</label>
-                            <input type="date" class="form-control border-0" id="check-in" value="2023-09-30">
-                        </div>
+                                                                            <div class="col-6 py-2">
+                                                                                <label for="check-in" class="form-label fw-bold mb-0">CHECK-IN</label>
+                                                                                <input type="date" class="form-control border-0" id="check-in" value="2023-09-30">
+                                                                            </div>
 
-                        <div class="col-6 py-2">
-                            <label for="check-out" class="form-label fw-bold mb-0">CHECK-OUT</label>
-                            <input type="date" class="form-control border-0" id="check-out" value="2023-10-30">
-                        </div>
+                                                                            <div class="col-6 py-2">
+                                                                                <label for="check-out" class="form-label fw-bold mb-0">CHECK-OUT</label>
+                                                                                <input type="date" class="form-control border-0" id="check-out" value="2023-10-30">
+                                                                            </div>
 
-                        <div class="col-12 border-top py-2">
-                            <label for="guests" class="form-label fw-bold mb-0">Ospiti</label>
-                            <select id="guests" class="form-select border-0">
-                                <option value="1">1 ospite</option>
-                                <option value="1">2 ospiti</option>
-                            </select>
-                        </div>
-                    </div>
+                                                                            <div class="col-12 border-top py-2">
+                                                                                <label for="guests" class="form-label fw-bold mb-0">Ospiti</label>
+                                                                                <select id="guests" class="form-select border-0">
+                                                                                    <option value="1">1 ospite</option>
+                                                                                    <option value="1">2 ospiti</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
 
-                    {{-- Booking Button --}}
-                    <button disabled class="btn btn-primary text-center">Prenota</button>
-                    <div class="text-center my-3">Non riceverai alcun addebito in questa fase</div>
+                                                                        {{-- Booking Button --}}
+                                                                        <button disabled class="btn btn-primary text-center">Prenota</button>
+                                                                        <div class="text-center my-3">Non riceverai alcun addebito in questa fase</div>
 
-                    {{-- Booking Recap --}}
-                    <div>
+                                                                        {{-- Booking Recap --}}
+                                                                        <div>
 
-                        <div class="d-flex justify-content-between">
-                            <div>Costo x notte</div>
-                            <div>tot notti</div>
-                        </div>
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <div>Costo x notte</div>
+                                                                                <div>tot notti</div>
+                                                                            </div>
 
-                        <div class="d-flex justify-content-between border-bottom pb-3">
-                            <div>Servizi</div>
-                            <div>tot servizi</div>
-                        </div>
+                                                                            <div class="d-flex justify-content-between border-bottom pb-3">
+                                                                                <div>Servizi</div>
+                                                                                <div>tot servizi</div>
+                                                                            </div>
 
-                        <div class="d-flex justify-content-between h4 pt-3">
-                            <div>Totale</div>
-                            <div>tot</div>
-                        </div>
-                    </div>
+                                                                            <div class="d-flex justify-content-between h4 pt-3">
+                                                                                <div>Totale</div>
+                                                                                <div>tot</div>
+                                                                            </div>
+                                                                        </div>
 
-                </div>-->
+                                                                    </div>-->
 
-                
+
                     <h3 class="mb-2 text-center">Messaggi ricevuti</h3>
-                
+
                     <div>
-                    <ul>
-                        @forelse ($apartment->messages as $message)
-                        <li class="text-center">
-                            <strong>{{$message->name}}</strong>
-                            ricevuto da <i> {{$message->email}} </i> 
-                            <div class="text-gradient" style="font-size: 12px">
-                                in data
-                                {{ $message->created_at->format('d/m/y') }}
-                                alle
-                                {{ $message->created_at->format('H:i') }}
-                            </div>
-                        </li>
-                    
-                        {{-- Empty message --}}
-                        @empty
-                               <li class="text-center" colspan="8">
-                               Non ci sono messaggi
-                               </li>
-                        @endforelse
-                    </ul>
+                        <ul>
+                            @forelse ($apartment->messages as $message)
+                                <li class="text-center">
+                                    <strong>{{ $message->name }}</strong>
+                                    ricevuto da <i> {{ $message->email }} </i>
+                                    <div class="text-gradient" style="font-size: 12px">
+                                        in data
+                                        {{ $message->created_at->format('d/m/y') }}
+                                        alle
+                                        {{ $message->created_at->format('H:i') }}
+                                    </div>
+                                </li>
+
+                                {{-- Empty message --}}
+                            @empty
+                                <li class="text-center" colspan="8">
+                                    Non ci sono messaggi
+                                </li>
+                            @endforelse
+                        </ul>
                     </div>
                 </div>
             </div>
