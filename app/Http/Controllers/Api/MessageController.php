@@ -24,7 +24,8 @@ class MessageController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|email',
-                'content' => 'required'
+                'content' => 'required',
+                'apartment_id' => 'nullable|exists:apartment_id'
             ],
             [
                 'name.required' => 'Il titolo è obbligatorio',
@@ -42,6 +43,6 @@ class MessageController extends Controller
         // Save apartment
         $message->save();
 
-        return to_route('message.index')->with('alert-message', 'Messaggio creato con successo')->with('alert-type', 'success');
+        return response()->json($message);
     }
 }
