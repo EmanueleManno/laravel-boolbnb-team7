@@ -4,7 +4,7 @@ return [
     ['name' => 'Wi-Fi', 'image' => 'wifi.png'],
     ['name' => 'TV', 'image' => 'tv.png'],
     ['name' => 'Lavatrice', 'image' => 'washing-machine.png'],
-    ['name' => 'Asciugatrice', 'image' => 'heating.png'],
+    ['name' => 'Asciugatrice', 'image' => 'dryer.png'],
     ['name' => 'Ferro da stiro', 'image' => 'iron.png'],
     ['name' => 'Asciugacapelli', 'image' => 'hairdryer.png'],
     ['name' => 'Cucina', 'image' => 'kitchen.png'],
