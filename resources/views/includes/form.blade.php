@@ -1,9 +1,9 @@
 @if ($apartment->exists)
-    <form id="validation-form" method="POST" action="{{ route('admin.apartments.update', $apartment) }}" class="mt-5"
+    <form id="validation-form" method="POST" action="{{ route('admin.apartments.update', $apartment) }}"
         enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
-        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}" class="mt-5"
+        <form id="validation-form" method="POST" action="{{ route('admin.apartments.store') }}"
             enctype="multipart/form-data" novalidate>
 @endif
 @csrf
@@ -64,8 +64,7 @@
 
                 {{-- Button for remove image --}}
                 <button class="btn btn-danger mt-3 @if (!$apartment->image) d-none @endif" id="remove-image"
-                    type="button">Togli
-                    immagine</button>
+                    type="button">Rimuovi immagine</button>
                 <input type="checkbox" class="d-none" id="delete_image" name="delete_image" value="1">
 
             </div>
@@ -83,7 +82,7 @@
     <div class="col-12 mb-4">
         <label for="categories" class="form-label">Categorie</label>
         <select id="categories" class="form-select form-select-lg @error('category_id') is-invalid @enderror"
-            aria-label="Large select example" name="category_id">
+            name="category_id">
             <option value="">Nessuna categoria</option>
             @foreach ($categories as $category)
                 <option @if (old('category_id', $apartment->category_id) == $category->id) selected @endif value="{{ $category->id }}">
@@ -250,11 +249,11 @@
 
 
     {{-- # Submit --}}
-    <div class="col-12 d-flex justify-content-between align-items-center">
+    <div class="col-12 d-flex justify-content-between align-items-center mb-3">
         <div class="text-danger">
             I campi contrassegnati (*) sono obbligatori.
         </div>
-        <button type="submit" class="btn btn-success">Conferma</button>
+        <button type="submit" class="button-primary">Conferma</button>
     </div>
 
 </div>
