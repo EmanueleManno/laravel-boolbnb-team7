@@ -32,11 +32,11 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
 
     // Rotte per i messaggi
     //Lista di tutti i messaggi:
-    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     //Creazione di un messaggio:
-    Route::get('/message/create', [MessageController::class, 'create'])->name('message.create');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
     //Store di un messaggio:
-    Route::post('/message', [MessageController::class, 'store'])->name('message.store');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
     // Apartments Routes:
     //Rotta per il cestino:

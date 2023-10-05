@@ -9,14 +9,14 @@
     <header class="d-flex justify-content-between align-items-center pb-4">
 
         <h2 class="text-center">Manda un messaggio</h2>
-        <a class="btn btn-secondary" href="{{ route('admin.message.index') }}">
+        <a class="btn btn-secondary" href="{{ route('admin.messages.index') }}">
             <i class="fas fa-arrow-left"></i>
             Indietro
         </a>
     </header>
 
     <!--Form-->
-    <form id="validation-form" method="POST" action="{{ route('admin.message.store') }}" class="mt-5" novalidate>
+    <form id="validation-form" method="POST" action="{{ route('admin.messages.store') }}" class="mt-5" novalidate>
     @csrf
 
     <!--Validazione-->
