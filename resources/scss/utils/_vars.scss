@@ -8,12 +8,13 @@ $light-grey: #dddddd;
 $roboto: 'Roboto', sans-serif;
 
 // Mixin
-@mixin flex($justify-content: center, $align-items: center, $direction: row, $wrap: unset){
+@mixin flex($justify-content: center, $align-items: center, $direction: row, $wrap: unset, $gap: 0){
     display: flex;
     justify-content: $justify-content;
     align-items: $align-items;
     flex-direction: $direction;
     flex-wrap: $wrap;
+    gap: $gap;
 }
 
 @mixin font($weight: 400, $size: 14px, $family: $roboto, $color:black, $spacing:normal){
@@ -28,4 +29,20 @@ $roboto: 'Roboto', sans-serif;
     border-radius: 50%;
     width: $size;
     height: $size;
+}
+
+@mixin square($size, $radius:0){
+    border-radius: $radius;
+    width: $size;
+    height: $size;
+}
+
+@mixin max-size($max: false, $width: 100%, $height: 100%, $max-width: 100%, $max-height: 100%){
+    @if $max{
+        max-width: $max-width;
+        max-height: $max-height;
+    }@else{
+        width: $width;
+        height: $height;
+    }
 }

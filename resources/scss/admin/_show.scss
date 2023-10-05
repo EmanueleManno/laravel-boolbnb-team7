@@ -1,6 +1,90 @@
 @use '../utils/vars.scss' as *;
 
 //__________________ SHOW
+#admin-show{
+    header{
+        @include flex(space-between, center);
+        padding: 24px 0;
+        border: 0;
+    }
+
+    // Header dropdown
+    .dropdown-menu{
+        padding: 10px 16px;
+        text-wrap: nowrap;
+
+        li:hover{
+            .secondary{
+                background-color: #6c757d;
+                color: white;
+            }
+            .success{
+                background-color: #198754;
+                color: white;
+            }
+            .warning{
+                background-color: #ffc107;
+            }
+            .danger{
+                background-color: #dc3545;
+                color: white;
+            }
+        }
+    }
+
+    .admin-action{
+        @include flex(start, center, $gap:5px);
+        padding: 5px;
+        border-radius: 10px;
+        transition: all 0.2s;
+    }
+
+    hr{
+        margin: 10px 0;
+    }
+}
+
+
+
+// Apartment image
+.slider {
+    display: flex;
+}
+
+.slider div:empty {
+    background-color: $light-grey;
+    flex-grow: 1;
+    border-radius: 20px;
+}
+
+// If there is
+.image-container {
+    @include square(calc(100vw - 24px), 20px);
+    @include max-size($max: true, $max-width: 100%, $max-height: 360px);
+    overflow: hidden;
+    img {
+        @include max-size;
+        object-fit: cover;
+    }
+}
+
+// If there in not image
+.no-image {
+    border: 1px solid $light-grey;
+    border-radius: 15px;
+    padding: 15px;
+    @include flex($direction: column, $gap: 20px);
+    .icon {
+        @include flex;
+        width: 30%;
+        img {
+            width: 100%;
+            filter: invert(44%) sepia(52%) saturate(6771%) hue-rotate(329deg) brightness(101%) contrast(101%);
+        }
+    }
+}
+
+// Services
 .service-image{
     width: 25px;
     height: 30px;
@@ -10,5 +94,55 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+    }
+}
+
+.message-list {
+    @include flex(stretch, stretch, column, wrap, 20px);
+    flex-grow: 1;
+
+    li {
+        @include flex(center, start, column, 7px);
+        border: 1px solid $light-grey;
+        border-radius: 15px;
+        padding: 10px;
+
+        div {
+            overflow: hidden;
+
+            img {
+                @include max-size;
+                object-fit: contain;
+                filter: brightness(0) saturate(100%);
+            }
+        }
+    }
+}
+
+#apartments-details{
+    h4{
+        margin: 10px 0;
+    }
+}
+
+
+// Media query
+@media (min-width: 768px) {
+    .image-container {
+        @include max-size($max: true, $max-width: 696px, $max-height: 400px);
+    }
+
+    .no-image {
+        margin: 0 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .slider {
+        gap: 20px;
+    }
+
+    .no-image {
+        margin: 0;
     }
 }
