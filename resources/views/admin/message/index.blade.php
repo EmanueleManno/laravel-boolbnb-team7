@@ -18,14 +18,15 @@
             <h2>Lista Messaggi</h2>
 
             {{-- Page Actions --}}
+            <!--
             <div>
-                <a href="{{ route('admin.message.create') }}" class="btn btn-success">
+                <a href="{{--{{ route('admin.message.create') }}--}}" class="btn btn-success">
                     <span>
                        Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
                     </span>
                     <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
                 </a>
-            </div>
+            </div>-->
 
         </header>
 
