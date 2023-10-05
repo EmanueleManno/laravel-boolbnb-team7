@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Aggiungi un Boolbnb')
+
 @section('main')
     <section id="admin-create" class="container">
         {{-- Header --}}
