@@ -28,7 +28,6 @@ class MessageController extends Controller
     public function store(Request $request)
 
     {
-
         $data = $request->validate(
             [
                 'name' => 'required',
