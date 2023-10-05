@@ -1,215 +1,172 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="container my-4">
-
+    <section id="admin-show" class="container">
         {{-- Alerts --}}
-        <div class="container my-2">
-            @include('includes.alerts')
-        </div>
+        @include('includes.alerts')
 
-        {{-- Actions --}}
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            {{-- Back Button --}}
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i>
-                Indietro</a>
+        {{-- header --}}
+        <header>
+            {{-- Title --}}
+            <h2>{{ $apartment->title }}</h2>
 
-            @if (Auth::id() === $apartment->user_id)
-                <div class="d-flex justify-content-end align-items-center">
-
-                    {{-- Toggle Button --}}
-                    <form method="POST" action="{{ route('admin.apartments.toggle', $apartment) }}">
-                        @csrf
-                        @method('PATCH')
-                        <button class="btn btn-sm btn-outline-{{ $apartment->is_visible ? 'secondary' : 'success' }} ms-2">
-                            <i class="fas fa-{{ $apartment->is_visible ? 'eye-slash' : 'eye' }}"></i>
-                            {{ $apartment->is_visible ? 'Cambia in Bozza' : 'Pubblica' }}
-                        </button>
-                    </form>
-
-
-                    {{-- Edit Button --}}
-                    <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-sm btn-warning ms-2">
-                        <i class="fas fa-pencil"></i> Modifica
+            <div class="d-flex justify-content-between align-items-center gap-2">
+                {{-- Back Button --}}
+                <div class="go-back">
+                    <a href="{{ route('admin.apartments.index') }}">
+                        <i class="fa-solid fa-chevron-left"></i>
                     </a>
+                </div>
 
-                    {{-- Delete Button --}}
-                    <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
-                        class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            <i class="fas fa-trash me-2"></i>Elimina
+                {{-- Actions --}}
+                @if (Auth::id() === $apartment->user_id)
+                    <div class="dropdown">
+                        <button class="go-back dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear"></i>
                         </button>
-                    </form>
-                </div>
-            @endif
-
-        </div>
-
-        {{-- Title --}}
-        <h2 class="mt-4 mb-2">{{ $apartment->title }}</h2>
-
-        {{-- Category --}}
-        @if ($apartment->category)
-            <div class="h6 mb-4">
-                <span class="badge text-bg-danger">
-                    {{ $apartment->category->name }}
-                </span>
-
-            </div>
-        @else
-            <div class="mb-4">
-                Nessuna Categoria
-            </div>
-        @endif
-
-        {{-- Image --}}
-        <div class="row">
-            <div class="col-8 mb-3">
-
-                <img class="img-fluid"
-                    src="{{ $apartment->image ? asset('storage/' . $apartment->image) : 'https://marcolanci.it/utils/placeholder.jpg' }}"
-                    alt="{{ $apartment->title }}">
-            </div>
-        </div>
-
-        <div class="row">
-            {{-- --------------------- Left Content ---------------------- --}}
-            <div class="col-12 col-md-7">
-
-                {{-- Details --}}
-                <div class="mb-3">
-
-                    {{-- Misc --}}
-                    <div>
-                        Stanze: {{ $apartment->rooms }} - Letti: {{ $apartment->beds }} - Bagni:
-                        {{ $apartment->bathrooms }}
-                        -
-                        Metri quadri: {{ $apartment->square_meters }}
-                    </div>
-                </div>
-
-                {{-- Description --}}
-                <div class="mb-5">
-                    {{ $apartment->description }}
-                </div>
-
-                {{-- Services --}}
-                <div class="mb-5">
-
-                    <h5 class="mb-2">Servizi offerti</h5>
-
-                    <div class="h5 d-flex flex-wrap">
-                        @forelse ($apartment->services as $service)
-                            <span class="badge text-bg-success p-2 m-1 d-flex align-items-center">
-                                <div class="service-image"><img src="{{ asset('img/service/' . $service['image']) }}"
-                                        alt="{{ $service->name }}" width="20px"></div>
-                                <span>{{ $service->name }}</span>
-                            </span>
-                        @empty
-                            -
-                        @endforelse
-                    </div>
-                </div>
-
-                {{-- Map --}}
-                @if ($apartment->address)
-                    <h5 class="mb-2">Mappa</h5>
-                    <div id="map" data-latitude="{{ $apartment->latitude }}"
-                        data-longitude="{{ $apartment->longitude }}" style="height:200px"></div>
-                @endif
-
-            </div>
-
-            {{-- ----------- Right Content --------------- --}}
-            <div class="col-12 col-md-5">
-
-
-                <div class="justify-content-center align-items-center p-4">
-
-                    {{-- Price x Night --}}
-                    <!-- <h5 class="mb-3"> {{-- $apartment->price --}} € <span class="fw-normal fs-6">notte</span></h5>
-
-                                                                        {{-- Booking Options --}}
-                                                                        <div class="row rounded border mb-3">
-
-                                                                            <div class="col-6 py-2">
-                                                                                <label for="check-in" class="form-label fw-bold mb-0">CHECK-IN</label>
-                                                                                <input type="date" class="form-control border-0" id="check-in" value="2023-09-30">
-                                                                            </div>
-
-                                                                            <div class="col-6 py-2">
-                                                                                <label for="check-out" class="form-label fw-bold mb-0">CHECK-OUT</label>
-                                                                                <input type="date" class="form-control border-0" id="check-out" value="2023-10-30">
-                                                                            </div>
-
-                                                                            <div class="col-12 border-top py-2">
-                                                                                <label for="guests" class="form-label fw-bold mb-0">Ospiti</label>
-                                                                                <select id="guests" class="form-select border-0">
-                                                                                    <option value="1">1 ospite</option>
-                                                                                    <option value="1">2 ospiti</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        {{-- Booking Button --}}
-                                                                        <button disabled class="btn btn-primary text-center">Prenota</button>
-                                                                        <div class="text-center my-3">Non riceverai alcun addebito in questa fase</div>
-
-                                                                        {{-- Booking Recap --}}
-                                                                        <div>
-
-                                                                            <div class="d-flex justify-content-between">
-                                                                                <div>Costo x notte</div>
-                                                                                <div>tot notti</div>
-                                                                            </div>
-
-                                                                            <div class="d-flex justify-content-between border-bottom pb-3">
-                                                                                <div>Servizi</div>
-                                                                                <div>tot servizi</div>
-                                                                            </div>
-
-                                                                            <div class="d-flex justify-content-between h4 pt-3">
-                                                                                <div>Totale</div>
-                                                                                <div>tot</div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>-->
-
-
-                    <h3 class="mb-2 text-center">Messaggi ricevuti</h3>
-
-                    <div>
-                        <ul>
-                            @forelse ($apartment->messages as $message)
-                                <li class="text-center">
-                                    <strong>{{ $message->name }}</strong>
-                                    ricevuto da <i> {{ $message->email }} </i>
-                                    <div class="text-gradient" style="font-size: 12px">
-                                        in data
-                                        {{ $message->created_at->format('d/m/y') }}
-                                        alle
-                                        {{ $message->created_at->format('H:i') }}
-                                    </div>
-                                </li>
-
-                                {{-- Empty message --}}
-                            @empty
-                                <li class="text-center" colspan="8">
-                                    Non ci sono messaggi
-                                </li>
-                            @endforelse
+                        <ul class="dropdown-menu">
+                            <li>
+                                {{-- Toggle Button --}}
+                                <form method="POST" action="{{ route('admin.apartments.toggle', $apartment) }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button class="admin-action {{ $apartment->is_visible ? 'secondary' : 'success' }}">
+                                        <i class="fas fa-{{ $apartment->is_visible ? 'eye-slash' : 'eye' }}"></i>
+                                        {{ $apartment->is_visible ? 'Cambia in Bozza' : 'Pubblica' }}
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                {{-- Edit Button --}}
+                                <a href="{{ route('admin.apartments.edit', $apartment) }}" class="admin-action warning">
+                                    <i class="fas fa-pencil"></i> Modifica
+                                </a>
+                            </li>
+                            <hr>
+                            <li>
+                                {{-- Delete Button --}}
+                                <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
+                                    class="delete-form" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="admin-action danger">
+                                        <i class="fas fa-trash"></i>Elimina
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
-                </div>
+                @endif
             </div>
+        </header>
 
+        {{-- image --}}
+        <div class="slider">
+            <div></div>
+            @if ($apartment->image)
+                {{-- With image --}}
+                <div class="image-container">
+                    <img src="{{ $apartment->image ? asset('storage/' . $apartment->image) : 'https://marcolanci.it/utils/placeholder.jpg' }}"
+                        alt="{{ $apartment->title }}">
+                </div>
+            @else
+                {{-- Without image --}}
+                <div class="no-image">
+                    <div class="icon">
+                        <img src="{{ asset('img/camera.png') }}" alt="camera">
+                    </div>
+                    <h3>Non hai acnora inserito nessuna immagine</h3>
+                </div>
+            @endif
+            <div></div>
         </div>
 
-    </div>
+        {{-- Information --}}
+        <section id="apartments-details" class="mt-4">
+            <h3>Informazioni sul tuo Boolbnb</h3>
+            <div>
+                <h4>Categoria e prezzo</h4>
+                {{-- Category --}}
+                @if ($apartment->category)
+                    <span>
+                        {{ $apartment->category->name }} |
+                    </span>
+                @else
+                    <span>
+                        Nessuna Categoria |
+                    </span>
+                @endif
+                <span>{{ $apartment->price }}€ a notte</span>
+            </div>
+            <hr>
+            <div>
+                <h4>Stanze e misure</h4>
+                <ul>
+                    <li>{{ $apartment->rooms . ' ' . ($apartment->rooms == 1 ? 'camera' : 'camere') }}</li>
+                    <li>{{ $apartment->beds . ' ' . ($apartment->beds == 1 ? 'letto' : 'letti') }}</li>
+                    <li>{{ $apartment->bathrooms . ' ' . ($apartment->bathrooms == 1 ? 'bagno' : 'bagni') }}</li>
+                    <li>{{ $apartment->square_meters }} Metri quadrati</li>
+                </ul>
+            </div>
+            <hr>
+            {{-- Description --}}
+            <div>
+                <h4>Descrizione</h4>
+                <p>{{ $apartment->description }}</p>
+            </div>
+            <hr>
+            {{-- Services --}}
+            <div>
+                <h4>Servizi offerti</h4>
+                <div class="d-flex flex-wrap">
+                    @forelse ($apartment->services as $service)
+                        <span class="badge text-bg-success p-2 m-1 d-flex align-items-center">
+                            <div class="service-image"><img src="{{ asset('img/service/' . $service['image']) }}"
+                                    alt="{{ $service->name }}" width="20px"></div>
+                            <span>{{ $service->name }}</span>
+                        </span>
+                    @empty
+                        -
+                    @endforelse
+                </div>
+            </div>
+            <hr>
+            {{-- Map --}}
+            @if ($apartment->address)
+                <h4>Mappa</h4>
+                <div id="map" data-latitude="{{ $apartment->latitude }}"
+                    data-longitude="{{ $apartment->longitude }}" style="height:400px"></div>
+                <hr>
+            @endif
+
+            <div>
+                <h4>Messaggi ricevuti</h4>
+                <ul class="message-list mb-3">
+                    @forelse ($apartment->messages as $message)
+                        <li>
+                            <div><strong>{{ $message->name }}</strong></div>
+                            <div>Ricevuto da: <i> {{ $message->email }} </i></div>
+                            <div class="text-gradient" style="font-size: 12px">
+                                in data
+                                {{ $message->created_at->format('d/m/y') }}
+                                alle
+                                {{ $message->created_at->format('H:i') }}
+                            </div>
+                        </li>
+                    @empty
+                        {{-- Empty message --}}
+                        <li class="text-center" colspan="8">
+                            Non ci sono messaggi
+                        </li>
+                    @endforelse
+                </ul>
+            </div>
+            </div>
+
+        </section>
+
+    </section>
 
     {{-- Delete Modal --}}
     @include('includes.delete-modal')

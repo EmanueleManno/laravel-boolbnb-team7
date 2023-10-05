@@ -39,13 +39,6 @@ header {
     height: 24px;
 }
 
-.icon {
-    @include flex;
-    @include circle(32px);
-    color: white;
-    background-color: $brand-color;
-}
-
 .user {
     @include circle(40px);
     @include flex;
