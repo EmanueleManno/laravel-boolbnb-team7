@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    public function index()
 
+    public function index()
     {
-        $messages = Message::all();
-        return view('message.index', compact('messages'));
+        $messages = Message::whereRelation('apartment', 'user_id', Auth::id())->get();
+
+        return view('admin.message.index', compact('messages'));
     }
 
 
@@ -21,7 +22,7 @@ class MessageController extends Controller
     {
         $message = new Message();
 
-        return view('message.create', compact('message'));
+        return view('admin.message.create', compact('message'));
     }
 
     public function store(Request $request)
@@ -47,9 +48,9 @@ class MessageController extends Controller
 
         $message->fill($data);
 
-        // Save apartment
+        // Save message
         $message->save();
 
-        return to_route('message.index')->with('alert-message', 'Messaggio creato con successo')->with('alert-type', 'success');
+        return to_route('admin.message.index')->with('alert-message', 'Messaggio creato con successo')->with('alert-type', 'success');
     }
 }
