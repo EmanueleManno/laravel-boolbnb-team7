@@ -19,7 +19,7 @@
 
             {{-- Page Actions --}}
             <div>
-                <a href="{{ route('message.create') }}" class="btn btn-success">
+                <a href="{{ route('admin.message.create') }}" class="btn btn-success">
                     <span>
                        Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
                     </span>

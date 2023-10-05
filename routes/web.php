@@ -24,19 +24,19 @@ use Illuminate\Support\Facades\Route;
 // Guest Home (Redirect su Vue)
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
-// Rotte per i messaggi
-//Lista di tutti i messaggi:
-Route::get('message', [MessageController::class, 'index'])->name('message.index');
-//Creazione di un messaggio:
-Route::get('message/create', [MessageController::class, 'create'])->name('message.create');
-//Store di un messaggio:
-Route::post('message', [MessageController::class, 'store'])->name('message.store');
-
 // Admin Routes
 Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
 
     // Home
     Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+
+    // Rotte per i messaggi
+    //Lista di tutti i messaggi:
+    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    //Creazione di un messaggio:
+    Route::get('/message/create', [MessageController::class, 'create'])->name('message.create');
+    //Store di un messaggio:
+    Route::post('/message', [MessageController::class, 'store'])->name('message.store');
 
     // Apartments Routes:
     //Rotta per il cestino:
