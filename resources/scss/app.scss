@@ -17,6 +17,8 @@
 @use 'admin/home.scss';
 @use 'admin/error-page';
 @use 'admin/show';
+@use 'admin/create';
+@use 'admin/edit';
 
 
 
@@ -81,6 +83,10 @@ button {
 
     &:hover {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+    }
+
+    a{
+        padding: 10px 14px;
     }
 }
 

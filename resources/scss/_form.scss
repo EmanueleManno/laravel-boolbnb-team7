@@ -1,8 +1,7 @@
-/* -----------------------------------------
-* FORM
--------------------------------------------*/
+@use './utils/vars' as *;
 
-// #image-preview {
-//     min-width: 30px;
-//     max-width: 100px;
-// }
+//__________________ FORM
+
+.form-select{
+    @include font
+}
