@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Promotions;
+use App\Models\Promotion;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +18,7 @@ class PromotionSeeder extends Seeder
 
         foreach ($promotions as $promotion) {
 
-            $new_promotion = new Promotions();
+            $new_promotion = new Promotion();
 
             $new_promotion->name = $promotion['name'];
             $new_promotion->price = $promotion['price'];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\Category;
 use App\Models\Apartment;
+use App\Models\Promotion;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -310,21 +311,36 @@ class ApartmentController extends Controller
         
         
         $gateway = new \Braintree\Gateway(config('braintree'));
-    
         
         if($request->input('payment_method_nonce') != null){
 
+            $promotion_id = $request->input('promotion');
+            $promotion = Promotion::find($promotion_id);
+
             $nonceFromTheClient = $request->input('payment_method_nonce');
-        
             $result = $gateway->transaction()->sale([
-                'amount' => '10.00',
+                'amount' => $promotion->price,
                 'paymentMethodNonce' => $nonceFromTheClient,
                 'options' => [
                     'submitForSettlement' => True
                 ]
             ]);
+
+            if ($result->success) {
+                
+                $data = $request->all();
+                
+                $start_date = now()->format('Y-m-d H:i:s');
+                $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours"));
+
+                $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
+
+                return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
+
+            } else {
+                return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
+            }
             
-            return to_route('admin.apartments.index');
         }
 
         $clientToken = $gateway->clientToken()->generate();
