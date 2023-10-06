@@ -22,7 +22,6 @@ class ApartmentController extends Controller
         // Get only user apartments
         $apartments = Apartment::where('user_id', Auth::id())->orderBy('updated_at', 'desc')->paginate(5);
 
-
         return view('admin.apartments.index', compact('apartments'));
     }
 
@@ -307,12 +306,19 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
     }
 
-    public function promote(Request $request, Apartment $apartment) {
-        
-        
+
+    /**
+     * 
+     */
+    public function promote(Request $request, Apartment $apartment)
+    {
+
+
+        $promotions = Promotion::all();
+
         $gateway = new \Braintree\Gateway(config('braintree'));
-        
-        if($request->input('payment_method_nonce') != null){
+
+        if ($request->input('payment_method_nonce') != null) {
 
             $promotion_id = $request->input('promotion');
             $promotion = Promotion::find($promotion_id);
@@ -327,24 +333,22 @@ class ApartmentController extends Controller
             ]);
 
             if ($result->success) {
-                
+
                 $data = $request->all();
-                
+
                 $start_date = now()->format('Y-m-d H:i:s');
                 $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours"));
 
+                $apartment->promotions()->detach();
                 $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
-
             } else {
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
             }
-            
         }
 
         $clientToken = $gateway->clientToken()->generate();
-        return view('admin.apartments.promote', compact('clientToken', 'apartment'));
+        return view('admin.apartments.promote', compact('clientToken', 'apartment', 'promotions'));
     }
-
 }

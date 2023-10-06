@@ -20,6 +20,7 @@
 @use 'admin/create';
 @use 'admin/edit';
 @use 'admin/trash';
+@use 'admin/promote';
 
 
 
@@ -86,7 +87,7 @@ button {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
     }
 
-    a{
+    a {
         padding: 10px 14px;
     }
 }

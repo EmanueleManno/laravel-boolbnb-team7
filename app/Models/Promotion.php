@@ -16,6 +16,6 @@ class Promotion extends Model
      */
     public function apartments()
     {
-        return $this->belongsToMany(Apartment::class);
+        return $this->belongsToMany(Apartment::class)->withPivot('end_date');
     }
 }
