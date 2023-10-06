@@ -19,7 +19,6 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-
         //Recupero i dati:
         $data = $request->all();
 
