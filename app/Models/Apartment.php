@@ -30,6 +30,14 @@ class Apartment extends Model
     }
 
     /**
+     * Services relation
+     */
+    public function promotions()
+    {
+        return $this->belongsToMany(Service::class);
+    }
+
+    /**
      * User relation
      */
     public function user()
