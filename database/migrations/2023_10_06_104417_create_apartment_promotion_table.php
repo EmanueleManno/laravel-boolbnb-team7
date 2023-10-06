@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('apartment_promotion', function (Blueprint $table) {
             $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
             $table->foreignId('promotion_id')->constrained()->onDelete('cascade');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
         });
     }
 
