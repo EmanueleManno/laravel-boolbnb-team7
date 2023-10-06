@@ -305,4 +305,30 @@ class ApartmentController extends Controller
 
         return to_route('admin.apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
     }
+
+    public function promote(Request $request, Apartment $apartment) {
+        
+        
+        $gateway = new \Braintree\Gateway(config('braintree'));
+    
+        
+        if($request->input('payment_method_nonce') != null){
+
+            $nonceFromTheClient = $request->input('payment_method_nonce');
+        
+            $result = $gateway->transaction()->sale([
+                'amount' => '10.00',
+                'paymentMethodNonce' => $nonceFromTheClient,
+                'options' => [
+                    'submitForSettlement' => True
+                ]
+            ]);
+            
+            return to_route('admin.apartments.index');
+        }
+
+        $clientToken = $gateway->clientToken()->generate();
+        return view('admin.apartments.promote', compact('clientToken', 'apartment'));
+    }
+
 }

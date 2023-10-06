@@ -49,8 +49,15 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
     //Route::delete('apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop');
     //Rotta per il toggle:
     Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle');
+    //Rotta per il payment:
+    Route::get('/apartments/{apartment}/promote', [ApartmentController::class, 'promote'])->name('apartments.promote');
+    Route::post('/apartments/{apartment}/promote', [ApartmentController::class, 'promote'])->name('apartments.payment');
+
     Route::resource('apartments', ApartmentController::class);
 });
+
+
+
 
 
 // Auths
