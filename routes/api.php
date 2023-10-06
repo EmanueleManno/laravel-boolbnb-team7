@@ -30,7 +30,6 @@ use function PHPSTORM_META\map;
 Route::get('apartments/filter', [FilterController::class, 'index']);
 
 // Message routes
-Route::get('/messages', [MessageController::class, 'index']);
 Route::post('/messages', [MessageController::class, 'store']);
 
 // Apartments routes
