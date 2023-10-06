@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Apartment extends Model
 {
@@ -27,6 +28,14 @@ class Apartment extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    /**
+     * Promotions relation
+     */
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class)->withPivot('end_date');
     }
 
     /**

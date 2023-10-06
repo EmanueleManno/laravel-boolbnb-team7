@@ -8,6 +8,7 @@
             <th scope="col">Titolo</th>
             <th scope="col">Stato</th>
             <th scope="col" class="d-none d-md-table-cell">Categoria</th>
+            <th scope="col">Promozione</th>
             <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
             <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
             <th scope="col"></th>
@@ -42,6 +43,15 @@
                     @endif
                 </td>
 
+                {{-- Promotion End Date --}}
+                <td>
+                    @forelse ($apartment->promotions as $promotion)
+                        {{ $promotion->pivot?->end_date }}
+                    @empty
+                        -
+                    @endforelse
+                </td>
+
                 {{-- Dates --}}
                 <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
                 <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
@@ -74,6 +84,12 @@
                                 </button>
                             </form>
 
+                            {{-- Promote --}}
+                            <a href="{{ route('admin.apartments.promote', $apartment) }}"
+                                class="btn btn-sm btn-primary ms-2">
+                                <i class="fas fa-eye"></i><span class="d-none d-md-flex">Promote</span>
+                            </a>
+
                             {{-- Trash Actions --}}
                         @else
                             {{-- Restore --}}
@@ -89,17 +105,16 @@
 
                             <!--Commentato l'elimina definitivamente-->
                             {{-- Drop --}}
-                                <!--<form action="{{--{{ route('admin.apartments.drop', $apartment) }}"--}} method="POST"
-                                class="delete-form ms-2" data-title="{{--{{ $apartment->title }}"--}} data-bs-toggle="modal"
+                            <!--<form action="{{-- {{ route('admin.apartments.drop', $apartment) }}" --}} method="POST"
+                                class="delete-form ms-2" data-title="{{-- {{ $apartment->title }}" --}} data-bs-toggle="modal"
                                 data-bs-target="#deleteModal">
-                                {{--@csrf
-                                @method('DELETE')--}}
+                                {{-- @csrf
+                                @method('DELETE') --}}
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="d-inline-block d-md-none fa-solid fa-trash-can"></i>
                                     <span class="d-none d-md-flex"> Elimina definitivamente</span>
                                 </button>
                             </form>-->
-
                         @endif
 
 
@@ -110,7 +125,7 @@
             {{-- Empty message --}}
         @empty
             <tr>
-                <td class="text-center" colspan="8">
+                <td class="text-center" colspan="9">
                     <h3>Non ci sono appartamenti</h3>
                 </td>
             </tr>
