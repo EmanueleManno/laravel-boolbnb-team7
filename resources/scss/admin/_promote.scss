@@ -1,0 +1,13 @@
+/* -----------------------------------------
+* PROMOTE
+-------------------------------------------*/
+
+#payment-form {
+    label {
+        cursor: pointer;
+
+        &:has(:checked) {
+            border: 1px solid red;
+        }
+    }
+}
