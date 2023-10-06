@@ -7,7 +7,7 @@ return [
     ],
     [
         "name" => "Interessamento al suo locale!",
-        "content" => "E' possibile prenotare già da domani? Altrimenti, da quanto? è libero",
+        "content" => "E' possibile prenotare già da domani? Altrimenti, da quando è libero?",
         "email" => "interessato@gmail.com",
     ],
     [
