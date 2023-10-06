@@ -49,11 +49,16 @@
                 {{-- Actions --}}
                 <td>
                     <div class="d-flex justify-content-center">
-
+        
                         @if (!$apartment->deleted_at)
                             {{-- Show --}}
                             <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
+                            </a>
+
+                            {{-- Promote --}}
+                            <a href="{{ route('admin.apartments.promote', $apartment) }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i><span class="d-none d-md-flex">Promote</span>
                             </a>
 
                             {{-- Edit --}}
