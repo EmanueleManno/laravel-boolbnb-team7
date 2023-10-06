@@ -31,11 +31,11 @@ class Apartment extends Model
     }
 
     /**
-     * Services relation
+     * Promotions relation
      */
     public function promotions()
     {
-        return $this->belongsToMany(Promotion::class);
+        return $this->belongsToMany(Promotion::class)->withPivot('end_date');
     }
 
     /**
