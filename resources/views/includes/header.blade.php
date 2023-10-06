@@ -58,14 +58,14 @@ $firstLetter = strtoupper(substr($name, 0, 1));
                         @else
                             <li><a class="dropdown-item" href="{{ route('admin.apartments.index') }}">I miei Boolbnb</a>
                             </li>
-                            <li><a class="dropdown-item " href="{{ route('admin.home') }}">Il mio Profilo</a></li>
-                            <li><a class="dropdown-item disabled" href="#">Messaggi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.home') }}">Il mio Profilo</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.messages.index') }}">Messaggi</a></li>
                             <li><a class="dropdown-item disabled" href="#">Notifiche</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="{{ route('admin.apartments.create') }}">Apri un Boolbnb</a>
                             </li>
                             <li><a class="dropdown-item" href="{{ url('profile') }}">Account</a></li>
-                        @endguest
+                        @endguest 
                     </ul>
                 </div>
             </div>
