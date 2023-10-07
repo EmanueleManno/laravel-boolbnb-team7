@@ -21,6 +21,7 @@
 @use 'admin/edit';
 @use 'admin/trash';
 @use 'admin/promote';
+@use 'admin/apartments-list';
 
 
 
@@ -74,7 +75,7 @@ button {
 }
 
 // Button go back
-.go-back {
+.circle-button {
     @include circle(40px);
     @include flex;
     flex: 0 0 40px;
