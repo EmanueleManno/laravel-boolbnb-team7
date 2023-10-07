@@ -345,7 +345,6 @@ class ApartmentController extends Controller
                 $start_date = now()->format('Y-m-d H:i:s');
                 $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours"));
 
-                $apartment->promotions()->detach();
                 $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
