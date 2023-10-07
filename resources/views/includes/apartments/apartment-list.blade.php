@@ -45,11 +45,11 @@
 
                 {{-- Promotion End Date --}}
                 <td>
-                    @forelse ($apartment->promotions as $promotion)
-                        {{ $promotion->pivot?->end_date }}
-                    @empty
+                    @if ($apartment->promotions_max_apartment_promotionend_date)
+                        {{ $apartment->promotions_max_apartment_promotionend_date }}
+                    @else
                         -
-                    @endforelse
+                    @endif
                 </td>
 
                 {{-- Dates --}}

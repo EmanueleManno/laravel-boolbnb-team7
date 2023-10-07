@@ -20,7 +20,13 @@ class ApartmentController extends Controller
     public function index()
     {
         // Get only user apartments
-        $apartments = Apartment::where('user_id', Auth::id())->orderBy('updated_at', 'desc')->paginate(5);
+        $apartments = Apartment::where('user_id', Auth::id())
+            ->withMax(['promotions' => function ($query) {
+                $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+            }], 'apartment_promotion.end_date')
+            ->orderBy('promotions_max_apartment_promotionend_date', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -339,7 +345,6 @@ class ApartmentController extends Controller
                 $start_date = now()->format('Y-m-d H:i:s');
                 $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours"));
 
-                $apartment->promotions()->detach();
                 $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
