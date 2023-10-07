@@ -20,7 +20,13 @@ class ApartmentController extends Controller
     public function index()
     {
         // Get only user apartments
-        $apartments = Apartment::where('user_id', Auth::id())->orderBy('updated_at', 'desc')->paginate(5);
+        $apartments = Apartment::where('user_id', Auth::id())
+            ->withMax(['promotions' => function ($query) {
+                $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+            }], 'apartment_promotion.end_date')
+            ->orderBy('promotions_max_apartment_promotionend_date', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
 
         return view('admin.apartments.index', compact('apartments'));
     }
