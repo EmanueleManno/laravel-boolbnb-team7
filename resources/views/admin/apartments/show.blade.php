@@ -14,7 +14,7 @@
 
             <div class="d-flex justify-content-between align-items-center gap-2">
                 {{-- Back Button --}}
-                <div class="go-back">
+                <div class="circle-button">
                     <a href="{{ route('admin.apartments.index') }}">
                         <i class="fa-solid fa-chevron-left"></i>
                     </a>
@@ -23,7 +23,8 @@
                 {{-- Actions --}}
                 @if (Auth::id() === $apartment->user_id)
                     <div class="dropdown">
-                        <button class="go-back dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="circle-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             <i class="fa-solid fa-gear"></i>
                         </button>
                         <ul class="dropdown-menu">

@@ -17,7 +17,7 @@
 
             <div>
                 {{-- Back Button --}}
-                <div class="go-back">
+                <div class="circle-button">
                     <a href="{{ route('admin.apartments.index') }}">
                         <i class="fa-solid fa-chevron-left"></i>
                     </a>
@@ -25,14 +25,14 @@
                 <!-- Svuota cestino commentato -->
                 {{-- Drop All --}}
                 <!--<form class="delete-form ms-2 delete-all d-inline-block" method="POST"
-                                                                                    action="{{-- {{ route('admin.apartments.dropAll') }} --}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                                                                    {{-- @csrf
+                                                                                        action="{{-- {{ route('admin.apartments.dropAll') }} --}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                                                        {{-- @csrf
                     @method('DELETE') --}}
-                                                                                    <button class="btn btn-danger">
-                                                                                        <span class="d-none d-md-flex">Svuota cestino</span>
-                                                                                        <i class="d-inline-block d-md-none fa-solid fa-broom"></i>
-                                                                                    </button>
-                                                                                </form>-->
+                                                                                        <button class="btn btn-danger">
+                                                                                            <span class="d-none d-md-flex">Svuota cestino</span>
+                                                                                            <i class="d-inline-block d-md-none fa-solid fa-broom"></i>
+                                                                                        </button>
+                                                                                    </form>-->
 
             </div>
         </header>

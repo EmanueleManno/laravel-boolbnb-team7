@@ -14,7 +14,7 @@
                 </div>
             </div>
             {{-- Back Button --}}
-            <div class="go-back">
+            <div class="circle-button">
                 <a href="{{ route('admin.apartments.index') }}">
                     <i class="fa-solid fa-chevron-left"></i>
                 </a>

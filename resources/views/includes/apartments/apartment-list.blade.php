@@ -61,33 +61,46 @@
                     <div class="d-flex justify-content-center">
 
                         @if (!$apartment->deleted_at)
-                            {{-- Show --}}
-                            <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-sm btn-primary">
-                                <i class="fas fa-eye"></i><span class="d-none d-md-flex">Dettaglio</span>
-                            </a>
-
-                            {{-- Edit --}}
-                            <a href="{{ route('admin.apartments.edit', $apartment) }}"
-                                class="btn btn-sm btn-warning ms-2">
-                                <i class="fas fa-pencil"></i><span class="d-none d-md-flex">Modifica</span>
-                            </a>
-
-                            {{-- Soft Delete --}}
-                            <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
-                                class="delete-form ms-2" data-title="{{ $apartment->title }}" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                    <span class="d-none d-md-flex">Elimina</span>
+                            <div class="dropdown apartments-action-list">
+                                <button class="circle-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-gear"></i>
                                 </button>
-                            </form>
-
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        {{-- Show --}}
+                                        <a href="{{ route('admin.apartments.show', $apartment) }}"
+                                            class="admin-action info">
+                                            <i class="fas fa-eye"></i>Dettaglio
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {{-- Edit --}}
+                                        <a href="{{ route('admin.apartments.edit', $apartment) }}"
+                                            class="admin-action warning">
+                                            <i class="fas fa-pencil"></i>Modifica
+                                        </a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        {{-- Soft Delete --}}
+                                        <form action="{{ route('admin.apartments.destroy', $apartment) }}"
+                                            method="POST" class="delete-form" data-title="{{ $apartment->title }}"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="admin-action danger">
+                                                <i class="fas fa-trash"></i>
+                                                Elimina
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                             {{-- Promote --}}
-                            <a href="{{ route('admin.apartments.promote', $apartment) }}"
-                                class="btn btn-sm btn-primary ms-2">
-                                <i class="fas fa-eye"></i><span class="d-none d-md-flex">Promote</span>
+                            <a href="{{ route('admin.apartments.promote', $apartment) }}" class="circle-button promote"
+                                title="Effettua l'Upgrade">
+                                <i class="fa-solid fa-arrow-up"></i>
                             </a>
 
                             {{-- Trash Actions --}}
