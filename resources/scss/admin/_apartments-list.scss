@@ -1,6 +1,21 @@
 @use '../utils/vars.scss' as *;
 
-//__________________ CREATE
+//__________________ APARTMENT LIST
+#admin-index{
+    padding-bottom: 30px;
+    
+    header{
+        @include flex(space-between, center);
+        padding: 24px 0;
+        border: 0;
+    }
+
+    .button-primary{
+        @include flex($gap:5px);
+        padding: 7px 10px;
+
+    }
+}
 
 .apartments-action-list{
     .dropdown-menu{
