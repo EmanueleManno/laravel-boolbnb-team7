@@ -1,4 +1,4 @@
-<table class="table table-white table-hover align-middle mt-5">
+<table class="table table-white table-hover align-middle mt-2">
 
     {{-- Table Headers --}}
     <thead>
@@ -8,7 +8,7 @@
             <th scope="col">Titolo</th>
             <th scope="col">Stato</th>
             <th scope="col" class="d-none d-md-table-cell">Categoria</th>
-            <th scope="col">Promozione</th>
+            <th scope="col">Fine promozione</th>
             <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
             <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
             <th scope="col"></th>
@@ -18,7 +18,7 @@
     {{-- Table Body --}}
     <tbody>
         @forelse ($apartments as $apartment)
-            <tr>
+            <tr class=" @forelse ($apartment->promotions as $promotion) {{ $promotion->name }}@empty '' @endforelse">
                 {{-- ID --}}
                 <th scope="row">{{ $apartment->id }}</th>
 
@@ -44,7 +44,7 @@
                 </td>
 
                 {{-- Promotion End Date --}}
-                <td>
+                <td class="promotion">
                     @forelse ($apartment->promotions as $promotion)
                         {{ $promotion->pivot?->end_date }}
                     @empty
