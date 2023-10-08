@@ -316,8 +316,14 @@ class ApartmentController extends Controller
     /**
      * Activate a Promotion to an Apartment
      */
-    public function promote(Request $request, Apartment $apartment)
+    public function promote(Request $request, String $id)
     {
+
+        // Get apartment with end date data
+        $apartment = Apartment::withMax(['promotions' => function ($query) {
+            $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+        }], 'apartment_promotion.end_date')->find($id);
+
 
         // Get all request inputs
         $data = $request->all();
@@ -341,13 +347,12 @@ class ApartmentController extends Controller
                 ]
             ]);
 
+
             // Payment success
             if ($result->success) {
 
-                $data = $request->all();
-
-                $start_date = now()->format('Y-m-d H:i:s');
-                $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours"));
+                $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s');
+                $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date)));
 
                 $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
