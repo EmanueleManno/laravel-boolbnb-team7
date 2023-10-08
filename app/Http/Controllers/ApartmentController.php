@@ -314,30 +314,34 @@ class ApartmentController extends Controller
 
 
     /**
-     * 
+     * Activate a Promotion to an Apartment
      */
     public function promote(Request $request, Apartment $apartment)
     {
 
+        // Get all request inputs
+        $data = $request->all();
 
-        $promotions = Promotion::all();
-
+        // Create Braintree Gateway
         $gateway = new \Braintree\Gateway(config('braintree'));
 
-        if ($request->input('payment_method_nonce') != null) {
 
-            $promotion_id = $request->input('promotion');
-            $promotion = Promotion::find($promotion_id);
+        // Payment
+        if ($data && $data['payment_method_nonce'] != null) {
 
-            $nonceFromTheClient = $request->input('payment_method_nonce');
+            // Get Promotion Data
+            $promotion = Promotion::find($data['promotion']);
+
+            // Make payment
             $result = $gateway->transaction()->sale([
                 'amount' => $promotion->price,
-                'paymentMethodNonce' => $nonceFromTheClient,
+                'paymentMethodNonce' => $data['payment_method_nonce'],
                 'options' => [
                     'submitForSettlement' => True
                 ]
             ]);
 
+            // Payment success
             if ($result->success) {
 
                 $data = $request->all();
@@ -349,11 +353,16 @@ class ApartmentController extends Controller
 
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
             } else {
+
+                // Payment failed
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
             }
         }
 
+        // Promotions Form data
         $clientToken = $gateway->clientToken()->generate();
+        $promotions = Promotion::all();
+
         return view('admin.apartments.promote', compact('clientToken', 'apartment', 'promotions'));
     }
 }
