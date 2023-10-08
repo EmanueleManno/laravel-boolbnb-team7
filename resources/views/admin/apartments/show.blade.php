@@ -145,25 +145,40 @@
 
             <div>
                 <h4>Messaggi ricevuti</h4>
-                <ul class="message-list mb-3">
+                <div class="message-list accordion accordion-flush" id="accordionFlushExample">
                     @forelse ($apartment->messages as $message)
-                        <li>
-                            <div><strong>{{ $message->name }}</strong></div>
-                            <div>Ricevuto da: <i> {{ $message->email }} </i></div>
-                            <div class="text-gradient" style="font-size: 12px">
-                                in data
-                                {{ $message->created_at->format('d/m/y') }}
-                                alle
-                                {{ $message->created_at->format('H:i') }}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse{{ $message->id }}" aria-expanded="false"
+                                    aria-controls="flush-collapse{{ $message->id }}">
+                                    Messaggio ricevuto da {{ $message->name }}
+                                </button>
+                            </h2>
+                            <div id="flush-collapse{{ $message->id }}" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <p>{{ $message->content }}</p>
+                                    <hr>
+                                    <div><i class="fa-solid fa-envelope"></i> <i> {{ $message->email }} </i></div>
+                                    <div class="text-gradient" style="font-size: 12px">
+                                        Il giorno
+                                        {{ $message->created_at->format('d/m/y') }}
+                                        alle
+                                        {{ $message->created_at->format('H:i') }}
+                                    </div>
+                                </div>
                             </div>
-                        </li>
+                        </div>
                     @empty
                         {{-- Empty message --}}
-                        <li class="text-center" colspan="8">
-                            Non ci sono messaggi
-                        </li>
+                        <div class="text-center" colspan="8">
+                            Non hai ricevuto nessun messaggio
+                        </div>
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
                     @endforelse
-                </ul>
+                </div>
+            </div>
             </div>
             </div>
 
