@@ -324,12 +324,10 @@ class ApartmentController extends Controller
             $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
         }], 'apartment_promotion.end_date')->find($id);
 
-
         // Check if auyhorized
         if (Auth::id() !== $apartment->user_id) {
             return to_route('admin.apartments.index', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
         }
-
 
         // Get all request inputs
         $data = $request->all();
@@ -344,8 +342,8 @@ class ApartmentController extends Controller
             // Get Promotion Data
             $promotion = Promotion::find($data['promotion']);
 
-            // Make payment
-            $result = $gateway->transaction()->sale([
+
+            $payment = $gateway->transaction()->sale([
                 'amount' => $promotion->price,
                 'paymentMethodNonce' => $data['payment_method_nonce'],
                 'options' => [
@@ -353,21 +351,19 @@ class ApartmentController extends Controller
                 ]
             ]);
 
-
             // Payment success
-            if ($result->success) {
+            if ($payment->success) {
 
                 $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s');
                 $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date)));
 
-                $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
+                $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
                 return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
-            } else {
-
-                // Payment failed
-                return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
             }
+
+            // Payment failed
+            return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
         }
 
         // Promotions Form data
