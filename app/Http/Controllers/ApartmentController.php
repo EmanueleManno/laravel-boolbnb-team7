@@ -325,6 +325,12 @@ class ApartmentController extends Controller
         }], 'apartment_promotion.end_date')->find($id);
 
 
+        // Check if auyhorized
+        if (Auth::id() !== $apartment->user_id) {
+            return to_route('admin.apartments.index', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
+        }
+
+
         // Get all request inputs
         $data = $request->all();
 
