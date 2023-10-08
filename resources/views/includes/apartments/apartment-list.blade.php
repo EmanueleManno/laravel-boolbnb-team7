@@ -46,15 +46,15 @@
                 {{-- Promotion End Date --}}
                 <td>
                     @if ($apartment->promotions_max_apartment_promotionend_date)
-                        {{ $apartment->promotions_max_apartment_promotionend_date }}
+                        {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
                     @else
                         -
                     @endif
                 </td>
 
                 {{-- Dates --}}
-                <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
-                <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
+                <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
 
                 {{-- Actions --}}
                 <td>

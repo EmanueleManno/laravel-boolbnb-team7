@@ -19,14 +19,14 @@
 
             {{-- Page Actions --}}
             <!--
-            <div>
-                <a href="{{--{{ route('admin.messages.create') }}--}}" class="btn btn-success">
-                    <span>
-                       Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
-                    </span>
-                    <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
-                </a>
-            </div>-->
+                <div>
+                    <a href="{{-- {{ route('admin.messages.create') }} --}}" class="btn btn-success">
+                        <span>
+                           Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
+                        </span>
+                        <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
+                    </a>
+                </div>-->
 
         </header>
 
@@ -44,14 +44,14 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-        
+
             {{-- Table Body --}}
             <tbody>
                 @forelse ($messages as $message)
                     <tr>
                         {{-- ID --}}
                         <th scope="row">{{ $message->id }}</th>
-        
+
                         {{-- Title --}}
                         <td>{{ $message->name }}</td>
 
@@ -63,11 +63,11 @@
 
                         {{-- Apartment_id --}}
                         <td>{{ $message->apartment_id }}</td>
-        
+
                         {{-- Dates --}}
-                        <td class="d-none d-lg-table-cell">{{ $message->created_at }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $message->getDate('created_at') }}</td>
                     </tr>
-        
+
                     {{-- Empty message --}}
                 @empty
                     <tr>
