@@ -15,7 +15,7 @@
         <p class="fs-5 mb-4">{{ $apartment->title }}</p>
 
         {{-- Payments Form --}}
-        <form id="payment-form" action="{{ route('admin.apartments.payment', $apartment) }}" method="post"
+        <form id="payment-form" action="{{ route('admin.apartments.sponsorize', $apartment) }}" method="post"
             data-token="{{ $clientToken }}">
             @csrf
             {{-- Radios --}}

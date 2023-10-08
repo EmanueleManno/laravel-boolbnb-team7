@@ -314,9 +314,32 @@ class ApartmentController extends Controller
 
 
     /**
-     * Activate a Promotion to an Apartment
+     * Show the form to Promote an Apartment
      */
-    public function promote(Request $request, String $id)
+    public function promote(Apartment $apartment)
+    {
+
+        // Check if authorized
+        if (Auth::id() !== $apartment->user_id) {
+            return to_route('admin.apartments.index', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
+        }
+
+
+        // Setup Braintree
+        $gateway = new \Braintree\Gateway(config('braintree'));
+        $clientToken = $gateway->clientToken()->generate();
+
+        // Get all promotions
+        $promotions = Promotion::all();
+
+        return view('admin.apartments.promote', compact('clientToken', 'apartment', 'promotions'));
+    }
+
+
+    /**
+     * Sponsorize an Apartment.
+     */
+    public function sponsorize(Request $request, String $id)
     {
 
         // Get apartment with end date data
@@ -324,52 +347,37 @@ class ApartmentController extends Controller
             $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
         }], 'apartment_promotion.end_date')->find($id);
 
-        // Check if auyhorized
-        if (Auth::id() !== $apartment->user_id) {
-            return to_route('admin.apartments.index', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
-        }
-
         // Get all request inputs
         $data = $request->all();
 
-        // Create Braintree Gateway
+        // Get Promotion Data
+        $promotion = Promotion::find($data['promotion']);
+
+
+        // Make transaction
         $gateway = new \Braintree\Gateway(config('braintree'));
 
+        $payment = $gateway->transaction()->sale([
+            'amount' => $promotion->price,
+            'paymentMethodNonce' => $data['payment_method_nonce'],
+            'options' => [
+                'submitForSettlement' => True
+            ]
+        ]);
 
-        // Payment
-        if ($data && $data['payment_method_nonce'] != null) {
 
-            // Get Promotion Data
-            $promotion = Promotion::find($data['promotion']);
+        // Payment success
+        if ($payment->success) {
 
+            $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s');
+            $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date)));
 
-            $payment = $gateway->transaction()->sale([
-                'amount' => $promotion->price,
-                'paymentMethodNonce' => $data['payment_method_nonce'],
-                'options' => [
-                    'submitForSettlement' => True
-                ]
-            ]);
+            $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
-            // Payment success
-            if ($payment->success) {
-
-                $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s');
-                $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date)));
-
-                $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
-
-                return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
-            }
-
-            // Payment failed
-            return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
+            return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
         }
 
-        // Promotions Form data
-        $clientToken = $gateway->clientToken()->generate();
-        $promotions = Promotion::all();
-
-        return view('admin.apartments.promote', compact('clientToken', 'apartment', 'promotions'));
+        // Payment failed
+        return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
     }
 }
