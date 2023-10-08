@@ -32,6 +32,11 @@ body {
     font-size: 14px;
 }
 
+main {
+    height: calc(100vh - 121px);
+    overflow: auto;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -115,7 +120,3 @@ button {
     background: transparent;
 }
 
-main {
-    height: calc(100vh - 121px);
-    overflow: auto;
-}

@@ -30,6 +30,7 @@
     }
 }
 
+// Button upgrade
 .circle-button.promote {
   color: white;
   background-color: black;
@@ -46,4 +47,40 @@
   100% { background-position: 0% 100%; }
 }
 
-  
+// Promo activated
+.Bronze{
+    .promotion::after{
+        content: 'Bronze';
+        background-color: $bronze;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        transform: translate(10%, -30%);
+        font-size: 12px;
+    }
+}
+
+.Silver{
+    .promotion::after{
+        content: 'Silver';
+        background-color: $silver;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        transform: translate(10%, -30%);
+        font-size: 12px;
+    }
+}
+
+
+.Gold{
+    .promotion::after{
+        content: 'Gold';
+        background-color: $gold;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        transform: translate(10%, -30%);
+        font-size: 12px;
+    }
+}
