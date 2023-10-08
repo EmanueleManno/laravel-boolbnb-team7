@@ -1,4 +1,4 @@
-<table class="table table-white table-hover align-middle mt-2">
+<table class="table table-white table-hover align-middle">
 
     {{-- Table Headers --}}
     <thead>
@@ -139,7 +139,7 @@
         @empty
             <tr>
                 <td class="text-center" colspan="9">
-                    <h3>Non ci sono appartamenti</h3>
+                    <h5>Qui potrai gestire i tuoi boolbnb</h5>
                 </td>
             </tr>
         @endforelse
