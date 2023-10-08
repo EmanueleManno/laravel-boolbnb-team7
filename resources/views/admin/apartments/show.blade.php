@@ -153,6 +153,11 @@
                                     data-bs-target="#flush-collapse{{ $message->id }}" aria-expanded="false"
                                     aria-controls="flush-collapse{{ $message->id }}">
                                     Messaggio ricevuto da {{ $message->name }}
+                                    <div class="text-gradient" style="font-size: 12px">
+                                        {{ $message->created_at->format('d/m/y') }}
+                                        alle
+                                        {{ $message->created_at->format('H:i') }}
+                                    </div>
                                 </button>
                             </h2>
                             <div id="flush-collapse{{ $message->id }}" class="accordion-collapse collapse"
@@ -161,12 +166,7 @@
                                     <p>{{ $message->content }}</p>
                                     <hr>
                                     <div><i class="fa-solid fa-envelope"></i> <i> {{ $message->email }} </i></div>
-                                    <div class="text-gradient" style="font-size: 12px">
-                                        Il giorno
-                                        {{ $message->created_at->format('d/m/y') }}
-                                        alle
-                                        {{ $message->created_at->format('H:i') }}
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

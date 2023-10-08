@@ -103,6 +103,16 @@
         border: 1px solid $light-grey!important;
         margin-bottom: 10px;
     }
+
+    .accordion-header{
+        position: relative;
+        padding-bottom: 3px;
+        .text-gradient{
+            position: absolute;
+            left: 20px;
+            bottom: 0;
+        }
+    }
  
 }
 
