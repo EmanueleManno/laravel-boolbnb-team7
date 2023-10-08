@@ -62,7 +62,7 @@ class Apartment extends Model
     /**
      * Format a date field
      */
-    public function getDate($date_field, $format = 'd M Y H:i')
+    public function getDate($date_field, $format = 'd/m/y H:i')
     {
         return Carbon::create($this->$date_field)
             ->format($format);
