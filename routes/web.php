@@ -24,40 +24,33 @@ use Illuminate\Support\Facades\Route;
 // Guest Home (Redirect su Vue)
 Route::get('/', [GuestHomeController::class, 'index'])->name('guest.home');
 
+
 // Admin Routes
 Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
 
     // Home
     Route::get('/', [AdminHomeController::class, 'index'])->name('home');
 
-    // Rotte per i messaggi
-    //Lista di tutti i messaggi:
-    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
-    //Creazione di un messaggio:
-    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
-    //Store di un messaggio:
-    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
-    // Apartments Routes:
-    //Rotta per il cestino:
-    Route::get('apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
-    //Rotta per il restore:
-    Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore');
-    //Rotta per lo svuota cestino:
-    //Route::delete('apartments/drop', [ApartmentController::class, 'dropAll'])->name('apartments.dropAll');
-    //Rotta per l'elimina definitivamente:
-    //Route::delete('apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop');
-    //Rotta per il toggle:
-    Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle');
-    //Rotta per il payment:
-    Route::get('/apartments/{apartment}/promote', [ApartmentController::class, 'promote'])->name('apartments.promote');
-    Route::post('/apartments/{apartment}/promote', [ApartmentController::class, 'promote'])->name('apartments.payment');
+    // Messages
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index'); // message index
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create'); //! message create
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store'); //! message store
 
-    Route::resource('apartments', ApartmentController::class);
+
+    // Apartments
+    Route::get('apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash'); // Trash index
+    Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore'); // Trash restore
+    //Route::delete('apartments/drop', [ApartmentController::class, 'dropAll'])->name('apartments.dropAll'); //! Trash Drop
+    //Route::delete('apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop');//! Trash Drop All
+
+    Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle'); // toggle
+
+    Route::get('/apartments/{apartment}/promote', [ApartmentController::class, 'promote'])->name('apartments.promote'); // promote
+    Route::post('/apartments/{apartment}/sponsorize', [ApartmentController::class, 'sponsorize'])->name('apartments.sponsorize'); // sponsorize
+
+    Route::resource('apartments', ApartmentController::class); // CRUD
 });
-
-
-
 
 
 // Auths
@@ -66,5 +59,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';
