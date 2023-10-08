@@ -350,7 +350,7 @@ class ApartmentController extends Controller
         // Get all request inputs
         $data = $request->all();
 
-        // Get Promotion Data
+        // Get Promotion Chosen Data
         $promotion = Promotion::find($data['promotion']);
 
 
@@ -369,9 +369,11 @@ class ApartmentController extends Controller
         // Payment success
         if ($payment->success) {
 
-            $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s');
-            $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date)));
+            // Calculate pivot table fields data
+            $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s'); // start promotion from active promotion or now
+            $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date))); // end prootion based on start date and promotion chosen
 
+            // Set pivot table fields
             $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
             return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
