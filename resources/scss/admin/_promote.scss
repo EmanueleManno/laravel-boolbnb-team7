@@ -38,7 +38,7 @@
 
 // PAYMENT-FORM
 #payment-form {
-    height: calc(100vh - 121px);
+    height: calc(100vh - 120px);
     font-size: 14px;
     position: relative;
 
@@ -125,7 +125,7 @@ div[class*="carousel-label"]{
     
 .promo-text{
     width: 100%;
-    height: 80px;
+    height: 70px;
     text-align: start;
     padding-left: 20px;
     border-radius: 15px;
@@ -161,6 +161,7 @@ div[class*="carousel-label"]{
     padding: 15px;
     border: 2px solid $light-grey;
     background-color: $light-grey;
+    font-size: 14px;
 
     .circle-button{
         @include circle(50px);
@@ -209,7 +210,7 @@ div[class*="carousel-label"]{
 @media (min-width: 768px) {
     #promotion-page{
         header{
-            padding: 24px 0;
+            padding: 20px 0 15px 0;
         }
 
         .jumbotron p{
@@ -217,6 +218,11 @@ div[class*="carousel-label"]{
             font-size: 20px;
         }
     }
+
 }
 
-
+@media (min-width: 992px){
+    .promo-details{
+        font-size: 16px;
+    }
+}

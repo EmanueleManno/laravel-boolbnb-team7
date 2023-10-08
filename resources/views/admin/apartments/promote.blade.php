@@ -82,12 +82,12 @@
                             <div id="carousel-{{ $promotion->id }}"
                                 class="carousel-item @if ($loop->first) active @endif ">
                                 {{-- Promotions --}}
-                                <div class="card p-1 pb-5">
+                                <div class="card p-1 pb-4">
                                     <div class="carousel-label-{{ $promotion->id }}">
                                         <h2>{{ $promotion->name }}</h2>
                                     </div>
 
-                                    <div class="py-3">
+                                    <div class="pt-3">
                                         <h3 class="mb-3">Boolbnb {{ $promotion->name }}</h3>
                                         <p>Il tuo boolbnb comparirà in cima alla lista delle ricerche effettuate sul nostro
                                             sito.
@@ -160,8 +160,8 @@
                                     Quaesto servizio sarà attivo per <b>{{ $promotion->duration }}</b> ore al prezzo di
                                     <b>€{{ $promotion->price }}</b>
                                 </p>
-                                <p>Promuovi <i class="fs-5">{{ $apartment->title }}</i> per
-                                    {{ $promotion->duration }}</p>
+                                <p>Promuovi <i class="fs-6">{{ $apartment->title }}</i> per
+                                    {{ $promotion->duration }} ore</p>
 
                                 {{-- Button payment modal --}}
                                 <div class="d-flex justify-content-center">
