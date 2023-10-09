@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statistics', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id')->nullable()->constrained()->nullOnDelete();
             $table->string('ip_address', 15);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statistics');
+        Schema::dropIfExists('views');
     }
 };
