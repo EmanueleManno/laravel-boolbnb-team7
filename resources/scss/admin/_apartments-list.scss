@@ -1,6 +1,21 @@
 @use '../utils/vars.scss' as *;
 
-//__________________ CREATE
+//__________________ APARTMENT LIST
+#admin-index{
+    padding-bottom: 30px;
+    
+    header{
+        @include flex(space-between, center);
+        padding: 24px 0;
+        border: 0;
+    }
+
+    .button-primary{
+        @include flex($gap:5px);
+        padding: 7px 10px;
+
+    }
+}
 
 .apartments-action-list{
     .dropdown-menu{
@@ -30,6 +45,7 @@
     }
 }
 
+// Button upgrade
 .circle-button.promote {
   color: white;
   background-color: black;
@@ -46,4 +62,40 @@
   100% { background-position: 0% 100%; }
 }
 
-  
+// Promo activated
+.Bronze{
+    .promotion::after{
+        content: 'Bronze';
+        background-color: $bronze;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        transform: translate(10%, -30%);
+        font-size: 12px;
+    }
+}
+
+.Silver{
+    .promotion::after{
+        content: 'Silver';
+        background-color: $silver;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        transform: translate(10%, -30%);
+        font-size: 12px;
+    }
+}
+
+
+.Gold{
+    .promotion::after{
+        content: 'Gold';
+        background-color: $gold;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        transform: translate(10%, -30%);
+        font-size: 12px;
+    }
+}

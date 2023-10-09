@@ -4,45 +4,41 @@
 
 @section('main')
 
-    <div class="container my-5">
-
+    <section id="admin-index" class="container">
         <!--Header-->
         <header class="d-flex align-items-center justify-content-between pb-4">
-
             {{-- Page Title --}}
-            <h2>Lista Appartamenti</h2>
+            <h2>I tuoi boolbnb</h2>
 
             {{-- Page Actions --}}
-            <div>
-                <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">
-                    <span class="d-none d-md-flex">
+            <div class="d-flex gap-2">
+                <a href="{{ route('admin.apartments.create') }}" class="button-primary">
+                    <div class="d-none d-md-flex">
                         @if (count($apartments))
-                            Aggiungi nuovo appartamento
+                            Aggiungi nuovo boolbnb
                         @else
-                            Clicca qui per aggiungere il tuo primo appartamento!
+                            Aggiungi il tuo primo boolbnb!
                         @endif
-                    </span>
-                    <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
+                    </div>
+                    <i class="fa-solid fa-house-medical"></i>
                 </a>
 
                 <!--Pulsante cestino-->
-                <a href="{{ route('admin.apartments.trash') }}" class="btn btn-secondary ms-2">
-                    <span class="d-none d-md-flex">Cestino</span>
-                    <i class="d-inline-block d-md-none fa-solid fa-trash-can"></i>
+                <a href="{{ route('admin.apartments.trash') }}" class="circle-button" title="Cestino">
+                    <i class="d-inline-block fa-solid fa-trash-can"></i>
                 </a>
             </div>
-
         </header>
 
         {{-- Alerts --}}
-        <div class="my-2">
+        <div>
             @include('includes.alerts')
         </div>
 
         {{-- Apartment List --}}
         @include('includes.apartments.apartment-list')
 
-    </div>
+    </section>
 
     {{-- Delete Modal --}}
     @include('includes.delete-modal')

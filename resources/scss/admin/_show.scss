@@ -98,26 +98,44 @@
 }
 
 .message-list {
-    @include flex(stretch, stretch, column, wrap, 20px);
-    flex-grow: 1;
+    margin: 20px 0;
+    .accordion-item{
+        border: 1px solid $light-grey!important;
+        margin-bottom: 10px;
+    }
 
-    li {
-        @include flex(center, start, column, 7px);
-        border: 1px solid $light-grey;
-        border-radius: 15px;
-        padding: 10px;
-
-        div {
-            overflow: hidden;
-
-            img {
-                @include max-size;
-                object-fit: contain;
-                filter: brightness(0) saturate(100%);
-            }
+    .accordion-header{
+        position: relative;
+        padding-bottom: 3px;
+        .text-gradient{
+            position: absolute;
+            left: 20px;
+            bottom: 0;
         }
     }
+ 
 }
+
+//     @include flex(stretch, stretch, column, wrap, 20px);
+//     flex-grow: 1;
+
+//     li {
+//         @include flex(center, start, column, 7px);
+//         border: 1px solid $light-grey;
+//         border-radius: 15px;
+//         padding: 10px;
+
+//         div {
+//             overflow: hidden;
+
+//             img {
+//                 @include max-size;
+//                 object-fit: contain;
+//                 filter: brightness(0) saturate(100%);
+//             }
+//         }
+//     }
+// }
 
 #apartments-details{
     h4{

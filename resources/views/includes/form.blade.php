@@ -205,7 +205,7 @@
 
 
     {{-- # Address --}}
-    <div class="col-12 mb-4">
+    <div class="col-12 mb-2">
         <label for="address-search" class="form-label">
             Indirizzo
             <span class="form-text text-danger fs-5">*</span>
@@ -237,21 +237,27 @@
             value="{{ old('longitude', $apartment->longitude) }}">
     </div>
 
-
-    {{-- # Is Visible --}}
-    <div class="col-12 mb-4">
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible"
-                value="1" @if (old('is_visible', $apartment->is_visible)) checked @endif>
-            <label class="ms-2 form-check-label" for="is_visible">Pubblica</label>
+    <div class="col-12 mb-2">
+        <div class="dropdown mb-3">
+            <button class="button-info" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-question fa-xs"></i>
+            </button>
+            <div class="dropdown-menu text-danger  ">
+                I campi contrassegnati (*) sono obbligatori.
+            </div>
         </div>
     </div>
 
 
+
+
     {{-- # Submit --}}
     <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-        <div class="text-danger">
-            I campi contrassegnati (*) sono obbligatori.
+        {{-- # Is Visible --}}
+        <div class="form-check form-switch button-primary">
+            <label class="form-check-label" for="is_visible">Pubblica</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible"
+                value="1" @if (old('is_visible', $apartment->is_visible)) checked @endif>
         </div>
         <button type="submit" class="button-primary">Conferma</button>
     </div>
