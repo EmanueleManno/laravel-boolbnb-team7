@@ -57,6 +57,14 @@ class Apartment extends Model
         return $this->hasMany(Message::class);
     }
 
+    /**
+     * Statistics relation
+     */
+    public function statistics()
+    {
+        return $this->hasMany(Statistic::class);
+    }
+
 
     //*** UTILITIES ***//
     /**
