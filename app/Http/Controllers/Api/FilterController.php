@@ -34,6 +34,8 @@ class FilterController extends Controller
             $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
         }], 'apartment_promotion.end_date');
 
+        // Get all services
+        $query->with('services');
 
         // Filtro "min rooms"
         if (isset($filters['rooms'])) {
