@@ -44,17 +44,17 @@
                 </td>
 
                 {{-- Promotion End Date --}}
-                <td class="promotion">
-                    @forelse ($apartment->promotions as $promotion)
-                        {{ $promotion->pivot?->end_date }}
-                    @empty
+                <td>
+                    @if ($apartment->promotions_max_apartment_promotionend_date)
+                        {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
+                    @else
                         -
-                    @endforelse
+                    @endif
                 </td>
 
                 {{-- Dates --}}
-                <td class="d-none d-lg-table-cell">{{ $apartment->created_at }}</td>
-                <td class="d-none d-lg-table-cell">{{ $apartment->updated_at }}</td>
+                <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
 
                 {{-- Actions --}}
                 <td>

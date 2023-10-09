@@ -45,7 +45,7 @@
 
         <div class="container">
             {{-- PAYMENTS FORM --}}
-            <form id="payment-form" action="{{ route('admin.apartments.payment', $apartment) }}" method="post"
+            <form id="payment-form" action="{{ route('admin.apartments.sponsorize', $apartment) }}" method="post"
                 data-token="{{ $clientToken }}">
                 @csrf
                 {{-- Back Button --}}

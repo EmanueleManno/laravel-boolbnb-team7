@@ -16,7 +16,11 @@ class ApartmentController extends Controller
     {
         // Get all apartments
         $apartments = Apartment::where('is_visible', true)
-            ->orderBy('updated_at', 'DESC')
+            ->withMax(['promotions' => function ($query) {
+                $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+            }], 'apartment_promotion.end_date')
+            ->orderBy('promotions_max_apartment_promotionend_date', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // Send response

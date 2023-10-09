@@ -20,7 +20,13 @@ class ApartmentController extends Controller
     public function index()
     {
         // Get only user apartments
-        $apartments = Apartment::where('user_id', Auth::id())->orderBy('updated_at', 'desc')->paginate(5);
+        $apartments = Apartment::where('user_id', Auth::id())
+            ->withMax(['promotions' => function ($query) {
+                $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+            }], 'apartment_promotion.end_date')
+            ->orderBy('promotions_max_apartment_promotionend_date', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(5);
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -308,47 +314,72 @@ class ApartmentController extends Controller
 
 
     /**
-     * 
+     * Show the form to Promote an Apartment
      */
-    public function promote(Request $request, Apartment $apartment)
+    public function promote(Apartment $apartment)
     {
 
-
-        $promotions = Promotion::all();
-
-        $gateway = new \Braintree\Gateway(config('braintree'));
-
-        if ($request->input('payment_method_nonce') != null) {
-
-            $promotion_id = $request->input('promotion');
-            $promotion = Promotion::find($promotion_id);
-
-            $nonceFromTheClient = $request->input('payment_method_nonce');
-            $result = $gateway->transaction()->sale([
-                'amount' => $promotion->price,
-                'paymentMethodNonce' => $nonceFromTheClient,
-                'options' => [
-                    'submitForSettlement' => True
-                ]
-            ]);
-
-            if ($result->success) {
-
-                $data = $request->all();
-
-                $start_date = now()->format('Y-m-d H:i:s');
-                $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours"));
-
-                $apartment->promotions()->detach();
-                $apartment->promotions()->attach($request['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
-
-                return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
-            } else {
-                return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
-            }
+        // Check if authorized
+        if (Auth::id() !== $apartment->user_id) {
+            return to_route('admin.apartments.index', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
         }
 
+
+        // Setup Braintree
+        $gateway = new \Braintree\Gateway(config('braintree'));
         $clientToken = $gateway->clientToken()->generate();
+
+        // Get all promotions
+        $promotions = Promotion::all();
+
         return view('admin.apartments.promote', compact('clientToken', 'apartment', 'promotions'));
+    }
+
+
+    /**
+     * Sponsorize an Apartment.
+     */
+    public function sponsorize(Request $request, String $id)
+    {
+
+        // Get apartment with end date data
+        $apartment = Apartment::withMax(['promotions' => function ($query) {
+            $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+        }], 'apartment_promotion.end_date')->find($id);
+
+        // Get all request inputs
+        $data = $request->all();
+
+        // Get Promotion Chosen Data
+        $promotion = Promotion::find($data['promotion']);
+
+
+        // Make transaction
+        $gateway = new \Braintree\Gateway(config('braintree'));
+
+        $payment = $gateway->transaction()->sale([
+            'amount' => $promotion->price,
+            'paymentMethodNonce' => $data['payment_method_nonce'],
+            'options' => [
+                'submitForSettlement' => True
+            ]
+        ]);
+
+
+        // Payment success
+        if ($payment->success) {
+
+            // Calculate pivot table fields data
+            $start_date = $apartment->promotions_max_apartment_promotionend_date ?? date('Y-m-d H:i:s'); // start promotion from active promotion or now
+            $end_date = date('Y-m-d H:i:s', strtotime("+ $promotion->duration hours", strtotime($start_date))); // end prootion based on start date and promotion chosen
+
+            // Set pivot table fields
+            $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
+
+            return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
+        }
+
+        // Payment failed
+        return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
     }
 }

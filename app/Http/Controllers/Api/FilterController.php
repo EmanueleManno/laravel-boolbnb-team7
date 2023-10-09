@@ -29,6 +29,12 @@ class FilterController extends Controller
         // Get all visible apartments
         $query->where('is_visible', 1);
 
+        // Get last promotion end_date (only active promotion)
+        $query->withMax(['promotions' => function ($query) {
+            $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+        }], 'apartment_promotion.end_date');
+
+
         // Filtro "min rooms"
         if (isset($filters['rooms'])) {
             $query->where('rooms', '>=', $filters['rooms']);
@@ -46,9 +52,14 @@ class FilterController extends Controller
             }
         }
 
-        // Filter by distance and order ASC
+        // Filter by distance
         $query->having('distance', '<', $radius);
+
+
+        // Ordering
+        $query->orderBy('promotions_max_apartment_promotionend_date', 'desc');
         $query->orderBy('distance');
+        $query->orderBy('created_at', 'desc');
 
         // Apply query and get apartments
         $apartments = $query->get();

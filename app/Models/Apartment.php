@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Promotion;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -14,6 +15,8 @@ class Apartment extends Model
     use SoftDeletes;
     protected $fillable = ['title', 'category_id', 'description', 'price', 'rooms', 'beds', 'bathrooms', 'square_meters', 'address', 'latitude', 'longitude', 'image', 'is_visible', 'delete_image'];
 
+
+    //*** RELATIONS ***//
     /**
      * Category relation
      */
@@ -54,7 +57,20 @@ class Apartment extends Model
         return $this->hasMany(Message::class);
     }
 
-    // Get image path
+
+    //*** UTILITIES ***//
+    /**
+     * Format a date field
+     */
+    public function getDate($date_field, $format = 'd/m/y H:i')
+    {
+        return Carbon::create($this->$date_field)
+            ->format($format);
+    }
+
+    /**
+     * Get Image Path
+     */
     public function get_image()
     {
         return asset('storage/' . $this->image);
