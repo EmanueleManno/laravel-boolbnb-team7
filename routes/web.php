@@ -7,7 +7,7 @@ use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\ViewController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +39,9 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store'); //! message store
 
     // Statistics
-    Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics.index'); // statistics index 
+    Route::get('/statistics', [ViewController::class, 'index'])->name('statistics.index'); // statistics index 
+    // Statistics prova di importazione grafico
+    Route::get('/statistics/{apartment}/graph', [ApartmentController::class, 'statistics'])->name('statistics.index2'); // statistics index2 
 
     // Apartments
     Route::get('apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash'); // Trash index
