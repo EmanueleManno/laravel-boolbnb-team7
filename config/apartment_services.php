@@ -1,20 +1,20 @@
 <?php
 return [
     // Essential
-    ['name' => 'Wi-Fi', 'image' => 'wifi.png'],
-    ['name' => 'TV', 'image' => 'tv.png'],
-    ['name' => 'Lavatrice', 'image' => 'washing-machine.png'],
-    ['name' => 'Asciugatrice', 'image' => 'dryer.png'],
-    ['name' => 'Ferro da stiro', 'image' => 'iron.png'],
-    ['name' => 'Asciugacapelli', 'image' => 'hairdryer.png'],
-    ['name' => 'Cucina', 'image' => 'kitchen.png'],
-    ['name' => 'Aria Condizionata', 'image' => 'snow.png'],
-    ['name' => 'Riscaldamento', 'image' => 'heating.png'],
+    ['name' => 'Wi-Fi', 'icon' => 'wifi.svg'],
+    ['name' => 'TV', 'icon' => 'tv.svg'],
+    ['name' => 'Aria Condizionata', 'icon' => 'air-conditioning.svg'],
+    ['name' => 'Riscaldamento', 'icon' => 'heating.svg'],
+    ['name' => 'Lavatrice', 'icon' => 'washing-machine.svg'],
+    ['name' => 'Forno', 'icon' => 'oven.svg'],
+    ['name' => 'Ferro da stiro', 'icon' => 'iron.svg'],
+    ['name' => 'Vasca da bagno', 'icon' => 'bath-tub.svg'],
+    ['name' => 'Cucina', 'icon' => 'kitchen.svg'],
 
     // Optional
-    ['name' => 'Posto Macchina', 'image' => 'car.png'],
-    ['name' => 'Piscina', 'image' => 'pool.png'],
-    ['name' => 'Portineria', 'image' => 'concierge-bell.png'],
-    ['name' => 'Sauna', 'image' => 'sauna.png'],
-    ['name' => 'Vista Mare', 'image' => 'sea-view.png'],
+    ['name' => 'Posto Macchina', 'icon' => 'car.svg'],
+    ['name' => 'Piscina', 'icon' => 'pool.svg'],
+    ['name' => 'Tavolo da biliardo', 'icon' => 'pool-table.svg'],
+    ['name' => 'Ascensore', 'icon' => 'elevator.svg'],
+    ['name' => 'Terrazza', 'icon' => 'terrace.svg'],
 ];
