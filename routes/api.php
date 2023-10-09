@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\FilterController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\StatisticController;
 use App\Models\Apartment;
 use App\Models\Category;
 use App\Models\Service;
@@ -31,6 +32,9 @@ Route::get('apartments/filter', [FilterController::class, 'index']);
 
 // Message routes
 Route::post('/messages', [MessageController::class, 'store']);
+
+// Statistic routes
+Route::post('/statistics', [StatisticController::class, 'store']);
 
 // Apartments routes
 Route::apiResource('apartments', ApartmentController::class);

@@ -15,7 +15,6 @@ class MessageSeeder extends Seeder
      */
     public function run(): void
     {
-
         // Get related resource ids
         $apartments_ids = Apartment::pluck('id')->toArray();
 
