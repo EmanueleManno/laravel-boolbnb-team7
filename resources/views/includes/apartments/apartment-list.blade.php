@@ -18,7 +18,8 @@
     {{-- Table Body --}}
     <tbody>
         @forelse ($apartments as $apartment)
-            <tr class=" {{ $apartment->promotions[0]->name }}">
+            <tr
+                class=" {{ $apartment->promotions_max_apartment_promotionend_date ? $apartment->promotions[0]->name : '' }}">
                 {{-- ID --}}
                 <th scope="row">
                     {{ $apartment->id }}</th>
