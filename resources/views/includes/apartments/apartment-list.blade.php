@@ -18,9 +18,10 @@
     {{-- Table Body --}}
     <tbody>
         @forelse ($apartments as $apartment)
-            <tr class=" @forelse ($apartment->promotions as $promotion) {{ $promotion->name }}@empty '' @endforelse">
+            <tr class=" {{ $apartment->promotions[0]->name }}">
                 {{-- ID --}}
-                <th scope="row">{{ $apartment->id }}</th>
+                <th scope="row">
+                    {{ $apartment->id }}</th>
 
                 {{-- Preview --}}
                 <td class="d-none d-lg-table-cell">
@@ -44,7 +45,7 @@
                 </td>
 
                 {{-- Promotion End Date --}}
-                <td>
+                <td class="promotion">
                     @if ($apartment->promotions_max_apartment_promotionend_date)
                         {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
                     @else
