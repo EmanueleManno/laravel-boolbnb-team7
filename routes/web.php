@@ -52,6 +52,7 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
     Route::patch('/apartments/{apartment}/toggle', [ApartmentController::class, 'toggle'])->name('apartments.toggle'); // toggle
 
     Route::get('/apartments/{apartment}/promote', [ApartmentController::class, 'promote'])->name('apartments.promote'); // promote
+    Route::get('/apartments/premium', [ApartmentController::class, 'premium'])->name('apartments.premium'); // boolbnb premium
     Route::post('/apartments/{apartment}/sponsorize', [ApartmentController::class, 'sponsorize'])->name('apartments.sponsorize'); // sponsorize
 
     Route::resource('apartments', ApartmentController::class); // CRUD

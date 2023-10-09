@@ -8,41 +8,6 @@
 
 @section('main')
     <section id="promotion-page">
-        {{-- JUMBOTRON --}}
-        <div class="jumbotron">
-            <div class="container">
-                <div class="d-flex justify-content-end">
-                    {{-- Back Button --}}
-                    <div class="circle-button">
-                        <a href="{{ route('admin.apartments.index') }}">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </a>
-                    </div>
-                </div>
-                {{-- Header --}}
-                <header>
-                    <div class="logo">
-                        <img src="{{ asset('img/logo.png') }}" alt="logo">
-                        <h1>boolbnb premium</h1>
-                    </div>
-                </header>
-            </div>
-            {{-- Content --}}
-            <div>
-                <div class="px-3">
-                    <h2 class="text-center my-2 my-sm-3 my-md-4">Promuovi i tuoi boolbnb per renderli subito visibili a
-                        tutti!</h2>
-                    <p>Promuovendo un boolbnb comparirà per primo alle ricerche sul nostro sito aumentandone la visibilità e
-                        aumentando la probabilità di essere contattato dai nostri utenti. <br> Scopri tutte le nostre
-                        offerte scegliendo quella più adatta alle tue esigenze. <br> Aumenta la visibilità senza impegno,
-                        scegli tu se rinnovare il servizio una volta terminato</p>
-                </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <a class="button-primary" href="#payment-form">Scopri le offerte</a>
-                </div>
-            </div>
-        </div>
-
         <div class="container">
             {{-- PAYMENTS FORM --}}
             <form id="payment-form" action="{{ route('admin.apartments.sponsorize', $apartment) }}" method="post"
@@ -258,7 +223,8 @@
                                             id="promotion-{{ $promotion->id }}" value="{{ $promotion->id }}"
                                             @if ($loop->first) checked @endif>
                                         <label class="form-check-label" for="promotion-{{ $promotion->id }}">
-                                            boolbnb {{ $promotion->name }}
+                                            boolbnb {{ $promotion->name }} €{{ $promotion->price }} /
+                                            {{ $promotion->duration }} ore
                                         </label>
                                     </div>
                                 @endforeach

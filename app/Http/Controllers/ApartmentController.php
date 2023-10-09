@@ -384,6 +384,7 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
     }
 
+
     public function statistics(Apartment $apartment)
     {
         $views = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -394,5 +395,10 @@ class ApartmentController extends Controller
         }
 
         return view('admin.statistics.index2', compact('views', 'apartment'));
+      }
+
+    public function premium()
+    {
+        return view('admin.apartments.premium');
     }
 }

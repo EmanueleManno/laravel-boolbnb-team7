@@ -119,14 +119,28 @@
                 <p>{{ $apartment->description }}</p>
             </div>
             <hr>
+            {{-- Indirizzo --}}
+            <div>
+                <h4>Indirizzo</h4>
+                <div class="mb-2">{{ $apartment->address }}</div>
+
+                <!-- Map modal button -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Visualizza la mappa
+                </button>
+            </div>
+            <hr>
+
             {{-- Services --}}
             <div>
                 <h4>Servizi offerti</h4>
                 <div class="d-flex flex-wrap">
                     @forelse ($apartment->services as $service)
                         <span class="badge text-bg-success p-2 m-1 d-flex align-items-center">
-                            <div class="service-image"><img src="{{ asset('img/service/' . $service['image']) }}"
-                                    alt="{{ $service->name }}" width="20px"></div>
+                            <div class="service-image">
+                                <img src="{{ asset('img/service/' . $service['icon']) }}" alt="{{ $service->name }}"
+                                    width="20px">
+                            </div>
                             <span>{{ $service->name }}</span>
                         </span>
                     @empty
@@ -135,13 +149,7 @@
                 </div>
             </div>
             <hr>
-            {{-- Map --}}
-            @if ($apartment->address)
-                <h4>Mappa</h4>
-                <div id="map" data-latitude="{{ $apartment->latitude }}"
-                    data-longitude="{{ $apartment->longitude }}" style="height:400px"></div>
-                <hr>
-            @endif
+
 
             <div>
                 <h4>Messaggi ricevuti</h4>
@@ -176,13 +184,41 @@
                             Non hai ricevuto nessun messaggio
                         </div>
                         <div class="accordion accordion-flush" id="accordionFlushExample">
+                        </div>
                     @endforelse
                 </div>
-            </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+
+
+                </div>
             </div>
 
+
         </section>
+
+        <!-- Map Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content text-center">
+                    {{-- Map --}}
+                    @if ($apartment->address)
+                        <div class="modal-header">
+                            <h4>Mappa</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="map" data-latitude="{{ $apartment->latitude }}"
+                                data-longitude="{{ $apartment->longitude }}" style="height:400px">
+                            </div>
+                        </div>
+                        <hr>
+                    @endif
+                </div>
+            </div>
+        </div>
 
     </section>
 

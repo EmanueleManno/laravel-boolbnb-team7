@@ -13,20 +13,29 @@ class ApartmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Get all apartments
-        $apartments = Apartment::where('is_visible', true)
+        // Get index options
+        $options = $request->all();
+
+        // Basic Query
+        $query = Apartment::where('is_visible', true)
             ->withMax(['promotions' => function ($query) {
                 $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
-            }], 'apartment_promotion.end_date')
-            ->orderBy('promotions_max_apartment_promotionend_date', 'desc')
-            ->orderBy('created_at', 'desc')
-            ->get();
+            }], 'apartment_promotion.end_date');
+
+        // Ordering
+        $query->orderBy('promotions_max_apartment_promotionend_date', 'desc')
+            ->orderBy('created_at', 'desc');
+
+        // Get Apartments
+        $apartments = $query->get();
+
 
         // Send response
         return response()->json($apartments);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -70,10 +79,57 @@ class ApartmentController extends Controller
         //
     }
 
+
     /**
-     * Filter the specified resource
+     * Display a listing of promoted apartments.
      */
-    public function filterApartments($filters)
+    public function promoted()
     {
+
+        // Basic Query
+        $query = Apartment::where('is_visible', true)
+            ->withMax(['promotions' => function ($query) {
+                $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+            }], 'apartment_promotion.end_date');
+
+        // Get Promoted Apartments
+        $query->havingNotNull('promotions_max_apartment_promotionend_date');
+
+        // Ordering
+        $query->orderBy('promotions_max_apartment_promotionend_date', 'desc')
+            ->orderBy('created_at', 'desc');
+
+        // Get Apartments
+        $apartments = $query->get();
+
+
+        // Send response
+        return response()->json($apartments);
+    }
+
+
+    /**
+     * Display a listing of random non promoted apartments.
+     */
+    public function random()
+    {
+        // Basic Query
+        $query = Apartment::where('is_visible', true)
+            ->withMax(['promotions' => function ($query) {
+                $query->where('apartment_promotion.end_date', '>=', date("Y-m-d H:i:s"));
+            }], 'apartment_promotion.end_date');
+
+        // Get Not Promoted Apartments
+        $query->havingNull('promotions_max_apartment_promotionend_date');
+
+        // Random Ordering
+        $query->inRandomOrder();
+
+        // Get Apartments
+        $apartments = $query->get();
+
+
+        // Send response
+        return response()->json($apartments);
     }
 }

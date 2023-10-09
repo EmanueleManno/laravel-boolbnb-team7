@@ -37,6 +37,8 @@ Route::post('/messages', [MessageController::class, 'store']);
 Route::post('/views', [ViewController::class, 'store']);
 
 // Apartments routes
+Route::get('apartments/promoted', [ApartmentController::class, 'promoted']);
+Route::get('apartments/random', [ApartmentController::class, 'random']);
 Route::apiResource('apartments', ApartmentController::class);
 
 
