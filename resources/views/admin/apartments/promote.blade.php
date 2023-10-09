@@ -258,7 +258,8 @@
                                             id="promotion-{{ $promotion->id }}" value="{{ $promotion->id }}"
                                             @if ($loop->first) checked @endif>
                                         <label class="form-check-label" for="promotion-{{ $promotion->id }}">
-                                            boolbnb {{ $promotion->name }}
+                                            boolbnb {{ $promotion->name }} €{{ $promotion->price }} /
+                                            {{ $promotion->duration }} ore
                                         </label>
                                     </div>
                                 @endforeach
