@@ -382,4 +382,9 @@ class ApartmentController extends Controller
         // Payment failed
         return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
     }
+
+    public function premium()
+    {
+        return view('admin.apartments.premium');
+    }
 }
