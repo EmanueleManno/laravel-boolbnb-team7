@@ -131,7 +131,7 @@
                 {{-- Promotion cards --}}
                 <div class="d-none d-md-block">
                     <div class="mb-2 d-flex justify-content-between">
-                        <h2>Scopri tutte le nostre offerte</h2>
+                        <h2>Confronta le nostre offerte</h2>
                         <!-- Questions modal button -->
                         <button type="button" class="text-decoration-underline" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
