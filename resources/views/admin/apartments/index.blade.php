@@ -35,6 +35,22 @@
             @include('includes.alerts')
         </div>
 
+        {{-- Bannner --}}
+        @if (count($apartments))
+            <div class="banner alert alert-dismissible fade show" role="alert">
+                <div class="title">
+                    <div class="logo">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo">
+                        <h1 class="me-3">boolbnb premium</h1>
+                    </div>
+                    <h6>Aumenta la visibilità!</h6>
+                </div>
+                <a href="{{ route('admin.apartments.premium') }}" class="button-primary">Scopri di più</a>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         {{-- Apartment List --}}
         @include('includes.apartments.apartment-list')
 

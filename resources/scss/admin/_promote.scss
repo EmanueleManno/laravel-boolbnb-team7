@@ -16,6 +16,33 @@
         background-color: white;
         color: black;
     }
+}
+
+#premium-page{
+    overflow:hidden;
+    height: calc(100vh - 121px);
+
+    header{
+        @include flex;
+        padding-bottom: 12px;
+        border: 0;
+        background-color: transparent;
+    }
+
+    .circle-button{
+        background-color: white;
+        color: black;
+    }
+
+    .upgrade{
+        @include circle(30px);
+        display: inline-block;
+        background-color: black;
+        color: white;
+        margin: 0 10px;
+        border: 1px solid white;
+        font-size: 20px!important;
+    }
 
     .jumbotron{
         background: rgb(0,0,0);
@@ -29,10 +56,41 @@
 
         p{
             margin: 0;
-            padding: 15px 0;
+            padding: 12px 0;
             font-size: 14px;
             text-align: center;
         }
+    }
+}
+
+.banner{
+    @include flex(space-between);
+    .title{
+        @include flex($wrap:wrap)
+    }
+    .btn-close{
+        padding: 5px 5px;
+        filter: invert(100%)
+    }
+    .button-primary{
+        font-size: 14px;
+    }
+    border-radius: 10px;
+    border: 0;
+    padding: 20px 10px;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(118,67,67,1) 83%, rgba(190,93,93,1) 100%);
+    color: white;
+
+    .circle-button{
+        margin-top: 20px;
+    }
+
+    p{
+        margin: 0;
+        padding: 15px 0;
+        font-size: 14px;
+        text-align: center;
     }
 }
 
@@ -190,11 +248,12 @@ div[class*="carousel-label"]{
 }
 
 
+
 // Media query
 @media (min-width: 576px) {
-    #promotion-page{
+    #premium-page{
         .jumbotron p{
-            padding: 20px 0;
+            padding: 20px 0 0 0;
             font-size: 16px;
         }
     }
@@ -213,8 +272,9 @@ div[class*="carousel-label"]{
             padding: 20px 0 15px 0;
         }
 
+    }
+    #premium-page{
         .jumbotron p{
-            padding: 25px 0;
             font-size: 20px;
         }
     }
