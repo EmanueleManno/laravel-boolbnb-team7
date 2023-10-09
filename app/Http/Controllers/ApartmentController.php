@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\Category;
 use App\Models\Apartment;
 use App\Models\Promotion;
+use App\Models\View;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -382,6 +383,19 @@ class ApartmentController extends Controller
         // Payment failed
         return to_route('admin.apartments.index')->with('alert-message', "Il pagamento non è andato a buon fine.")->with('alert-type', 'danger');
     }
+
+
+    public function statistics(Apartment $apartment)
+    {
+        $views = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        foreach ($apartment->views as $view) {
+            $month = date("m", strtotime($view->date));
+            $views[$month - 1]++;
+        }
+
+        return view('admin.statistics.index2', compact('views', 'apartment'));
+      }
 
     public function premium()
     {

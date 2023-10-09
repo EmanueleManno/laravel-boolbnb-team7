@@ -60,9 +60,9 @@ class Apartment extends Model
     /**
      * Statistics relation
      */
-    public function statistics()
+    public function views()
     {
-        return $this->hasMany(Statistic::class);
+        return $this->hasMany(View::class);
     }
 
 

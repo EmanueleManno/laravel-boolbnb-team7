@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -47,10 +48,18 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
         $apartment = Apartment::with('user', 'category', 'services')->find($id);
         if (!$apartment) return response(null, 404);
+
+        // Insert View
+        $view = new View();
+        $view->ip_address = $request->getClientIp();
+        $view->apartment_id = $id;
+        $view->date = date("Y-m-d H:i:s");
+        $view->save();
+
         return response()->json($apartment);
     }
 

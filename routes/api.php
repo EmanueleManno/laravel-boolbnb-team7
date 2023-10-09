@@ -34,7 +34,7 @@ Route::get('apartments/filter', [FilterController::class, 'index']);
 Route::post('/messages', [MessageController::class, 'store']);
 
 // Statistic routes
-Route::post('/statistics', [StatisticController::class, 'store']);
+Route::post('/views', [ViewController::class, 'store']);
 
 // Apartments routes
 Route::get('apartments/promoted', [ApartmentController::class, 'promoted']);

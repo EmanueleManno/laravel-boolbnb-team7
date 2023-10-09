@@ -5,6 +5,7 @@
 @section('main')
 
     <div class="container my-5">
+        
 
         {{-- Alerts --}}
         <div class="my-2">
@@ -15,7 +16,7 @@
         <header class="d-flex align-items-center justify-content-between pb-4">
 
             {{-- Page Title --}}
-            <h2>Lista Statistiche</h2>
+            <h2>Lista Visualizzazioni</h2>
 
         </header>
 
@@ -34,19 +35,19 @@
 
             {{-- Table Body --}}
             <tbody>
-                @forelse ($statistics as $statistic)
+                @forelse ($views as $view)
                     <tr>
                         {{-- ID --}}
-                        <th scope="row">{{ $statistic->id }}</th>
+                        <th scope="row">{{ $view->id }}</th>
 
                         {{-- IP Address --}}
-                        <td>{{ $statistic->ip_address }}</td>
+                        <td>{{ $view->ip_address }}</td>
 
                         {{-- Date --}}
-                        <td>{{ $statistic->getDate('date') }}</td>
+                        <td>{{ $view->getDate('date') }}</td>
 
                         {{-- Apartment_id --}}
-                        <td>{{ $statistic->apartment_id }}</td>
+                        <td>{{ $view->apartment_id }}</td>
 
                     </tr>
 
@@ -54,7 +55,7 @@
                 @empty
                     <tr>
                         <td class="text-center" colspan="8">
-                            <h3>Non ci sono statistiche</h3>
+                            <h3>Non ci sono visualizzazioni</h3>
                         </td>
                     </tr>
                 @endforelse

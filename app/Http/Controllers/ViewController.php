@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Statistic;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StatisticController extends Controller
+class ViewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $statistics = Statistic::whereRelation('apartment', 'user_id', Auth::id())->get();
+        $views = View::whereRelation('apartment', 'user_id', Auth::id())->get();
 
-        return view('admin.statistics.index', compact('statistics'));
+        return view('admin.statistics.index', compact('views'));
+    }
+
+    public function index2()
+    {
+        $views = View::whereRelation('apartment', 'user_id', Auth::id())->get();
+
+        return view('admin.statistics.index2', compact('views'));
     }
 
     /**
@@ -37,7 +44,7 @@ class StatisticController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Statistic $statistic)
+    public function show(View $view)
     {
         //
     }
@@ -45,7 +52,7 @@ class StatisticController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Statistic $statistic)
+    public function edit(view $view)
     {
         //
     }
@@ -53,7 +60,7 @@ class StatisticController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Statistic $statistic)
+    public function update(Request $request, view $view)
     {
         //
     }
@@ -61,7 +68,7 @@ class StatisticController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Statistic $statistic)
+    public function destroy(view $view)
     {
         //
     }
