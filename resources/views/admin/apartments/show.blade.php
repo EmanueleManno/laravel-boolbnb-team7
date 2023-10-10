@@ -89,6 +89,9 @@
         <section id="apartments-details" class="mt-4">
             <h3>Informazioni sul tuo Boolbnb</h3>
             <div>
+
+                <a class="btn btn-primary" href="{{route('admin.apartments.statistics', $apartment)}}">Stats</a>
+
                 <h4>Categoria e prezzo</h4>
                 {{-- Category --}}
                 @if ($apartment->category)
