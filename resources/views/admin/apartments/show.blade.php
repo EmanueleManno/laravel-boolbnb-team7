@@ -129,7 +129,8 @@
                     <div class="address">{{ $apartment->address }}</div>
 
                     <!-- Map modal button -->
-                    <button type="button" class="button-dark" data-bs-toggle="modal" data-bs-target="#mapModal">
+                    <button type="button" id="map-button" class="button-dark" data-bs-toggle="modal"
+                        data-bs-target="#mapModal">
                         Mostra la mappa <i class="fa-solid fa-map"></i>
                     </button>
                 </div>
