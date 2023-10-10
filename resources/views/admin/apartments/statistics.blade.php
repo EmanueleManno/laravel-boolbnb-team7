@@ -5,23 +5,38 @@
 @section('main')
 
     <div id="statistics" class="container my-5">
-        <div class="row">
-            <!--Month Views-->
-            <div class="col-6">
-                <canvas id="month-views"></canvas>
-            </div>
-            <!--Month Messages-->
-            <div class="col-6">
-                <canvas id="month-messages"></canvas>
+        <div class="row row-cols-1 row-cols-md-2">
+
+            <!-- Views Per Months -->
+            <div class="col mb-4">
+                <h5 class="mb-2">Visualizzazioni per mese</h5>
+                <div class="border rounded p-2">
+                    <canvas id="month-views"></canvas>
+                </div>
             </div>
 
-            <!--Year Views-->
-            <div class="col-6">
-                <canvas id="year-views"></canvas>
+            <!-- Views Per Year -->
+            <div class="col mb-4">
+                <h5 class="mb-2">Visualizzazioni per anno</h5>
+                <div class="border rounded p-2">
+                    <canvas id="year-views"></canvas>
+                </div>
             </div>
-            <!--Year Messages-->
-            <div class="col-6">
-                <canvas id="year-messages"></canvas>
+
+            <!-- Messages Per Months -->
+            <div class="col mb-4">
+                <h5 class="mb-2">Messaggi per mese</h5>
+                <div class="border rounded p-2">
+                    <canvas id="month-messages"></canvas>
+                </div>
+            </div>
+
+            <!-- Messages Per Year -->
+            <div class="col mb-4">
+                <h5 class="mb-2">Messaggi per anno</h5>
+                <div class="border rounded p-2">
+                    <canvas id="year-messages"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -36,7 +51,7 @@
     <script>
         //*** FUNCTIONS ***//
 
-        const initGraph = (elem, title, labels, data) => {
+        const initGraph = (elem, title, labels, data, backgroundColor) => {
             const graph = new Chart(elem, {
                 type: 'bar',
                 data: {
@@ -44,7 +59,8 @@
                     datasets: [{
                         label: title,
                         data,
-                        borderWidth: 1
+                        borderWidth: 1,
+                        backgroundColor
                     }]
                 },
                 options: {
@@ -52,12 +68,19 @@
                         y: {
                             beginAtZero: true
                         }
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     }
                 }
             });
 
             return graph;
         }
+
 
         //*** INIT ***//
         // Get DOM Elems
@@ -79,13 +102,13 @@
 
 
         //*** LOGIC ***//
-        // Init All Months Graphs
-        initGraph(viewsPerMonthsElem, 'Visualizzazioni per mese', months, Object.values(viewsPerMonthsData));
-        initGraph(messagesPerMonthsElem, 'Messaggi per mese', months, Object.values(messagesPerMonthsData));
-
-        // Init All Years Graphs
+        // Init All Views Graphs
+        initGraph(viewsPerMonthsElem, 'Visualizzazioni per mese', months, Object.values(viewsPerMonthsData), '#dc3545');
         initGraph(viewsPerYearsElem, 'Visualizzazioni per anno', Object.keys(viewsPerYearsData), Object.values(
-            viewsPerYearsData));
+            viewsPerYearsData), '#dc3545');
+
+        // Init All Messages Graphs
+        initGraph(messagesPerMonthsElem, 'Messaggi per mese', months, Object.values(messagesPerMonthsData));
         initGraph(messagesPerYearsElem, 'Messaggi per anno', Object.keys(messagesPerYearsData), Object.values(
             messagesPerYearsData));
     </script>
