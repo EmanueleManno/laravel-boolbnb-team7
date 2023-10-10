@@ -51,6 +51,9 @@
     <script>
         //*** FUNCTIONS ***//
 
+        /**
+         * Inizialize a Chart JS Graph
+         */
         const initGraph = (elem, title, labels, data, backgroundColor) => {
             const graph = new Chart(elem, {
                 type: 'bar',
@@ -83,34 +86,37 @@
 
 
         //*** INIT ***//
+        // Axis Data
+        const monthsAxis = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
+            'Ottobre', 'Novembre', 'Dicembre'
+        ];
+        const yearsAxis = ['2020', '2021', '2022', '2023'];
+
         // Get DOM Elems
         const viewsPerMonthsElem = document.getElementById('month-views');
-        const messagesPerMonthsElem = document.getElementById('month-messages');
         const viewsPerYearsElem = document.getElementById('year-views');
+        const messagesPerMonthsElem = document.getElementById('month-messages');
         const messagesPerYearsElem = document.getElementById('year-messages');
 
         // Get Data From PHP
         const viewsPerMonthsData = <?php echo json_encode($month_views); ?>;
-        const messagesPerMonthsData = <?php echo json_encode($month_messages); ?>;
         const viewsPerYearsData = <?php echo json_encode($year_views); ?>;
+        const messagesPerMonthsData = <?php echo json_encode($month_messages); ?>;
         const messagesPerYearsData = <?php echo json_encode($year_messages); ?>;
-
-        // Vars
-        const months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
-            'Ottobre', 'Novembre', 'Dicembre'
-        ];
 
 
         //*** LOGIC ***//
+        // Calculate values based on years axis
+        const viewsPerYearsValues = yearsAxis.map(year => viewsPerYearsData[year] || 0);
+        const messagesPerYearsValues = yearsAxis.map(year => messagesPerYearsData[year] || 0);
+
         // Init All Views Graphs
-        initGraph(viewsPerMonthsElem, 'Visualizzazioni per mese', months, Object.values(viewsPerMonthsData), '#dc3545');
-        initGraph(viewsPerYearsElem, 'Visualizzazioni per anno', Object.keys(viewsPerYearsData), Object.values(
-            viewsPerYearsData), '#dc3545');
+        initGraph(viewsPerMonthsElem, 'Visualizzazioni per mese', monthsAxis, Object.values(viewsPerMonthsData), '#dc3545');
+        initGraph(viewsPerYearsElem, 'Visualizzazioni per anno', yearsAxis, viewsPerYearsValues, '#dc3545');
 
         // Init All Messages Graphs
-        initGraph(messagesPerMonthsElem, 'Messaggi per mese', months, Object.values(messagesPerMonthsData));
-        initGraph(messagesPerYearsElem, 'Messaggi per anno', Object.keys(messagesPerYearsData), Object.values(
-            messagesPerYearsData));
+        initGraph(messagesPerMonthsElem, 'Messaggi per mese', monthsAxis, Object.values(messagesPerMonthsData));
+        initGraph(messagesPerYearsElem, 'Messaggi per anno', yearsAxis, messagesPerYearsValues);
     </script>
 
 @endsection
