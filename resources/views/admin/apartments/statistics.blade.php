@@ -4,16 +4,17 @@
 
 @section('main')
 
-    <div class="container my-5">
+    <div id="statistics" class="container my-5">
         <div class="row">
             <!--Month Views-->
             <div class="col-6">
-                <canvas id="month-views" data-statistics="{{ implode($month_views) }}"></canvas>
+                <canvas id="month-views"></canvas>
             </div>
             <!--Month Messages-->
             <div class="col-6">
-                <canvas id="month-messages" data-statistics="{{ implode($month_messages) }}"></canvas>
+                <canvas id="month-messages"></canvas>
             </div>
+
             <!--Year Views-->
             <div class="col-6">
                 <canvas id="year-views"></canvas>
@@ -65,14 +66,11 @@
         const viewsPerYearsElem = document.getElementById('year-views');
         const messagesPerYearsElem = document.getElementById('year-messages');
 
-        // Get Data
-        const yearData = <?php echo json_encode($year_views); ?>;
-        const yearLabel = Object.keys(yearData);
-        const yearView = Object.values(yearData);
-
-        const yearDataMessages = <?php echo json_encode($year_messages); ?>;
-        const yearLabelMessages = Object.keys(yearDataMessages);
-        const yearMessages = Object.values(yearDataMessages);
+        // Get Data From PHP
+        const viewsPerMonthsData = <?php echo json_encode($month_views); ?>;
+        const messagesPerMonthsData = <?php echo json_encode($month_messages); ?>;
+        const viewsPerYearsData = <?php echo json_encode($year_views); ?>;
+        const messagesPerYearsData = <?php echo json_encode($year_messages); ?>;
 
         // Vars
         const months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
@@ -82,12 +80,14 @@
 
         //*** LOGIC ***//
         // Init All Months Graphs
-        initGraph(viewsPerMonthsElem, 'Visualizzazioni per mese', months, viewsPerMonthsElem.dataset.statistics);
-        initGraph(messagesPerMonthsElem, 'Messaggi per mese', months, messagesPerMonthsElem.dataset.statistics);
+        initGraph(viewsPerMonthsElem, 'Visualizzazioni per mese', months, Object.values(viewsPerMonthsData));
+        initGraph(messagesPerMonthsElem, 'Messaggi per mese', months, Object.values(messagesPerMonthsData));
 
         // Init All Years Graphs
-        initGraph(viewsPerYearsElem, 'Visualizzazioni per anno', yearLabel, yearView);
-        initGraph(messagesPerYearsElem, 'Messaggi per anno', yearLabelMessages, yearMessages);
+        initGraph(viewsPerYearsElem, 'Visualizzazioni per anno', Object.keys(viewsPerYearsData), Object.values(
+            viewsPerYearsData));
+        initGraph(messagesPerYearsElem, 'Messaggi per anno', Object.keys(messagesPerYearsData), Object.values(
+            messagesPerYearsData));
     </script>
 
 @endsection
