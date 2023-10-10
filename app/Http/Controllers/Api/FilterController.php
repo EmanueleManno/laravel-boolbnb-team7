@@ -54,6 +54,11 @@ class FilterController extends Controller
             }
         }
 
+        // Filtro "category"
+        if (isset($filters['category'])) {
+            $query->where('category_id', $filters['category']);
+        }
+
         // Filter by distance
         $query->having('distance', '<', $radius);
 
