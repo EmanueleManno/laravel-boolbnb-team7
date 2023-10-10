@@ -58,6 +58,8 @@ h6 {
     padding: 0;
 }
 
+//________Buttons
+
 button {
     background-color: transparent;
     border: none;
@@ -79,7 +81,21 @@ button {
     }
 }
 
-// Button go back
+.button-dark {
+    @include flex($gap:5px);
+    background-color: rgb(33, 33, 33);
+    color: white;
+    font-weight: 500;
+    height: 100%;
+    padding: 12px;
+    border-radius: 50px;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: black;
+    }
+}
+
 .circle-button {
     @include circle(40px);
     @include flex;
