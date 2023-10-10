@@ -35,13 +35,9 @@ Route::prefix('/admin')->middleware(['auth', 'verified'])->name('admin.')->group
 
     // Messages
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index'); // message index
-    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create'); //! message create
-    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store'); //! message store
 
     // Statistics
-    Route::get('/statistics', [ViewController::class, 'index'])->name('statistics.index'); // statistics index 
-    // Statistics prova di importazione grafico
-    Route::get('/statistics/{apartment}/graph', [ApartmentController::class, 'statistics'])->name('statistics.index2'); // statistics index2 
+    Route::get('/apartments/{apartment}/statistics', [ApartmentController::class, 'statistics'])->name('apartments.statistics');
 
     // Apartments
     Route::get('apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash'); // Trash index

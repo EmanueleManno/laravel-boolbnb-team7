@@ -394,8 +394,8 @@ class ApartmentController extends Controller
             $views[$month - 1]++;
         }
 
-        return view('admin.statistics.index2', compact('views', 'apartment'));
-      }
+        return view('admin.apartments.statistics', compact('views', 'apartment'));
+    }
 
     public function premium()
     {
