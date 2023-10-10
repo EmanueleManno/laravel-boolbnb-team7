@@ -42,9 +42,54 @@
     hr{
         margin: 10px 0;
     }
+
+    // Modal map
+    #map{
+        height: 400px;
+    }
+
+    .modal-dialog{
+        max-width: calc(100vw - 40px);
+        height: calc(100vh - 60px);
+        margin: 30px auto;
+        .modal-content{
+            height: 100%
+        }
+    }
+
+    .modal-body{
+        @include flex($gap:15px);
+
+        .description{
+            @include flex(flex-start, center, column, $gap: 8px);
+
+            *{
+                font-size: calc(1rem + 0.3vw);
+            }
+
+            hr{
+                width: 30%;
+            }
+
+            h6{
+                font-weight: 300;
+                color: #717171;
+                text-transform: uppercase;
+            }
+        }
+
+        .map{
+            flex: 1 0 55%;
+            padding: calc(50px - 5vw) 0;
+            width: 100%;
+            
+            #map{
+                @include max-size;
+                border-radius: 10px;
+            }
+        }
+    }
 }
-
-
 
 // Apartment image
 .slider {
@@ -142,6 +187,11 @@
     h4{
         margin: 10px 0;
     }
+
+    .address{
+        font-size: 16px;
+        font-weight: 500;
+    }
 }
 
 
@@ -163,5 +213,26 @@
 
     .no-image {
         margin: 0;
+    }
+
+    #admin-show .modal-body{
+        @include flex($gap:15px);
+
+        .description{
+            @include flex(flex-start, center, column, $gap: 8px);
+            margin-top: 20px;
+            height: 100%;
+
+            h6{
+                font-size: 20px;
+            }
+        }
+
+        .map{
+            flex: 0 0 70%;
+            height: calc(100% - 20px);
+        }
+
+        
     }
 }

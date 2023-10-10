@@ -90,7 +90,7 @@
             <h3>Informazioni sul tuo Boolbnb</h3>
             <div>
 
-                <a class="btn btn-primary" href="{{route('admin.apartments.statistics', $apartment)}}">Stats</a>
+                <a class="btn btn-primary" href="{{ route('admin.apartments.statistics', $apartment) }}">Stats</a>
 
                 <h4>Categoria e prezzo</h4>
                 {{-- Category --}}
@@ -125,12 +125,14 @@
             {{-- Indirizzo --}}
             <div>
                 <h4>Indirizzo</h4>
-                <div class="mb-2">{{ $apartment->address }}</div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="address">{{ $apartment->address }}</div>
 
-                <!-- Map modal button -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Visualizza la mappa
-                </button>
+                    <!-- Map modal button -->
+                    <button type="button" class="button-dark" data-bs-toggle="modal" data-bs-target="#mapModal">
+                        Mostra la mappa <i class="fa-solid fa-map"></i>
+                    </button>
+                </div>
             </div>
             <hr>
 
@@ -199,30 +201,36 @@
 
                 </div>
             </div>
-
-
         </section>
 
         <!-- Map Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content text-center">
                     {{-- Map --}}
                     @if ($apartment->address)
                         <div class="modal-header">
-                            <h4>Mappa</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div id="map" data-latitude="{{ $apartment->latitude }}"
-                                data-longitude="{{ $apartment->longitude }}" style="height:400px">
+                        <div class="modal-body flex-column flex-lg-row">
+                            {{-- Title & Address --}}
+                            <div class="description ">
+                                <h3>{{ $apartment->title }}</h3>
+                                <hr>
+                                <h5>Si trova a </h5>
+                                <h6>{{ $apartment->address }}</h6>
+                            </div>
+                            {{-- Map --}}
+                            <div class="map">
+                                <div id="map" data-latitude="{{ $apartment->latitude }}"
+                                    data-longitude="{{ $apartment->longitude }}">
+                                </div>
                             </div>
                         </div>
-                        <hr>
                     @endif
                 </div>
             </div>
         </div>
-
     </section>
 
     {{-- Delete Modal --}}
