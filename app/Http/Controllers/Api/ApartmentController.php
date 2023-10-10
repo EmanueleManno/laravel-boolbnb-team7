@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -53,12 +54,17 @@ class ApartmentController extends Controller
         $apartment = Apartment::with('user', 'category', 'services')->find($id);
         if (!$apartment) return response(null, 404);
 
-        // Insert View
-        $view = new View();
-        $view->ip_address = $request->getClientIp();
-        $view->apartment_id = $id;
-        $view->date = date("Y-m-d H:i:s");
-        $view->save();
+        $ip_address = $request->getClientIp();
+        $apartment_views_hour = $apartment->views->where('ip_address', $ip_address)->where('date', '>=', date('Y-m-d H:i:s', strtotime('-1 hour')))->count();
+
+        if ($apartment_views_hour === 0) {
+            // Insert View
+            $view = new View();
+            $view->ip_address = $request->getClientIp();
+            $view->apartment_id = $id;
+            $view->date = date("Y-m-d H:i:s");
+            $view->save();
+        }
 
         return response()->json($apartment);
     }
