@@ -80,8 +80,9 @@ td .circle-button.promote {
 
     .dropdown-toggle{
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         text-decoration: underline;
+        color: $brand-color;
     }
 
    ol{
@@ -92,7 +93,6 @@ td .circle-button.promote {
         @include flex(start, center, $gap:8px);
         color: #000000;
         list-style-position: outside;
-        
     }
 
     hr{
@@ -101,7 +101,6 @@ td .circle-button.promote {
 
     h6{
         font-size: 13px;
-        // color: #717171;
         font-weight: 300;
     }
 }

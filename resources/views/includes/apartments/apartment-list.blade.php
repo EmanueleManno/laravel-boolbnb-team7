@@ -58,7 +58,7 @@
                                 Promo attive
                             </button>
                             <ol class="dropdown-menu">
-                                <h6>A partire da
+                                <h6>A partire dal giorno
                                     <br><b
                                         class="fw-bold">{{ $apartment->formatDate($apartment->promotions[0]->created_at) }}</b>
                                 </h6>
