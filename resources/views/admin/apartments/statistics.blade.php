@@ -3,8 +3,21 @@
 @section('title', 'Statistics')
 
 @section('main')
+    <section id="statistics" class="container">
+        {{-- Header --}}
+        <header>
+            {{-- Title --}}
+            <div class="d-flex align-items-center gap-3">
+                <h2>Statistiche</h2>
+            </div>
+            {{-- Back Button --}}
+            <div class="circle-button">
+                <a href="{{ route('admin.apartments.index') }}">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </div>
+        </header>
 
-    <div id="statistics" class="container my-5">
         <div class="row row-cols-1 row-cols-md-2">
 
             <!-- Views Per Months -->
@@ -39,8 +52,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </section>
 @endsection
 
 @section('scripts')
