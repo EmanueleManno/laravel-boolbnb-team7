@@ -125,7 +125,7 @@
             <div class="card flex-column flex-md-row">
                 <div>
                     <h4 class="d-md-none">Categoria & Prezzo</h4>
-                    <h4 class="d-none d-md-block">Categoria <br>&<br>Prezzo</h4>
+                    <h4 class="d-none d-md-inline">Categoria <br>&<br>Prezzo</h4>
                 </div>
 
                 <div>
@@ -153,7 +153,11 @@
                 </div>
 
                 <div>
-                    <p>{{ $apartment->description }}</p>
+                    @if ($apartment->description)
+                        <p>{{ $apartment->description }}</p>
+                    @else
+                        <p>Non hai inserito nessuna descrizione</p>
+                    @endif
                 </div>
             </div>
 
@@ -248,9 +252,10 @@
                     <h4>Statistiche</h4>
                 </div>
 
-                <div>
-                    <a class="button-dark" href="{{ route('admin.apartments.statistics', $apartment) }}">Grafici
-                        visualizzazioni e messaggi ricevuti</a>
+                <div class="gap-2">
+                    Verifica i messaggi ricevuti e le visualizzazioni di questo boolbnb
+                    <div><a class="button-dark" href="{{ route('admin.apartments.statistics', $apartment) }}">Scopri</a>
+                    </div>
                 </div>
 
             </section>

@@ -24,9 +24,7 @@
     {{-- Table Body --}}
     <tbody>
         @forelse ($apartments as $apartment)
-            <tr
-                class=" {{ $apartment->promotions_max_apartment_promotionend_date ? $apartment->promotions[0]->name : '' }}">
-
+            <tr>
                 {{-- ID --}}
                 <th scope="row">
                     {{ $apartment->id }}</th>
@@ -57,27 +55,62 @@
                         @endif
                     </td>
 
-                    {{-- Promotion End Date --}}
-                    <td class="promotion">
+                    <<<<<<< HEAD {{-- Promotion End Date --}} <td class="promotion">
                         @if ($apartment->promotions_max_apartment_promotionend_date)
                             {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Promo attive
+                                </button>
+                                <ol class="dropdown-menu">
+                                    <h6>A partire dal giorno
+                                        <br><b
+                                            class="fw-bold">{{ $apartment->formatDate($apartment->promotions[0]->created_at) }}</b>
+                                    </h6>
+                                    <hr>
+                                    @foreach ($apartment->promotions as $key => $promotion)
+                                        <li>
+                                            <div>
+                                                {{ $key + 1 }}
+                                            </div>
+                                            <div class="{{ $promotion->name }}">
+                                                {{ $promotion->name }}
+                                            </div>
+                                            <div>
+                                                Per {{ $promotion->duration }} ore
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </div>
                         @else
                             -
                         @endif
-                    </td>
+                        </td>
+                        =======
+                        {{-- Promotion End Date --}}
+                        <td class="promotion">
+                            @if ($apartment->promotions_max_apartment_promotionend_date)
+                                {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
+                            @else
+                                -
+                            @endif
+                        </td>
+                        >>>>>>> main
 
-                    {{-- Dates --}}
-                    <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
-                    <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
-                @else
-                    {{-- Title (trash version) --}}
-                    <td>
-                        {{ $apartment->title }}
-                    </td>
+                        {{-- Dates --}}
+                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
+                    @else
+                        {{-- Title (trash version) --}}
+                        <td>
+                            {{ $apartment->title }}
+                        </td>
 
-                    {{-- Dates --}}
-                    <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
-                    <td>{{ $apartment->getDate('deleted_at') }}</td>
+                        {{-- Dates --}}
+                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                        <td>{{ $apartment->getDate('deleted_at') }}</td>
                 @endif
 
                 {{-- Actions --}}

@@ -76,39 +76,55 @@ td .circle-button.promote {
 }
 
 // Promo activated
-.Bronze{
-    .promotion::after{
-        content: 'Bronze';
-        background-color: $bronze;
-        color: white;
-        border-radius: 15px;
-        padding: 5px;
-        transform: translate(10%, -30%);
+.promotion {
+
+    .dropdown-toggle{
         font-size: 12px;
+        font-weight: 600;
+        text-decoration: underline;
+        color: $brand-color;
+    }
+
+   ol{
+        list-style-type: decimal;
+    }
+
+    li{
+        @include flex(start, center, $gap:8px);
+        color: #000000;
+        list-style-position: outside;
+    }
+
+    hr{
+        margin: 0 0 12px 0;
+    }
+
+    h6{
+        font-size: 13px;
+        font-weight: 300;
     }
 }
 
+.Bronze, 
+.Silver,
+.Gold{
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    padding: 3px 5px;
+    margin: 2px 0;
+    font-size: 10px;
+}
+
+.Bronze{
+    background-color: $bronze;
+}
+
 .Silver{
-    .promotion::after{
-        content: 'Silver';
-        background-color: $silver;
-        color: white;
-        border-radius: 15px;
-        padding: 5px;
-        transform: translate(10%, -30%);
-        font-size: 12px;
-    }
+    background-color: $silver;
 }
 
 
 .Gold{
-    .promotion::after{
-        content: 'Gold';
-        background-color: $gold;
-        color: white;
-        border-radius: 15px;
-        padding: 5px;
-        transform: translate(10%, -30%);
-        font-size: 12px;
-    }
+    background-color: $gold;
 }
