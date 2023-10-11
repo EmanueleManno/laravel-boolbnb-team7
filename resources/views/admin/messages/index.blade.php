@@ -19,14 +19,14 @@
 
             {{-- Page Actions --}}
             <!--
-                <div>
-                    <a href="{{-- {{ route('admin.messages.create') }} --}}" class="btn btn-success">
-                        <span>
-                           Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
-                        </span>
-                        <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
-                    </a>
-                </div>-->
+                    <div>
+                        <a href="{{-- {{ route('admin.messages.create') }} --}}" class="btn btn-success">
+                            <span>
+                               Manda un nuovo messaggio <i class="fa-regular fa-envelope"></i>
+                            </span>
+                            <i class="d-inline-block d-md-none fa-solid fa-plus"></i>
+                        </a>
+                    </div>-->
 
         </header>
 
@@ -39,7 +39,7 @@
                     <th scope="col">Titolo</th>
                     <th scope="col">Contenuto</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Appartamento</th>
+                    <th scope="col">boolbnb</th>
                     <th scope="col" class="d-none d-lg-table-cell">Data</th>
                     <th scope="col"></th>
                 </tr>
