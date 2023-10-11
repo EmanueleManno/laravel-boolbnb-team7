@@ -96,7 +96,8 @@
                 </ul>
             </div>
 
-            <div class="card">
+            {{-- Planimetry --}}
+            <div class="card flex-column flex-md-row">
                 <div>
                     <h4>Planimetria</h4>
                 </div>
@@ -121,9 +122,10 @@
 
 
             {{-- Category & Price --}}
-            <div class="card">
+            <div class="card flex-column flex-md-row">
                 <div>
-                    <h4>Categoria <br>&<br>Prezzo</h4>
+                    <h4 class="d-md-none">Categoria & Prezzo</h4>
+                    <h4 class="d-none d-md-block">Categoria <br>&<br>Prezzo</h4>
                 </div>
 
                 <div>
@@ -168,7 +170,7 @@
                         <!-- Map modal button -->
                         <button type="button" id="map-button" class="button-dark" data-bs-toggle="modal"
                             data-bs-target="#mapModal">
-                            Mostra la mappa <i class="fa-solid fa-map"></i>
+                            <span class="d-none d-sm-inline">Mostra la mappa</span> <i class="fa-solid fa-map"></i>
                         </button>
                     </div>
                 </div>
