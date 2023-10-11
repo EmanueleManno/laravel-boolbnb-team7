@@ -125,7 +125,7 @@
             <div class="card flex-column flex-md-row">
                 <div>
                     <h4 class="d-md-none">Categoria & Prezzo</h4>
-                    <h4 class="d-none d-md-block">Categoria <br>&<br>Prezzo</h4>
+                    <h4 class="d-none d-md-inline">Categoria <br>&<br>Prezzo</h4>
                 </div>
 
                 <div>

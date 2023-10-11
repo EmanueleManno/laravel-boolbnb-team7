@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Aparments')
+@section('title', 'i tuoi boolbnb')
 
 @section('main')
 

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'profilo')
+
 @section('main')
     <?php
     $name = Auth::user()->name ? strtoupper(Auth::user()->name) : null;
