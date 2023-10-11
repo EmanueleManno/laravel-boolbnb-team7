@@ -45,6 +45,19 @@
     }
 }
 
+.apartment-title{
+    >div{
+        @include text_underscore($brand-color, 2px, 0.3s);
+    }
+    &:hover{
+        color: $brand-color;
+        background-size: 100% 2px;
+    }
+    a{
+        padding: 20px 0;
+    }
+}
+
 // Button upgrade
 td .circle-button.promote {
   color: white;
