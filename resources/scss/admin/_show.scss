@@ -44,47 +44,47 @@
     }
 
     // Modal map
-    .modal-dialog{
-        max-width: calc(100vw - 40px);
-        height: calc(100vh - 60px);
-        margin: 30px auto;
-        .modal-content{
-            height: 100%
-        }
-    }
-
-    .modal-body{
-        @include flex($gap:15px);
-
-        .description{
-            @include flex(flex-start, center, column, $gap: 8px);
-
-            *{
-                font-size: calc(1rem + 0.3vw);
-            }
-
-            hr{
-                width: 30%;
-            }
-
-            h6{
-                font-weight: 300;
-                color: #717171;
-                text-transform: uppercase;
+        .map.modal-dialog{
+            max-width: calc(100vw - 40px);
+            height: calc(100vh - 60px);
+            margin: 30px auto;
+            .modal-content{
+                height: 100%
             }
         }
 
-        .map{
-            flex: 1 0 55%;
-            padding: calc(50px - 5vw) 0;
-            width: 100%;
-            
-            #map{
-                @include max-size;
-                border-radius: 10px;
+        .map.modal-body{
+            @include flex($gap:15px);
+
+            .description{
+                @include flex(flex-start, center, column, $gap: 8px);
+
+                *{
+                    font-size: calc(1rem + 0.3vw);
+                }
+
+                hr{
+                    width: 30%;
+                }
+
+                h6{
+                    font-weight: 300;
+                    color: #717171;
+                    text-transform: uppercase;
+                }
+            }
+
+            .map{
+                flex: 1 0 55%;
+                padding: calc(50px - 5vw) 0;
+                width: 100%;
+
+                #map{
+                    @include max-size;
+                    border-radius: 10px;
+                }
             }
         }
-    }
 }
 
 // Apartment image
@@ -207,7 +207,6 @@
 #messages{
     @include flex(center, stretch, column, $gap: 10px);
     height: $main-h;
-    // border: 1px solid $light-grey;
     box-shadow: 0 6px 20px rgba($color: #000000, $alpha: 0.2);
     border-radius: 20px;
     padding: 20px;
@@ -232,7 +231,6 @@
     padding: 10px;
     background-color: rgb(33, 33, 33);
     border: 2px solid  rgb(33, 33, 33);
-    margin: 20px 0;
     width: 100%;
     height: 450px;
     overflow-y: scroll;
@@ -306,11 +304,12 @@
         margin: 0;
     }
 
-    #admin-show .modal-body{
+    #admin-show .map.modal-body{
         @include flex($gap:15px);
 
         .description{
             @include flex(flex-start, center, column, $gap: 8px);
+            width: 100%;
             margin-top: 20px;
             height: 100%;
 
