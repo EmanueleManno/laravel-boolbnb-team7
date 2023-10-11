@@ -31,7 +31,11 @@
                 </td>
 
                 {{-- Title --}}
-                <td>{{ $apartment->title }}</td>
+                <td class="apartment-title">
+                    <div>
+                        <a href="{{ route('admin.apartments.show', $apartment) }}">{{ $apartment->title }}</a>
+                    </div>
+                </td>
 
                 {{-- Status (is_visible) --}}
                 <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>

@@ -22,7 +22,7 @@
 @use 'admin/trash';
 @use 'admin/promote';
 @use 'admin/apartments-list';
-
+@use 'admin/statistics';
 
 
 //__________________ General rules
@@ -33,7 +33,7 @@ body {
 }
 
 main {
-    height: calc(100vh - 121px);
+    height: $main-h;
     overflow: auto;
 }
 
@@ -46,6 +46,10 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+img{
+    display: block;
 }
 
 h1,
