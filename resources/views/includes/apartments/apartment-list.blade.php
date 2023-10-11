@@ -6,11 +6,17 @@
             <th scope="col">ID</th>
             <th scope="col" class="d-none d-lg-table-cell">Anteprima</th>
             <th scope="col">Titolo</th>
-            <th scope="col">Stato</th>
-            <th scope="col" class="d-none d-md-table-cell">Categoria</th>
-            <th scope="col">Fine promozione</th>
-            <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
-            <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
+            @if (Route::is('admin.apartments.index'))
+                <th scope="col">Stato</th>
+                <th scope="col" class="d-none d-md-table-cell">Categoria</th>
+                <th scope="col">Fine promozione</th>
+                <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
+                <th scope="col" class="d-none d-lg-table-cell">Ultima Modifica</th>
+            @else
+                <th scope="col" class="d-none d-lg-table-cell">Data Creazione</th>
+                <th scope="col">Data Eliminazione</th>
+            @endif
+
             <th scope="col"></th>
         </tr>
     </thead>
@@ -29,69 +35,89 @@
                         alt="{{ $apartment->title }}" class="image-preview">
                 </td>
 
-                {{-- Title --}}
-                <td class="apartment-title">
-                    <div>
-                        <a href="{{ route('admin.apartments.show', $apartment) }}">{{ $apartment->title }}</a>
-                    </div>
-                </td>
-
-                {{-- Status (is_visible) --}}
-                <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
-
-                {{-- Category --}}
-                <td class="d-none d-md-table-cell">
-                    @if ($apartment->category)
-                        {{ $apartment->category->name }}
-                    @else
-                        -
-                    @endif
-                </td>
-
-                {{-- Promotion End Date --}}
-                <td class="promotion">
-                    @if ($apartment->promotions_max_apartment_promotionend_date)
-                        {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
-                        <div class="dropdown">
-                            <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Promo attive
-                            </button>
-                            <ol class="dropdown-menu">
-                                <h6>A partire dal giorno
-                                    <br><b
-                                        class="fw-bold">{{ $apartment->formatDate($apartment->promotions[0]->created_at) }}</b>
-                                </h6>
-                                <hr>
-                                @foreach ($apartment->promotions as $key => $promotion)
-                                    <li>
-                                        <div>
-                                            {{ $key + 1 }}
-                                        </div>
-                                        <div class="{{ $promotion->name }}">
-                                            {{ $promotion->name }}
-                                        </div>
-                                        <div>
-                                            Per {{ $promotion->duration }} ore
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ol>
+                @if (Route::is('admin.apartments.index'))
+                    {{-- Title --}}
+                    <td class="apartment-title">
+                        <div>
+                            <a href="{{ route('admin.apartments.show', $apartment) }}">{{ $apartment->title }}</a>
                         </div>
-                    @else
-                        -
-                    @endif
-                </td>
+                    </td>
 
-                {{-- Dates --}}
-                <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
-                <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
+                    {{-- Status (is_visible) --}}
+                    <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
+
+                    {{-- Category --}}
+                    <td class="d-none d-md-table-cell">
+                        @if ($apartment->category)
+                            {{ $apartment->category->name }}
+                        @else
+                            -
+                        @endif
+                    </td>
+
+                    <<<<<<< HEAD {{-- Promotion End Date --}} <td class="promotion">
+                        @if ($apartment->promotions_max_apartment_promotionend_date)
+                            {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Promo attive
+                                </button>
+                                <ol class="dropdown-menu">
+                                    <h6>A partire dal giorno
+                                        <br><b
+                                            class="fw-bold">{{ $apartment->formatDate($apartment->promotions[0]->created_at) }}</b>
+                                    </h6>
+                                    <hr>
+                                    @foreach ($apartment->promotions as $key => $promotion)
+                                        <li>
+                                            <div>
+                                                {{ $key + 1 }}
+                                            </div>
+                                            <div class="{{ $promotion->name }}">
+                                                {{ $promotion->name }}
+                                            </div>
+                                            <div>
+                                                Per {{ $promotion->duration }} ore
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </div>
+                        @else
+                            -
+                        @endif
+                        </td>
+                        =======
+                        {{-- Promotion End Date --}}
+                        <td class="promotion">
+                            @if ($apartment->promotions_max_apartment_promotionend_date)
+                                {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
+                            @else
+                                -
+                            @endif
+                        </td>
+                        >>>>>>> main
+
+                        {{-- Dates --}}
+                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
+                    @else
+                        {{-- Title (trash version) --}}
+                        <td>
+                            {{ $apartment->title }}
+                        </td>
+
+                        {{-- Dates --}}
+                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                        <td>{{ $apartment->getDate('deleted_at') }}</td>
+                @endif
 
                 {{-- Actions --}}
                 <td>
                     <div class="d-flex justify-content-center">
 
-                        @if (!$apartment->deleted_at)
+                        @if (Route::is('admin.apartments.index'))
                             <div class="dropdown apartments-action-list">
                                 <button class="circle-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -169,9 +195,15 @@
             {{-- Empty message --}}
         @empty
             <tr>
-                <td class="text-center" colspan="9">
-                    <h5>Qui potrai gestire i tuoi boolbnb</h5>
-                </td>
+                @if (Route::is('admin.apartments.index'))
+                    <td class="text-center" colspan="9">
+                        <h5>Qui potrai gestire i tuoi boolbnb</h5>
+                    </td>
+                @else
+                    <td class="text-center" colspan="6">
+                        <h5>Cestino vuoto</h5>
+                    </td>
+                @endif
             </tr>
         @endforelse
     </tbody>

@@ -611,5 +611,19 @@ return $apartments = [
         'address' => 'Roma, Lazio',
         'latitude' => '41.88734428939035',
         'longitude' => '12.489194880125902',
+    ],
+    [
+        'title' => 'La Casa Bianca... a Roma',
+        'description' => 'La Casa Bianca è la residenza ufficiale dell\'imperatore romano e sede della presidenza stessa. Si trova al numero 1600 di Pennsylvania Avenue a Roma ed è stata la residenza di ogni imperatore romano da John Adams in poi.',
+        'price' => '99999',
+        'rooms' => '100',
+        'beds' => '200',
+        'bathrooms' => '999',
+        'square_meters' => '342000',
+        'image' => 'apartments_img/apartment_42.jpg',
+        'is_visible' => '1',
+        'address' => 'Roma, Lazio',
+        'latitude' => '41.88734428939035',
+        'longitude' => '12.489194880125902',
     ]
 ];

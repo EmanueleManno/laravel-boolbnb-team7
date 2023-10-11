@@ -131,7 +131,7 @@ class ApartmentController extends Controller
         // Insert apartment-service records
         if (Arr::exists($data, 'services')) $apartment->services()->attach($data['services']);
 
-        return to_route('admin.apartments.index')->with('alert-message', 'Appartamento creato con successo')->with('alert-type', 'success');
+        return to_route('admin.apartments.index')->with('alert-message', 'boolbnb creato con successo')->with('alert-type', 'success');
     }
 
     /**
@@ -245,7 +245,7 @@ class ApartmentController extends Controller
 
         $apartment->update($data);
 
-        return to_route('admin.apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
+        return to_route('admin.apartments.index')->with('alert-type', 'primary')->with('alert-message', "Il boolbnb $apartment->title è stato modificato con successo");
     }
 
     /**
@@ -255,7 +255,7 @@ class ApartmentController extends Controller
     {
         Apartment::destroy($id);
 
-        return to_route('admin.apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
+        return to_route('admin.apartments.index')->with('alert-message', 'boolbnb eliminato con successo')->with('alert-type', 'danger');
     }
 
     //Funzione per il cestino:
@@ -273,7 +273,7 @@ class ApartmentController extends Controller
         $apartment = Apartment::onlyTrashed()->findOrFail($id);
         $apartment->restore();
 
-        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
+        return to_route('admin.apartments.trash')->with('alert-message', "Il boolbnb $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
     }
 
     //Funzione per il drop:
@@ -283,7 +283,7 @@ class ApartmentController extends Controller
 
         $apartment->forceDelete();
 
-        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
+        return to_route('admin.apartments.trash')->with('alert-message', "Il boolbnb $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
     }
 
     //Funzione per il dropAll:
@@ -294,10 +294,10 @@ class ApartmentController extends Controller
         Apartment::onlyTrashed()->where('user_id', Auth::id())->forceDelete();
 
         if ($total === 0) {
-            return to_route('admin.apartments.trash')->with('alert-message', "Non ci sono appartamenti da eliminare")->with('alert-type', 'danger');
+            return to_route('admin.apartments.trash')->with('alert-message', "Non ci sono bolbnb da eliminare")->with('alert-type', 'danger');
         }
 
-        return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total appartamenti")->with('alert-type', 'danger');
+        return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total bolbnb")->with('alert-type', 'danger');
     }
 
 
@@ -310,7 +310,7 @@ class ApartmentController extends Controller
         $action = $apartment->is_visible ? 'pubblicato' : 'salvato come bozza';
         $apartment->save();
 
-        return to_route('admin.apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
+        return to_route('admin.apartments.show', $apartment)->with('alert-message', "boolbnb $action.")->with('alert-type', 'info');
     }
 
 
@@ -377,7 +377,7 @@ class ApartmentController extends Controller
             // Set pivot table fields
             $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
-            return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
+            return to_route('admin.apartments.index')->with('alert-message', "Promozione $promotion->name attivata sul boolbnb $apartment->title. Totale pagato: $promotion->price €.")->with('alert-type', 'success');
         }
 
         // Payment failed
@@ -385,20 +385,32 @@ class ApartmentController extends Controller
     }
 
 
+    /**
+     * Show Apartment stats.
+     */
     public function statistics(Apartment $apartment)
     {
-        //Month Views
-        $month_views = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        // Check if authorized
+        if (Auth::id() !== $apartment->user_id) {
+            return to_route('admin.apartments.index', $apartment)->with('alert-type', 'warning')->with('alert-message', 'Non sei autorizzato!');
+        }
 
+        // Prepare variables
+        $month_views = array_fill(0, 12, 0);
+        $month_messages = array_fill(0, 12, 0);
+        $year_views = [];
+        $year_messages = [];
+
+        // Get Current Year Views and Messages
         $current_year_views = $apartment->views->where('date', '>=', date('Y-m-d H:i:s', strtotime('-1 year')));
+        $current_year_messages = $apartment->messages->where('created_at', '>=', date('Y-m-d H:i:s', strtotime('-1 year')));
 
+
+        // Calculate data
         foreach ($current_year_views as $view) {
             $month = date("m", strtotime($view->date));
             $month_views[$month - 1]++;
         }
-
-        //Year Views
-        $year_views = [];
 
         foreach ($apartment->views as $view) {
             $year = date("Y", strtotime($view->date));
@@ -409,18 +421,10 @@ class ApartmentController extends Controller
             }
         }
 
-        //Month Messages
-        $month_messages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-        $current_year_messages = $apartment->messages->where('created_at', '>=', date('Y-m-d H:i:s', strtotime('-1 year')));
-
         foreach ($current_year_messages as $message) {
             $month = date("m", strtotime($message->created_at));
             $month_messages[$month - 1]++;
         }
-
-        //Year Messages
-        $year_messages = [];
 
         foreach ($apartment->messages as $message) {
             $year = date("Y", strtotime($message->created_at));
@@ -431,9 +435,14 @@ class ApartmentController extends Controller
             }
         }
 
+
         return view('admin.apartments.statistics', compact('month_views', 'apartment', 'year_views', 'month_messages', 'year_messages'));
     }
 
+
+    /**
+     * Show Promotions info.
+     */
     public function premium()
     {
         return view('admin.apartments.premium');
