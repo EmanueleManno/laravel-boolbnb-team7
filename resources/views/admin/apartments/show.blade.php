@@ -79,7 +79,7 @@
                     <div class="icon">
                         <img src="{{ asset('img/camera.png') }}" alt="camera">
                     </div>
-                    <h3>Non hai acnora inserito nessuna immagine</h3>
+                    <h3>Non hai ancora inserito nessuna immagine</h3>
                 </div>
             @endif
             <div></div>
@@ -87,159 +87,209 @@
 
         {{-- Information --}}
         <section id="apartments-details" class="mt-4">
-            <h3>Informazioni sul tuo Boolbnb</h3>
-            <div>
-
-                <a class="btn btn-primary" href="{{ route('admin.apartments.statistics', $apartment) }}">Stats</a>
-
-                <h4>Categoria e prezzo</h4>
-                {{-- Category --}}
-                @if ($apartment->category)
-                    <span>
-                        {{ $apartment->category->name }} |
-                    </span>
-                @else
-                    <span>
-                        Nessuna Categoria |
-                    </span>
-                @endif
-                <span>{{ $apartment->price }}€ a notte</span>
-            </div>
-            <hr>
-            <div>
-                <h4>Stanze e misure</h4>
-                <ul>
-                    <li>{{ $apartment->rooms . ' ' . ($apartment->rooms == 1 ? 'camera' : 'camere') }}</li>
-                    <li>{{ $apartment->beds . ' ' . ($apartment->beds == 1 ? 'letto' : 'letti') }}</li>
-                    <li>{{ $apartment->bathrooms . ' ' . ($apartment->bathrooms == 1 ? 'bagno' : 'bagni') }}</li>
-                    <li>{{ $apartment->square_meters }} Metri quadrati</li>
+            <div class="card flex-column">
+                <h3>Comandi rapidi</h3>
+                <ul class="short-actions">
+                    <li><a href="#messages">Vedi messaggi</a></li>
+                    <li><a href="#map-card">Vedi mappa</a></li>
+                    <li><a href="#stats">Mostra grafici statistiche</a></li>
                 </ul>
             </div>
-            <hr>
-            {{-- Description --}}
-            <div>
-                <h4>Descrizione</h4>
-                <p>{{ $apartment->description }}</p>
-            </div>
-            <hr>
-            {{-- Indirizzo --}}
-            <div>
-                <h4>Indirizzo</h4>
-                <div class="d-flex align-items-center gap-3">
-                    <div class="address">{{ $apartment->address }}</div>
 
-                    <!-- Map modal button -->
-                    <button type="button" id="map-button" class="button-dark" data-bs-toggle="modal"
-                        data-bs-target="#mapModal">
-                        Mostra la mappa <i class="fa-solid fa-map"></i>
-                    </button>
+            <div class="card">
+                <div>
+                    <h4>Planimetria</h4>
+                </div>
+
+                <div>
+                    <ul>
+                        <li>{{ $apartment->rooms . ' ' . ($apartment->rooms == 1 ? 'Camera da letto' : 'Camere da letto') }}
+                        </li>
+                        <li>{{ $apartment->beds . ' ' . ($apartment->beds == 1 ? 'Letto' : 'Letti') }}
+                        </li>
+                        <li>{{ $apartment->bathrooms . ' ' . ($apartment->bathrooms == 1 ? 'Bagno' : 'Bagni') }}</li>
+                    </ul>
+                </div>
+
+
+                <div>
+                    <ul>
+                        <li>{{ $apartment->square_meters }} Metri quadrati</li>
+                    </ul>
                 </div>
             </div>
-            <hr>
+
+
+            {{-- Category & Price --}}
+            <div class="card">
+                <div>
+                    <h4>Categoria <br>&<br>Prezzo</h4>
+                </div>
+
+                <div>
+                    {{-- Category --}}
+                    @if ($apartment->category)
+                        <span>
+                            {{ $apartment->category->name }}
+                        </span>
+                    @else
+                        <span>
+                            Nessuna Categoria
+                        </span>
+                    @endif
+                </div>
+
+                <div>
+                    <span>{{ $apartment->price }}€ a notte</span>
+                </div>
+            </div>
+
+            {{-- Description --}}
+            <div class="card">
+                <div>
+                    <h4>Descrizione</h4>
+                </div>
+
+                <div>
+                    <p>{{ $apartment->description }}</p>
+                </div>
+            </div>
+
+            {{-- Map & Position --}}
+            <section id="map-card" class="card">
+                <div>
+                    <h4>Posizione</h4>
+                </div>
+
+                <div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="address">{{ $apartment->address }}</div>
+
+                        <!-- Map modal button -->
+                        <button type="button" id="map-button" class="button-dark" data-bs-toggle="modal"
+                            data-bs-target="#mapModal">
+                            Mostra la mappa <i class="fa-solid fa-map"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
             {{-- Services --}}
-            <div>
-                <h4>Servizi offerti</h4>
-                <div class="d-flex flex-wrap">
-                    @forelse ($apartment->services as $service)
-                        <span class="badge text-bg-success p-2 m-1 d-flex align-items-center">
-                            <div class="service-image">
-                                <img src="{{ asset('img/service/' . $service['icon']) }}" alt="{{ $service->name }}"
-                                    width="20px">
-                            </div>
-                            <span>{{ $service->name }}</span>
-                        </span>
-                    @empty
-                        -
-                    @endforelse
+            <div class="card">
+                <div>
+                    <h4>Servizi offerti</h4>
+                </div>
+
+                <div>
+                    <div class="d-flex flex-wrap gap-2">
+                        @forelse ($apartment->services as $service)
+                            <span class="service-badge">
+                                <div class="service-image">
+                                    <img src="{{ asset('img/service/' . $service['icon']) }}" alt="{{ $service->name }}"
+                                        width="20px">
+                                </div>
+                                <span>{{ $service->name }}</span>
+                            </span>
+                        @empty
+                            -
+                        @endforelse
+                    </div>
                 </div>
             </div>
-            <hr>
 
+            <section id="messages">
+                <h2 class="text-center">Messaggi <i class="fa-solid fa-comments"></i></h2>
+                <div>
+                    <div class="message-list accordion accordion-flush" id="accordionFlushExample">
+                        @forelse ($apartment->messages as $message)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapse{{ $message->id }}" aria-expanded="false"
+                                        aria-controls="flush-collapse{{ $message->id }}">
+                                        Messaggio ricevuto da {{ $message->name }}
+                                        <div class="text-gradient" style="font-size: 12px">
+                                            {{ $message->created_at->format('d/m/y') }}
+                                            alle
+                                            {{ $message->created_at->format('H:i') }}
+                                        </div>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapse{{ $message->id }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p>{{ $message->content }}</p>
+                                        <hr>
+                                        <div><i class="fa-solid fa-envelope"></i> <i> {{ $message->email }} </i></div>
 
-            <div>
-                <h4>Messaggi ricevuti</h4>
-                <div class="message-list accordion accordion-flush" id="accordionFlushExample">
-                    @forelse ($apartment->messages as $message)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse{{ $message->id }}" aria-expanded="false"
-                                    aria-controls="flush-collapse{{ $message->id }}">
-                                    Messaggio ricevuto da {{ $message->name }}
-                                    <div class="text-gradient" style="font-size: 12px">
-                                        {{ $message->created_at->format('d/m/y') }}
-                                        alle
-                                        {{ $message->created_at->format('H:i') }}
                                     </div>
-                                </button>
-                            </h2>
-                            <div id="flush-collapse{{ $message->id }}" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <p>{{ $message->content }}</p>
-                                    <hr>
-                                    <div><i class="fa-solid fa-envelope"></i> <i> {{ $message->email }} </i></div>
-
                                 </div>
                             </div>
-                        </div>
-                    @empty
-                        {{-- Empty message --}}
-                        <div class="text-center" colspan="8">
-                            Non hai ricevuto nessun messaggio
-                        </div>
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                        </div>
-                    @endforelse
+                        @empty
+                            {{-- Empty message --}}
+                            <div class="message-empty">
+                                <img src="{{ asset('img/pages/message.svg') }}" alt="">
+                                <img class="logo" src="{{ asset('img/logo.png') }}" alt="">
+                            </div>
+                            <div>
+                                Non hai ricevuto nessun messaggio, promuovi i tuoi boolbnb con boolbnb premium per ottenere
+                                più visualizzazioni!
+                                <a href="{{ route('admin.apartments.index') }}" class="button-primary">Vedi di più</a>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </section>
+
+            <section id="stats" class="card">
+                <div>
+                    <h4>Statistiche</h4>
                 </div>
 
-                <div class="row">
-                    <div class="col-6">
+                <div>
+                    <a class="button-dark" href="{{ route('admin.apartments.statistics', $apartment) }}">Grafici
+                        visualizzazioni e messaggi ricevuti</a>
+                </div>
 
+            </section>
+
+            <!-- Map Modal -->
+            <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content text-center">
+                        {{-- Map --}}
+                        @if ($apartment->address)
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body flex-column flex-lg-row">
+                                {{-- Title & Address --}}
+                                <div class="description ">
+                                    <h3>{{ $apartment->title }}</h3>
+                                    <hr>
+                                    <h5>Si trova a </h5>
+                                    <h6>{{ $apartment->address }}</h6>
+                                </div>
+                                {{-- Map --}}
+                                <div class="map">
+                                    <div id="map" data-latitude="{{ $apartment->latitude }}"
+                                        data-longitude="{{ $apartment->longitude }}">
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
-
-
                 </div>
             </div>
         </section>
 
-        <!-- Map Modal -->
-        <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content text-center">
-                    {{-- Map --}}
-                    @if ($apartment->address)
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body flex-column flex-lg-row">
-                            {{-- Title & Address --}}
-                            <div class="description ">
-                                <h3>{{ $apartment->title }}</h3>
-                                <hr>
-                                <h5>Si trova a </h5>
-                                <h6>{{ $apartment->address }}</h6>
-                            </div>
-                            {{-- Map --}}
-                            <div class="map">
-                                <div id="map" data-latitude="{{ $apartment->latitude }}"
-                                    data-longitude="{{ $apartment->longitude }}">
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Delete Modal --}}
-    @include('includes.delete-modal')
-@endsection
+        {{-- Delete Modal --}}
+        @include('includes.delete-modal')
+    @endsection
 
 
 
-@section('scripts')
-    @vite(['resources/js/confirm-delete.js', 'resources/js/map-viewer.js'])
-@endsection
+    @section('scripts')
+        @vite(['resources/js/confirm-delete.js', 'resources/js/map-viewer.js'])
+    @endsection
