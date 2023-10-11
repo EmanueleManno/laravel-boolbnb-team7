@@ -7,7 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Sei sicuro di voler eliminare questo boolbnb?
+                Sei sicuro di voler eliminare questo boolbnb? <br> L'elemento verrà spostato nel cestino dal quale
+                potrai sempre ripristinarlo
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non eliminare</button>
