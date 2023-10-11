@@ -597,5 +597,19 @@ return $apartments = [
         'address' => 'Roma, Lazio',
         'latitude' => '41.88734428939035',
         'longitude' => '12.489194880125902',
+    ],
+    [
+        'title' => 'Una notte nella palude di Shrek, ora su Boolbnb',
+        'description' => 'C’era una volta un asino molto loquace che accettò di fare da custode della palude di Shrek e prima di rimettersi in viaggio, decise di invitare le persone a trascorrere una notte da orchi proprio nella palude, disponibile ora per un soggiorno unico solo su Boolbnb.',
+        'price' => '2',
+        'rooms' => '1',
+        'beds' => '1',
+        'bathrooms' => '1',
+        'square_meters' => '90',
+        'image' => 'apartments_img/apartment_41.webp',
+        'is_visible' => '1',
+        'address' => 'Roma, Lazio',
+        'latitude' => '41.88734428939035',
+        'longitude' => '12.489194880125902',
     ]
 ];
