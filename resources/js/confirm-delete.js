@@ -15,7 +15,7 @@ deleteForm.forEach((form) => {
 
             //Altrimenti fai uscire quest'altro:
         } else {
-            modalBody.innerText = `Sei sicuro di voler eliminare "${name}"`;
+            modalBody.innerText = `Sei sicuro di voler eliminare "${name}"?`;
             modalTitle.innerText = "Eliminazione boolbnb";
         }
 
