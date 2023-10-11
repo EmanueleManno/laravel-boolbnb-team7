@@ -16,7 +16,7 @@ deleteForm.forEach((form) => {
             //Altrimenti fai uscire quest'altro:
         } else {
             modalBody.innerText = `Sei sicuro di voler eliminare "${name}"`;
-            modalTitle.innerText = "Eliminazione appartamento";
+            modalTitle.innerText = "Eliminazione boolbnb";
         }
 
         deleteButton.addEventListener("click", function () {
