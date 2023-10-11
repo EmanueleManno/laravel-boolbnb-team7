@@ -24,7 +24,6 @@
 @use 'admin/apartments-list';
 
 
-
 //__________________ General rules
 body {
     display: block;
@@ -33,7 +32,7 @@ body {
 }
 
 main {
-    height: calc(100vh - 121px);
+    height: $main-h;
     overflow: auto;
 }
 
@@ -46,6 +45,10 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+img{
+    display: block;
 }
 
 h1,

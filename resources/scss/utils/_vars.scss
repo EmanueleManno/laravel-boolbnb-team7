@@ -5,6 +5,9 @@ $bronze:#cd7f32;
 $silver:#8a9597;
 $gold:#daa520;
 
+// Max height main
+$main-h: calc(100vh - 121px);
+
 // Google font
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 // Font 
@@ -47,5 +50,32 @@ $roboto: 'Roboto', sans-serif;
     }@else{
         width: $width;
         height: $height;
+    }
+}
+
+//_________________________ Text Underline
+@mixin text_underscore($color, $height, $duration: .5s){
+    display: inline;
+    background-image: linear-gradient($color, $color);
+    background-size: 0 $height;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size $duration linear;
+    
+    &:hover {
+        background-size: 100% $height;
+    }
+}
+
+@mixin text_underscore_reverse($color, $height, $duration: .5s){
+    display: inline;
+    background-image: linear-gradient($color, $color);
+    background-size: 100% $height;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size $duration linear;
+    
+    &:hover {
+        background-size: 0 $height;
     }
 }
