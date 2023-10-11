@@ -77,6 +77,14 @@ class Apartment extends Model
     }
 
     /**
+     * Format a date field
+     */
+    public function formatDate($date)
+    {
+        return date('d/m/y H:i', strtotime($date));
+    }
+
+    /**
      * Get Image Path
      */
     public function get_image()
