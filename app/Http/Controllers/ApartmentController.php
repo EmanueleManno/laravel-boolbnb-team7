@@ -131,7 +131,7 @@ class ApartmentController extends Controller
         // Insert apartment-service records
         if (Arr::exists($data, 'services')) $apartment->services()->attach($data['services']);
 
-        return to_route('admin.apartments.index')->with('alert-message', 'Appartamento creato con successo')->with('alert-type', 'success');
+        return to_route('admin.apartments.index')->with('alert-message', 'boolbnb creato con successo')->with('alert-type', 'success');
     }
 
     /**
@@ -245,7 +245,7 @@ class ApartmentController extends Controller
 
         $apartment->update($data);
 
-        return to_route('admin.apartments.index')->with('alert-type', 'primary')->with('alert-message', "L'appartamento $apartment->title è stato modificato con successo");
+        return to_route('admin.apartments.index')->with('alert-type', 'primary')->with('alert-message', "Il boolbnb $apartment->title è stato modificato con successo");
     }
 
     /**
@@ -255,7 +255,7 @@ class ApartmentController extends Controller
     {
         Apartment::destroy($id);
 
-        return to_route('admin.apartments.index')->with('alert-message', 'Appartamento eliminato con successo')->with('alert-type', 'danger');
+        return to_route('admin.apartments.index')->with('alert-message', 'boolbnb eliminato con successo')->with('alert-type', 'danger');
     }
 
     //Funzione per il cestino:
@@ -273,7 +273,7 @@ class ApartmentController extends Controller
         $apartment = Apartment::onlyTrashed()->findOrFail($id);
         $apartment->restore();
 
-        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
+        return to_route('admin.apartments.trash')->with('alert-message', "Il boolbnb $apartment->title è stato ripristinato con successo")->with('alert-type', 'success');
     }
 
     //Funzione per il drop:
@@ -283,7 +283,7 @@ class ApartmentController extends Controller
 
         $apartment->forceDelete();
 
-        return to_route('admin.apartments.trash')->with('alert-message', "L'appartamento $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
+        return to_route('admin.apartments.trash')->with('alert-message', "Il boolbnb $apartment->title è stato eliminato definitivamente")->with('alert-type', 'danger');
     }
 
     //Funzione per il dropAll:
@@ -310,7 +310,7 @@ class ApartmentController extends Controller
         $action = $apartment->is_visible ? 'pubblicato' : 'salvato come bozza';
         $apartment->save();
 
-        return to_route('admin.apartments.show', $apartment)->with('alert-message', "Appartamento $action.")->with('alert-type', 'info');
+        return to_route('admin.apartments.show', $apartment)->with('alert-message', "boolbnb $action.")->with('alert-type', 'info');
     }
 
 
