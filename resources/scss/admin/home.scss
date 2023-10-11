@@ -52,26 +52,15 @@
     font-size: 50px;
 }
 
-.button-primary,
-.logout{
-    color: white;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 16px 32px;
-    border-radius: 15px;
-    transition: all 0.4s;
-}
-
-.button-primary{
-    background-color: $brand-color;
-    &:hover{
-        background-color: #d80566;
-    }
-}
-
-.logout{
+.logout.button-primary{
     background-color: red;
+    padding: 0;
+
     &:hover{
         background-color:rgb(214, 0, 0);
+    }
+
+    a{
+        padding: 16px 32px;
     }
 }

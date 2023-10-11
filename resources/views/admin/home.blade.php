@@ -58,7 +58,7 @@
 
             <div class="card">
                 <h3>Esci</h3>
-                <div class="logout">
+                <div class="logout button-primary">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Esci</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

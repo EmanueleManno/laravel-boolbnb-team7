@@ -118,6 +118,20 @@ button {
     }
 }
 
+.button-primary{
+    background-color: $brand-color;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 32px;
+    border-radius: 15px;
+    transition: all 0.4s;
+
+    &:hover{
+        background-color: #d80566;
+    }
+}
+
 // ________Image Preview (index table)
 .image-preview {
     width: 100px;
