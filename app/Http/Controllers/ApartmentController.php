@@ -294,10 +294,10 @@ class ApartmentController extends Controller
         Apartment::onlyTrashed()->where('user_id', Auth::id())->forceDelete();
 
         if ($total === 0) {
-            return to_route('admin.apartments.trash')->with('alert-message', "Non ci sono appartamenti da eliminare")->with('alert-type', 'danger');
+            return to_route('admin.apartments.trash')->with('alert-message', "Non ci sono bolbnb da eliminare")->with('alert-type', 'danger');
         }
 
-        return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total appartamenti")->with('alert-type', 'danger');
+        return to_route('admin.apartments.trash')->with('alert-message', "Sono stati eliminati $total bolbnb")->with('alert-type', 'danger');
     }
 
 
@@ -377,7 +377,7 @@ class ApartmentController extends Controller
             // Set pivot table fields
             $apartment->promotions()->attach($data['promotion'], ['start_date' => $start_date, 'end_date' => $end_date]);
 
-            return to_route('admin.apartments.index')->with('alert-message', "Il pagamento è andato a buon fine.")->with('alert-type', 'success');
+            return to_route('admin.apartments.index')->with('alert-message', "Promozione $promotion->name attivata sul boolbnb $apartment->title. Totale pagato: $promotion->price €.")->with('alert-type', 'success');
         }
 
         // Payment failed
