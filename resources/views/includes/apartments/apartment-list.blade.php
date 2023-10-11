@@ -55,7 +55,8 @@
                         @endif
                     </td>
 
-                    <<<<<<< HEAD {{-- Promotion End Date --}} <td class="promotion">
+                    {{-- Promotion End Date --}}
+                    <td class="promotion">
                         @if ($apartment->promotions_max_apartment_promotionend_date)
                             {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
                             <div class="dropdown">
@@ -87,30 +88,20 @@
                         @else
                             -
                         @endif
-                        </td>
-                        =======
-                        {{-- Promotion End Date --}}
-                        <td class="promotion">
-                            @if ($apartment->promotions_max_apartment_promotionend_date)
-                                {{ $apartment->getDate('promotions_max_apartment_promotionend_date') }}
-                            @else
-                                -
-                            @endif
-                        </td>
-                        >>>>>>> main
+                    </td>
 
-                        {{-- Dates --}}
-                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
-                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
-                    @else
-                        {{-- Title (trash version) --}}
-                        <td>
-                            {{ $apartment->title }}
-                        </td>
+                    {{-- Dates --}}
+                    <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                    <td class="d-none d-lg-table-cell">{{ $apartment->getDate('updated_at') }}</td>
+                @else
+                    {{-- Title (trash version) --}}
+                    <td>
+                        {{ $apartment->title }}
+                    </td>
 
-                        {{-- Dates --}}
-                        <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
-                        <td>{{ $apartment->getDate('deleted_at') }}</td>
+                    {{-- Dates --}}
+                    <td class="d-none d-lg-table-cell">{{ $apartment->getDate('created_at') }}</td>
+                    <td>{{ $apartment->getDate('deleted_at') }}</td>
                 @endif
 
                 {{-- Actions --}}
