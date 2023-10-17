@@ -117,7 +117,7 @@ class ApartmentController extends Controller
     /**
      * Display a listing of random non promoted apartments.
      */
-    public function random()
+    public function random(Request $request)
     {
         // Basic Query
         $query = Apartment::where('is_visible', true)
@@ -129,10 +129,11 @@ class ApartmentController extends Controller
         $query->havingNull('promotions_max_apartment_promotionend_date');
 
         // Random Ordering
-        $query->inRandomOrder();
+        $rand_seed = $request->rand_seed;
+        $query->inRandomOrder($rand_seed);
 
         // Get Apartments
-        $apartments = $query->get();
+        $apartments = $query->paginate(10);
 
 
         // Send response
