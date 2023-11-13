@@ -39,12 +39,20 @@
                     {{-- Title --}}
                     <td class="apartment-title">
                         <div>
-                            <a href="{{ route('admin.apartments.show', $apartment) }}">{{ $apartment->title }}</a>
+                            <a href="{{ route('admin.apartments.show', $apartment) }}"
+                                title="{{ $apartment->title }}">{{ $apartment->title }}</a>
                         </div>
                     </td>
 
                     {{-- Status (is_visible) --}}
-                    <td>{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
+                    <td class="d-none d-md-table-cell">{{ $apartment->is_visible ? 'Pubblicato' : 'Bozza' }}</td>
+                    <td class="d-md-none">
+                        @if ($apartment->is_visible)
+                            <i class="fa-solid fa-eye" style="color:#198754;"></i>
+                        @else
+                            <i class="fa-solid fa-eye-slash" style="color:#6c757d;"></i>
+                        @endif
+                    </td>
 
                     {{-- Category --}}
                     <td class="d-none d-md-table-cell">
