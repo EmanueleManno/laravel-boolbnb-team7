@@ -15,8 +15,21 @@
         padding: 7px 10px;
 
     }
-}
 
+    td,th{
+        text-align: center;
+    }
+
+    td.apartment-title{
+        text-align: start;
+        max-width: 70px;
+        
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+        
 .apartments-action-list{
     .dropdown-menu{
         padding: 10px 16px;
@@ -127,4 +140,15 @@ td .circle-button.promote {
 
 .Gold{
     background-color: $gold;
+}
+
+// Media Query
+
+@media (min-width: 576px) {
+
+#admin-index{
+    td.apartment-title{
+        max-width: 80px;
+    }
+}
 }
